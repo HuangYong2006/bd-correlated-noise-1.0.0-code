@@ -288,8 +288,8 @@ repository root are indexed in [`docs/REVIEW_NOTES.md`](docs/REVIEW_NOTES.md).
 Python **3.10+** is required. The pipeline is CPU-only; no GPU is used.
 
 ```bash
-git clone <your-repository-url>
-cd "BD model"
+git clone https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code.git
+cd bd-correlated-noise-1.0.0-code
 python -m venv .venv
 # Windows
 .venv\Scripts\activate

@@ -15,8 +15,8 @@ authors:
     given-names: Yong
     affiliation: "College of Physics, Chengdu University of Technology, Chengdu, China"
     orcid: ""          # TODO: add your ORCID iD, e.g. https://orcid.org/0000-0000-0000-0000
-repository-code: ""    # TODO: add the GitHub/GitLab URL after the first push
-url: ""                # TODO: same as repository-code, or the archived DOI URL
+repository-code: "https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code"
+url: "https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code"
 license: MIT
 version: "1.0.0"
 date-released: "2026-10-09"
