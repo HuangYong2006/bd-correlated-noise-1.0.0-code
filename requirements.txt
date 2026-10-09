@@ -1,0 +1,30 @@
+# ---------------------------------------------------------------------------
+# Core scientific stack for the BD correlated-noise study.
+# Tested on Python 3.10-3.13 (Windows and Linux).
+# ---------------------------------------------------------------------------
+
+# Simulation core: JIT compilation and threaded prange parallelism.
+numpy>=1.24
+scipy>=1.9
+numba>=0.57
+
+# Diagnostics: Isolation Forest novelty detector.
+scikit-learn>=1.2
+
+# Figures.
+matplotlib>=3.6
+
+# ---------------------------------------------------------------------------
+# Optional extras.
+#
+#   PDF inspection utilities in tools/ (layout_map.py, inspect_pdf.py,
+#   overfull.py) need PyMuPDF:
+#       pip install pymupdf
+#
+#   The test suite needs pytest:
+#       pip install pytest
+#
+#   Re-enabling the rendered panel-alignment / collision audit gate inside
+#   code/figures_ctp.py needs the external "nature-figure" skill helpers on
+#   sys.path; point the DSH_FIGURE_SKILL environment variable at them.
+# ---------------------------------------------------------------------------

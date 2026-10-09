@@ -1,0 +1,248 @@
+﻿tag=spec rule=bd  96 cells  thetas=[-0.2, -0.1, -0.05, 0.0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.1583, 0.1667, 0.175, 0.1833, 0.1917, 0.2, 0.21, 0.225, 0.25, 0.3, 0.35, 0.4]  Ls=[32, 64, 128, 256]
+  [L=32] null floor: incr_pmf=0.00810+-0.00612  terr_pmf=0.07433+-0.01468  | hist diff(r=4)=0.1279  hist height=0.1716
+  th=-0.2000 L=   32 dHpmf=+0.00996 zH=   1.63 | terr=+0.00061 zT=  0.04 | histdiff=-0.0070 height=-0.0027 | zPhi=     nan Phi=+nan | W=   1.26 as=5.145 kd=-1.26
+  th=-0.1000 L=   32 dHpmf=-0.00132 zH=  -0.22 | terr=-0.00268 zT= -0.18 | histdiff=-0.0065 height=+0.0024 | zPhi=     nan Phi=+nan | W=   1.25 as=0.487 kd=-1.19
+  th=-0.0500 L=   32 dHpmf=-0.00087 zH=  -0.14 | terr=+0.00220 zT=  0.15 | histdiff=-0.0091 height=-0.0002 | zPhi=     nan Phi=+nan | W=   1.25 as=5.388 kd=-1.14
+  th=+0.0000 L=   32 dHpmf=-0.00330 zH=  -0.54 | terr=-0.02236 zT= -1.52 | histdiff=-0.0386 height=-0.0497 | zPhi=     nan Phi=+nan | W=   1.26 as=0.502 kd=-1.17
+  th=+0.0200 L=   32 dHpmf=-0.00134 zH=  -0.22 | terr=-0.00793 zT= -0.54 | histdiff=-0.0094 height=-0.0056 | zPhi=     nan Phi=+nan | W=   1.25 as=0.276 kd=-1.15
+  th=+0.0400 L=   32 dHpmf=-0.00105 zH=  -0.17 | terr=+0.00436 zT=  0.30 | histdiff=-0.0066 height=-0.0094 | zPhi=     nan Phi=+nan | W=   1.28 as=0.330 kd=-1.14
+  th=+0.0600 L=   32 dHpmf=+0.00587 zH=   0.96 | terr=-0.00718 zT= -0.49 | histdiff=-0.0164 height=+0.0020 | zPhi=     nan Phi=+nan | W=   1.29 as=0.367 kd=-1.11
+  th=+0.0800 L=   32 dHpmf=+0.00505 zH=   0.83 | terr=+0.00007 zT=  0.00 | histdiff=-0.0154 height=-0.0165 | zPhi=     nan Phi=+nan | W=   1.28 as=2.900 kd=-1.11
+  th=+0.1000 L=   32 dHpmf=+0.00537 zH=   0.88 | terr=-0.00039 zT= -0.03 | histdiff=+0.0034 height=-0.0052 | zPhi=     nan Phi=+nan | W=   1.28 as=0.467 kd=-1.11
+  th=+0.1100 L=   32 dHpmf=-0.00316 zH=  -0.52 | terr=-0.00035 zT= -0.02 | histdiff=-0.0005 height=+0.0003 | zPhi=     nan Phi=+nan | W=   1.29 as=0.473 kd=-1.17
+  th=+0.1200 L=   32 dHpmf=+0.00757 zH=   1.24 | terr=+0.00599 zT=  0.41 | histdiff=-0.0111 height=+0.0007 | zPhi=     nan Phi=+nan | W=   1.29 as=0.444 kd=-1.09
+  th=+0.1300 L=   32 dHpmf=-0.00092 zH=  -0.15 | terr=-0.00257 zT= -0.17 | histdiff=-0.0108 height=-0.0177 | zPhi=     nan Phi=+nan | W=   1.30 as=0.539 kd=-1.15
+  th=+0.1400 L=   32 dHpmf=+0.00268 zH=   0.44 | terr=-0.00602 zT= -0.41 | histdiff=-0.0145 height=+0.0131 | zPhi=     nan Phi=+nan | W=   1.25 as=3.081 kd=-1.12
+  th=+0.1500 L=   32 dHpmf=+0.00733 zH=   1.20 | terr=+0.00877 zT=  0.60 | histdiff=-0.0108 height=-0.0149 | zPhi=     nan Phi=+nan | W=   1.26 as=0.363 kd=-1.08
+  th=+0.1583 L=   32 dHpmf=+0.00664 zH=   1.09 | terr=+0.00718 zT=  0.49 | histdiff=-0.0121 height=+0.0066 | zPhi=     nan Phi=+nan | W=   1.31 as=2.839 kd=-1.07
+  th=+0.1667 L=   32 dHpmf=+0.01129 zH=   1.84 | terr=-0.00242 zT= -0.17 | histdiff=-0.0056 height=-0.0043 | zPhi=     nan Phi=+nan | W=   1.28 as=0.517 kd=-1.07
+  th=+0.1750 L=   32 dHpmf=-0.00055 zH=  -0.09 | terr=-0.00256 zT= -0.17 | histdiff=-0.0102 height=-0.0125 | zPhi=     nan Phi=+nan | W=   1.29 as=3.094 kd=-1.12
+  th=+0.1833 L=   32 dHpmf=+0.01117 zH=   1.82 | terr=-0.00077 zT= -0.05 | histdiff=-0.0114 height=-0.0110 | zPhi=     nan Phi=+nan | W=   1.30 as=2.934 kd=-1.07
+  th=+0.1917 L=   32 dHpmf=+0.00477 zH=   0.78 | terr=-0.00638 zT= -0.43 | histdiff=-0.0048 height=-0.0230 | zPhi=     nan Phi=+nan | W=   1.35 as=3.016 kd=-1.09
+  th=+0.2000 L=   32 dHpmf=+0.01454 zH=   2.37 | terr=+0.00818 zT=  0.56 | histdiff=-0.0039 height=-0.0067 | zPhi=     nan Phi=+nan | W=   1.25 as=0.527 kd=-1.05
+  th=+0.2100 L=   32 dHpmf=+0.01831 zH=   2.99 | terr=+0.01195 zT=  0.81 | histdiff=-0.0092 height=-0.0017 | zPhi=     nan Phi=+nan | W=   1.29 as=2.977 kd=-1.03
+  th=+0.2250 L=   32 dHpmf=+0.00515 zH=   0.84 | terr=+0.00219 zT=  0.15 | histdiff=-0.0118 height=-0.0016 | zPhi=     nan Phi=+nan | W=   1.30 as=0.678 kd=-1.09
+  th=+0.2500 L=   32 dHpmf=+0.01710 zH=   2.79 | terr=+0.01308 zT=  0.89 | histdiff=+0.0089 height=-0.0094 | zPhi=     nan Phi=+nan | W=   1.27 as=2.956 kd=-1.03
+  th=+0.3000 L=   32 dHpmf=+0.02711 zH=   4.43 | terr=+0.02185 zT=  1.49 | histdiff=-0.0011 height=-0.0048 | zPhi=     nan Phi=+nan | W=   1.27 as=0.482 kd=-0.97
+  th=+0.3500 L=   32 dHpmf=+0.04333 zH=   7.08 | terr=+0.03245 zT=  2.21 | histdiff=+0.0039 height=-0.0146 | zPhi=     nan Phi=+nan | W=   1.25 as=0.517 kd=-0.85
+  th=+0.4000 L=   32 dHpmf=+0.04448 zH=   7.27 | terr=+0.02921 zT=  1.99 | histdiff=-0.0097 height=-0.0089 | zPhi=     nan Phi=+nan | W=   1.27 as=2.944 kd=-0.86
+  [L=64] null floor: incr_pmf=0.00488+-0.00447  terr_pmf=0.04975+-0.01138  | hist diff(r=8)=0.1171  hist height=0.1413
+  th=-0.2000 L=   64 dHpmf=+0.00126 zH=   0.28 | terr=-0.00499 zT= -0.44 | histdiff=-0.0070 height=-0.0051 | zPhi=     nan Phi=+nan | W=   1.86 as=1.662 kd=-1.23
+  th=-0.1000 L=   64 dHpmf=-0.00092 zH=  -0.21 | terr=-0.00361 zT= -0.32 | histdiff=+0.0077 height=-0.0076 | zPhi=     nan Phi=+nan | W=   1.81 as=0.522 kd=-1.22
+  th=-0.0500 L=   64 dHpmf=-0.00086 zH=  -0.19 | terr=-0.00797 zT= -0.70 | histdiff=+0.0020 height=-0.0129 | zPhi=     nan Phi=+nan | W=   1.79 as=1.563 kd=-1.21
+  th=+0.0000 L=   64 dHpmf=-0.00118 zH=  -0.26 | terr=-0.01523 zT= -1.34 | histdiff=-0.0342 height=-0.0414 | zPhi=     nan Phi=+nan | W=   1.79 as=0.549 kd=-1.21
+  th=+0.0200 L=   64 dHpmf=-0.00118 zH=  -0.26 | terr=-0.00324 zT= -0.28 | histdiff=-0.0096 height=-0.0041 | zPhi=     nan Phi=+nan | W=   1.79 as=0.565 kd=-1.20
+  th=+0.0400 L=   64 dHpmf=+0.00036 zH=   0.08 | terr=-0.01004 zT= -0.88 | histdiff=-0.0076 height=-0.0065 | zPhi=     nan Phi=+nan | W=   1.79 as=0.377 kd=-1.22
+  th=+0.0600 L=   64 dHpmf=-0.00069 zH=  -0.15 | terr=-0.01057 zT= -0.93 | histdiff=+0.0171 height=-0.0071 | zPhi=     nan Phi=+nan | W=   1.93 as=0.557 kd=-1.21
+  th=+0.0800 L=   64 dHpmf=+0.00307 zH=   0.69 | terr=-0.00466 zT= -0.41 | histdiff=-0.0080 height=+0.0052 | zPhi=     nan Phi=+nan | W=   1.86 as=0.525 kd=-1.17
+  th=+0.1000 L=   64 dHpmf=+0.00912 zH=   2.04 | terr=-0.00303 zT= -0.27 | histdiff=-0.0104 height=-0.0040 | zPhi=     nan Phi=+nan | W=   1.82 as=0.524 kd=-1.15
+  th=+0.1100 L=   64 dHpmf=+0.00230 zH=   0.51 | terr=+0.00245 zT=  0.21 | histdiff=-0.0134 height=-0.0013 | zPhi=     nan Phi=+nan | W=   1.80 as=2.764 kd=-1.18
+  th=+0.1200 L=   64 dHpmf=+0.00496 zH=   1.11 | terr=+0.00065 zT=  0.06 | histdiff=-0.0119 height=-0.0104 | zPhi=     nan Phi=+nan | W=   1.82 as=0.565 kd=-1.16
+  th=+0.1300 L=   64 dHpmf=+0.01004 zH=   2.25 | terr=+0.00827 zT=  0.73 | histdiff=+0.0072 height=-0.0024 | zPhi=     nan Phi=+nan | W=   1.86 as=0.486 kd=-1.14
+  th=+0.1400 L=   64 dHpmf=+0.00310 zH=   0.69 | terr=-0.00185 zT= -0.16 | histdiff=+0.0047 height=-0.0006 | zPhi=     nan Phi=+nan | W=   1.79 as=0.521 kd=-1.17
+  th=+0.1500 L=   64 dHpmf=+0.01082 zH=   2.42 | terr=+0.00264 zT=  0.23 | histdiff=-0.0078 height=-0.0010 | zPhi=     nan Phi=+nan | W=   1.80 as=0.488 kd=-1.12
+  th=+0.1583 L=   64 dHpmf=+0.01023 zH=   2.29 | terr=+0.00269 zT=  0.24 | histdiff=-0.0080 height=-0.0084 | zPhi=     nan Phi=+nan | W=   1.83 as=0.537 kd=-1.14
+  th=+0.1667 L=   64 dHpmf=+0.00568 zH=   1.27 | terr=-0.00218 zT= -0.19 | histdiff=-0.0067 height=-0.0039 | zPhi=     nan Phi=+nan | W=   1.88 as=0.512 kd=-1.15
+  th=+0.1750 L=   64 dHpmf=+0.00398 zH=   0.89 | terr=-0.00248 zT= -0.22 | histdiff=+0.0015 height=+0.0043 | zPhi=     nan Phi=+nan | W=   1.95 as=0.489 kd=-1.17
+  th=+0.1833 L=   64 dHpmf=+0.00722 zH=   1.61 | terr=+0.00871 zT=  0.77 | histdiff=-0.0104 height=+0.0004 | zPhi=     nan Phi=+nan | W=   1.93 as=0.481 kd=-1.14
+  th=+0.1917 L=   64 dHpmf=+0.00878 zH=   1.96 | terr=+0.00087 zT=  0.08 | histdiff=-0.0103 height=+0.0003 | zPhi=     nan Phi=+nan | W=   1.81 as=0.523 kd=-1.14
+  th=+0.2000 L=   64 dHpmf=+0.01155 zH=   2.58 | terr=-0.00012 zT= -0.01 | histdiff=-0.0129 height=+0.0013 | zPhi=     nan Phi=+nan | W=   1.90 as=0.578 kd=-1.12
+  th=+0.2100 L=   64 dHpmf=+0.00848 zH=   1.90 | terr=+0.00198 zT=  0.17 | histdiff=-0.0014 height=+0.0020 | zPhi=     nan Phi=+nan | W=   1.90 as=0.537 kd=-1.13
+  th=+0.2250 L=   64 dHpmf=+0.02205 zH=   4.94 | terr=+0.01685 zT=  1.48 | histdiff=-0.0053 height=-0.0005 | zPhi=     nan Phi=+nan | W=   1.74 as=1.705 kd=-1.07
+  th=+0.2500 L=   64 dHpmf=+0.01959 zH=   4.38 | terr=+0.01846 zT=  1.62 | histdiff=-0.0024 height=+0.0035 | zPhi=     nan Phi=+nan | W=   1.87 as=0.521 kd=-1.08
+  th=+0.3000 L=   64 dHpmf=+0.02828 zH=   6.33 | terr=+0.01763 zT=  1.55 | histdiff=+0.0133 height=-0.0038 | zPhi=     nan Phi=+nan | W=   1.89 as=0.560 kd=-1.02
+  th=+0.3500 L=   64 dHpmf=+0.04123 zH=   9.23 | terr=+0.03168 zT=  2.78 | histdiff=-0.0022 height=+0.0034 | zPhi=     nan Phi=+nan | W=   1.88 as=0.657 kd=-0.95
+  th=+0.4000 L=   64 dHpmf=+0.05461 zH=  12.22 | terr=+0.04643 zT=  4.08 | histdiff=-0.0086 height=-0.0040 | zPhi=     nan Phi=+nan | W=   1.85 as=0.620 kd=-0.85
+  [L=128] null floor: incr_pmf=0.00352+-0.00256  terr_pmf=0.03608+-0.00680  | hist diff(r=16)=0.0925  hist height=0.1161
+  th=-0.2000 L=  128 dHpmf=+0.00701 zH=   2.74 | terr=+0.00282 zT=  0.41 | histdiff=+0.0049 height=-0.0025 | zPhi=     nan Phi=+nan | W=   2.58 as=0.454 kd=-1.27
+  th=-0.1000 L=  128 dHpmf=+0.00015 zH=   0.06 | terr=-0.00357 zT= -0.52 | histdiff=+0.0176 height=-0.0035 | zPhi=     nan Phi=+nan | W=   2.53 as=0.495 kd=-1.24
+  th=-0.0500 L=  128 dHpmf=-0.00021 zH=  -0.08 | terr=-0.00282 zT= -0.41 | histdiff=+0.0072 height=-0.0012 | zPhi=     nan Phi=+nan | W=   2.46 as=0.479 kd=-1.23
+  th=+0.0000 L=  128 dHpmf=-0.00090 zH=  -0.35 | terr=-0.01017 zT= -1.50 | histdiff=-0.0265 height=-0.0359 | zPhi=     nan Phi=+nan | W=   2.55 as=0.539 kd=-1.22
+  th=+0.0200 L=  128 dHpmf=-0.00088 zH=  -0.34 | terr=-0.00335 zT= -0.49 | histdiff=+0.0032 height=-0.0139 | zPhi=     nan Phi=+nan | W=   2.65 as=0.505 kd=-1.22
+  th=+0.0400 L=  128 dHpmf=+0.00134 zH=   0.53 | terr=+0.00071 zT=  0.10 | histdiff=+0.0098 height=+0.0022 | zPhi=     nan Phi=+nan | W=   2.52 as=0.510 kd=-1.20
+  th=+0.0600 L=  128 dHpmf=+0.00104 zH=   0.41 | terr=+0.00150 zT=  0.22 | histdiff=+0.0258 height=-0.0111 | zPhi=     nan Phi=+nan | W=   2.69 as=0.513 kd=-1.20
+  th=+0.0800 L=  128 dHpmf=+0.00257 zH=   1.00 | terr=+0.00288 zT=  0.42 | histdiff=+0.0086 height=-0.0083 | zPhi=     nan Phi=+nan | W=   2.51 as=0.414 kd=-1.19
+  th=+0.1000 L=  128 dHpmf=+0.00638 zH=   2.49 | terr=-0.00046 zT= -0.07 | histdiff=+0.0179 height=-0.0117 | zPhi=     nan Phi=+nan | W=   2.59 as=0.521 kd=-1.18
+  th=+0.1100 L=  128 dHpmf=+0.00398 zH=   1.56 | terr=-0.00035 zT= -0.05 | histdiff=-0.0001 height=-0.0042 | zPhi=     nan Phi=+nan | W=   2.61 as=0.478 kd=-1.19
+  th=+0.1200 L=  128 dHpmf=+0.00082 zH=   0.32 | terr=-0.00428 zT= -0.63 | histdiff=-0.0017 height=-0.0117 | zPhi=     nan Phi=+nan | W=   2.57 as=1.078 kd=-1.21
+  th=+0.1300 L=  128 dHpmf=+0.00397 zH=   1.55 | terr=-0.00254 zT= -0.37 | histdiff=+0.0113 height=-0.0074 | zPhi=     nan Phi=+nan | W=   2.70 as=0.489 kd=-1.19
+  th=+0.1400 L=  128 dHpmf=+0.00599 zH=   2.34 | terr=+0.00336 zT=  0.49 | histdiff=+0.0073 height=-0.0097 | zPhi=     nan Phi=+nan | W=   2.54 as=0.558 kd=-1.18
+  th=+0.1500 L=  128 dHpmf=+0.00693 zH=   2.71 | terr=+0.00455 zT=  0.67 | histdiff=+0.0106 height=-0.0121 | zPhi=     nan Phi=+nan | W=   2.63 as=0.494 kd=-1.17
+  th=+0.1583 L=  128 dHpmf=+0.00906 zH=   3.54 | terr=+0.00389 zT=  0.57 | histdiff=+0.0049 height=-0.0163 | zPhi=     nan Phi=+nan | W=   2.70 as=0.515 kd=-1.16
+  th=+0.1667 L=  128 dHpmf=+0.00846 zH=   3.31 | terr=-0.00254 zT= -0.37 | histdiff=+0.0044 height=-0.0037 | zPhi=     nan Phi=+nan | W=   2.67 as=0.494 kd=-1.17
+  th=+0.1750 L=  128 dHpmf=+0.01394 zH=   5.45 | terr=+0.00078 zT=  0.12 | histdiff=+0.0099 height=-0.0090 | zPhi=     nan Phi=+nan | W=   2.61 as=0.548 kd=-1.14
+  th=+0.1833 L=  128 dHpmf=+0.01334 zH=   5.21 | terr=+0.00796 zT=  1.17 | histdiff=+0.0145 height=-0.0072 | zPhi=     nan Phi=+nan | W=   2.72 as=0.579 kd=-1.13
+  th=+0.1917 L=  128 dHpmf=+0.01369 zH=   5.35 | terr=+0.00809 zT=  1.19 | histdiff=-0.0069 height=+0.0017 | zPhi=     nan Phi=+nan | W=   2.64 as=0.550 kd=-1.14
+  th=+0.2000 L=  128 dHpmf=+0.01818 zH=   7.10 | terr=+0.00911 zT=  1.34 | histdiff=+0.0057 height=-0.0086 | zPhi=     nan Phi=+nan | W=   2.75 as=0.571 kd=-1.11
+  th=+0.2100 L=  128 dHpmf=+0.01607 zH=   6.28 | terr=+0.00732 zT=  1.08 | histdiff=+0.0040 height=-0.0054 | zPhi=     nan Phi=+nan | W=   2.75 as=0.483 kd=-1.13
+  th=+0.2250 L=  128 dHpmf=+0.01507 zH=   5.89 | terr=+0.00435 zT=  0.64 | histdiff=+0.0126 height=-0.0022 | zPhi=     nan Phi=+nan | W=   2.69 as=0.530 kd=-1.13
+  th=+0.2500 L=  128 dHpmf=+0.02049 zH=   8.01 | terr=+0.01254 zT=  1.84 | histdiff=+0.0085 height=-0.0130 | zPhi=     nan Phi=+nan | W=   2.75 as=0.519 kd=-1.10
+  th=+0.3000 L=  128 dHpmf=+0.03065 zH=  11.98 | terr=+0.02202 zT=  3.24 | histdiff=+0.0061 height=-0.0011 | zPhi=     nan Phi=+nan | W=   2.65 as=0.511 kd=-1.04
+  th=+0.3500 L=  128 dHpmf=+0.03304 zH=  12.91 | terr=+0.02734 zT=  4.02 | histdiff=+0.0050 height=-0.0108 | zPhi=     nan Phi=+nan | W=   2.82 as=0.602 kd=-1.03
+  th=+0.4000 L=  128 dHpmf=+0.04812 zH=  18.80 | terr=+0.05299 zT=  7.79 | histdiff=-0.0014 height=-0.0040 | zPhi=     nan Phi=+nan | W=   2.73 as=0.575 kd=-0.92
+  [L=256] null floor: incr_pmf=0.00263+-0.00169  terr_pmf=0.02527+-0.00432  | hist diff(r=32)=0.0745  hist height=0.0904
+  th=-0.2000 L=  256 dHpmf=+0.00735 zH=   4.35 | terr=-0.00015 zT= -0.03 | histdiff=+0.0039 height=+0.0054 | zPhi=     nan Phi=+nan | W=   3.54 as=0.532 kd=-1.27
+  th=-0.1000 L=  256 dHpmf=+0.00415 zH=   2.46 | terr=+0.00177 zT=  0.41 | histdiff=+0.0052 height=-0.0016 | zPhi=     nan Phi=+nan | W=   3.57 as=0.499 kd=-1.26
+  th=-0.0500 L=  256 dHpmf=+0.00141 zH=   0.83 | terr=-0.00168 zT= -0.39 | histdiff=-0.0061 height=-0.0008 | zPhi=     nan Phi=+nan | W=   3.55 as=0.515 kd=-1.24
+  th=+0.0000 L=  256 dHpmf=-0.00064 zH=  -0.38 | terr=-0.00717 zT= -1.66 | histdiff=-0.0201 height=-0.0264 | zPhi=     nan Phi=+nan | W=   3.62 as=0.550 kd=-1.23
+  th=+0.0200 L=  256 dHpmf=-0.00051 zH=  -0.30 | terr=-0.00145 zT= -0.34 | histdiff=+0.0093 height=+0.0022 | zPhi=     nan Phi=+nan | W=   3.68 as=0.534 kd=-1.22
+  th=+0.0400 L=  256 dHpmf=-0.00071 zH=  -0.42 | terr=+0.00364 zT=  0.84 | histdiff=-0.0044 height=+0.0054 | zPhi=     nan Phi=+nan | W=   3.61 as=0.539 kd=-1.23
+  th=+0.0600 L=  256 dHpmf=+0.00262 zH=   1.55 | terr=+0.00219 zT=  0.51 | histdiff=-0.0008 height=-0.0040 | zPhi=     nan Phi=+nan | W=   3.59 as=0.550 kd=-1.20
+  th=+0.0800 L=  256 dHpmf=+0.00461 zH=   2.73 | terr=+0.00503 zT=  1.16 | histdiff=-0.0013 height=+0.0025 | zPhi=     nan Phi=+nan | W=   3.57 as=0.539 kd=-1.20
+  th=+0.1000 L=  256 dHpmf=+0.00630 zH=   3.73 | terr=+0.00349 zT=  0.81 | histdiff=+0.0020 height=+0.0046 | zPhi=     nan Phi=+nan | W=   3.65 as=0.518 kd=-1.19
+  th=+0.1100 L=  256 dHpmf=+0.00454 zH=   2.69 | terr=+0.00230 zT=  0.53 | histdiff=-0.0036 height=+0.0004 | zPhi=     nan Phi=+nan | W=   3.72 as=0.571 kd=-1.19
+  th=+0.1200 L=  256 dHpmf=+0.00308 zH=   1.82 | terr=+0.00631 zT=  1.46 | histdiff=+0.0088 height=+0.0051 | zPhi=     nan Phi=+nan | W=   3.84 as=0.585 kd=-1.20
+  th=+0.1300 L=  256 dHpmf=+0.00602 zH=   3.57 | terr=+0.00144 zT=  0.33 | histdiff=-0.0028 height=+0.0088 | zPhi=     nan Phi=+nan | W=   3.66 as=0.549 kd=-1.19
+  th=+0.1400 L=  256 dHpmf=+0.01122 zH=   6.65 | terr=+0.01159 zT=  2.68 | histdiff=+0.0045 height=+0.0011 | zPhi=     nan Phi=+nan | W=   3.86 as=0.552 kd=-1.16
+  th=+0.1500 L=  256 dHpmf=+0.00374 zH=   2.22 | terr=+0.00175 zT=  0.40 | histdiff=+0.0082 height=-0.0019 | zPhi=     nan Phi=+nan | W=   3.86 as=0.571 kd=-1.20
+  th=+0.1583 L=  256 dHpmf=+0.01021 zH=   6.05 | terr=+0.01063 zT=  2.46 | histdiff=+0.0069 height=-0.0050 | zPhi=     nan Phi=+nan | W=   3.87 as=0.538 kd=-1.17
+  th=+0.1667 L=  256 dHpmf=+0.01089 zH=   6.45 | terr=+0.00512 zT=  1.19 | histdiff=+0.0024 height=+0.0039 | zPhi=     nan Phi=+nan | W=   3.81 as=0.538 kd=-1.17
+  th=+0.1750 L=  256 dHpmf=+0.00989 zH=   5.86 | terr=+0.01185 zT=  2.74 | histdiff=-0.0054 height=+0.0033 | zPhi=     nan Phi=+nan | W=   3.65 as=0.543 kd=-1.17
+  th=+0.1833 L=  256 dHpmf=+0.01294 zH=   7.66 | terr=+0.00763 zT=  1.76 | histdiff=-0.0023 height=-0.0012 | zPhi=     nan Phi=+nan | W=   3.96 as=0.537 kd=-1.16
+
+==========================================================================================================
+SCALE-DEPENDENT ONSETS theta*(L) and finite-size scaling fits
+==========================================================================================================
+
+  [Hellinger_pmf_effectsize] criterion 0.005:  theta*(L) = 32:0.0575, 64:0.0864, 128:0.0928, 256:0.0846
+      free   theta_c = 0.0885 +- 0.0020   1/nu = 4.189   chi2/dof = 4.68/1   p = 0.031
+      th_c=0 forced     A = 0.0803   1/nu = 0.000   chi2/dof = 100.00/2   p = 0.000
+python.exe : E:\Ӧ������ѧ\����\BDģ��\code\diagnostics.py:464: RuntimeWarning: overflow encountered in power
+At line:1 char:166
++ ... ython.exe'; & $py -u code\analyze.py --tag spec --rule bd --checkpoin ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (E:\Ӧ������ѧ\���...ntered in power:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  return (tc + A * Ls ** (-1.0 / nu) - y) / sigma
+
+  [Hellinger_pmf_effectsize] criterion 0.01:  theta*(L) = 32:0.1644, 64:0.1299, 128:0.1690, 256:0.1377
+      free   theta_c = 0.1455 +- 0.0024   1/nu = 17.318   chi2/dof = 76.31/1   p = 0.000
+      th_c=0 forced     A = 0.1795   1/nu = 0.040   chi2/dof = 92.47/2   p = 0.000
+
+  [Hellinger_pmf_effectsize] criterion 0.02:  theta*(L) = 32:0.2645, 64:0.2227, 128:0.2477, 256:--
+      free   theta_c = 0.2352 +- 0.0034   1/nu = 18.352   chi2/dof = 26.57/1   p = 0.000
+      th_c=0 forced     A = 0.3035   1/nu = 0.052   chi2/dof = 62.54/1   p = 0.000
+
+  [Hellinger_pmf_z] criterion 2.0:  theta*(L) = 32:0.1980, 64:0.0994, 128:0.0934, 256:0.0676
+      free   theta_c = 0.0741 +- 0.0104   1/nu = 2.054   chi2/dof = 2.39/1   p = 0.122
+      th_c=0 forced     A = 1.3736   1/nu = 0.575   chi2/dof = 10.25/2   p = 0.006
+
+  [Hellinger_pmf_z] criterion 3.0:  theta*(L) = 32:0.2563, 64:0.2154, 128:0.1529, 256:0.0854
+      free   theta_c = 0.4362 +- 0.2596   1/nu = -0.326   chi2/dof = 0.12/1   p = 0.734
+      th_c=0 forced     A = 1.2587   1/nu = 0.447   chi2/dof = 5.88/2   p = 0.053
+
+  [Hellinger_pmf_z] criterion 5.0:  theta*(L) = 32:0.3108, 64:0.2658, 128:0.1733, 256:0.1347
+      free   theta_c = -1.1935 +- 7.3012   1/nu = 0.063   chi2/dof = 2.61/1   p = 0.106
+      th_c=0 forced     A = 1.2898   1/nu = 0.402   chi2/dof = 3.84/2   p = 0.147
+
+  [Hellinger_pmf_z] criterion 10.0:  theta*(L) = 32:--, 64:0.3629, 128:0.2751, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [Hellinger_terrace_z] criterion 2.0:  theta*(L) = 32:0.3354, 64:0.3182, 128:0.2556, 256:0.1371
+      free   theta_c = 0.3582 +- 0.0319   1/nu = -1.152   chi2/dof = 0.16/1   p = 0.686
+      th_c=0 forced     A = 1.1417   1/nu = 0.334   chi2/dof = 17.90/2   p = 0.000
+
+  [Hellinger_terrace_z] criterion 3.0:  theta*(L) = 32:--, 64:0.3583, 128:0.2915, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [Hellinger_terrace_z] criterion 5.0:  theta*(L) = 32:--, 64:--, 128:0.3630, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+D:\TOOLS\anaconda3\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:2015: RuntimeWarning: Degrees of freedom <= 0 for 
+slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+
+  [iForest_frac_effectsize] criterion 0.05:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [iForest_frac_effectsize] criterion 0.1:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [iForest_frac_effectsize] criterion 0.2:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [iForest_frac_effectsize] criterion 0.5:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [iForest_zscore] criterion 3.0:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [iForest_zscore] criterion 5.0:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [iForest_zscore] criterion 10.0:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [Hellinger_histdiff_z] criterion 3.0:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [Hellinger_histdiff_z] criterion 5.0:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [Hellinger_height_z] criterion 3.0:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [Hellinger_height_z] criterion 5.0:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [Hellinger_height_z] criterion 10.0:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [frac_step2] criterion 0.01:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [frac_step2] criterion 0.05:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+  [frac_step2] criterion 0.1:  theta*(L) = 32:--, 64:--, 128:--, 256:--
+      free   theta_c = nan +- nan   1/nu = nan   chi2/dof = nan/0   p = nan
+      th_c=0 forced     A = nan   1/nu = nan   chi2/dof = nan/0   p = nan
+
+==========================================================================================================
+DIRECT EXPONENTS  (alpha from W_sat ~ L^alpha, beta in growth window)
+==========================================================================================================
+  theta=-0.2000  alpha=0.4947+-0.0181   beta=0.2601   beta(early)=0.2920
+  theta=-0.1000  alpha=0.5028+-0.0070   beta=0.2662   beta(early)=0.2775
+  theta=-0.0500  alpha=0.4993+-0.0092   beta=0.2697   beta(early)=0.2831
+  theta=+0.0000  alpha=0.5084+-0.0015   beta=0.2607   beta(early)=0.2771
+  theta=+0.0200  alpha=0.5245+-0.0122   beta=0.2555   beta(early)=0.2868
+  theta=+0.0400  alpha=0.4977+-0.0067   beta=0.2619   beta(early)=0.2841
+  theta=+0.0600  alpha=0.4928+-0.0268   beta=0.2644   beta(early)=0.2822
+  theta=+0.0800  alpha=0.4870+-0.0142   beta=0.2583   beta(early)=0.2820
+  theta=+0.1000  alpha=0.5026+-0.0021   beta=0.2547   beta(early)=0.2781
+  theta=+0.1100  alpha=0.5117+-0.0063   beta=0.2565   beta(early)=0.2773
+  theta=+0.1200  alpha=0.5213+-0.0140   beta=0.2745   beta(early)=0.2876
+  theta=+0.1300  alpha=0.5034+-0.0159   beta=0.2559   beta(early)=0.2865
+  theta=+0.1400  alpha=0.5381+-0.0163   beta=0.2641   beta(early)=0.2940
+  theta=+0.1500  alpha=0.5388+-0.0067   beta=0.2603   beta(early)=0.2816
+  theta=+0.1583  alpha=0.5248+-0.0096   beta=0.2568   beta(early)=0.2874
+  theta=+0.1667  alpha=0.5247+-0.0080   beta=0.2565   beta(early)=0.2827
+  theta=+0.1750  alpha=0.4932+-0.0254   beta=0.2438   beta(early)=0.2879
+  theta=+0.1833  alpha=0.5320+-0.0093   beta=0.2625   beta(early)=0.2864
+  theta=+0.1917  alpha=0.4842+-0.0368   beta=0.2539   beta(early)=0.2796
+  theta=+0.2000  alpha=0.5658+-0.0188   beta=0.2456   beta(early)=0.2768
+  theta=+0.2100  alpha=0.5453+-0.0047   beta=0.2544   beta(early)=0.2762
+  theta=+0.2250  alpha=0.5229+-0.0622   beta=0.2367   beta(early)=0.2764
+  theta=+0.2500  alpha=0.5566+-0.0024   beta=0.2560   beta(early)=0.2840
+  theta=+0.3000  alpha=0.5321+-0.0237   beta=0.2503   beta(early)=0.2835
+  theta=+0.3500  alpha=0.5842+-0.0009   beta=0.2644   beta(early)=0.2931
+  theta=+0.4000  alpha=0.5525+-0.0053   beta=0.2488   beta(early)=0.2926
+
+wrote E:\Ӧ������ѧ\����\BDģ��\data\analysis\spec_bd/diagnostics.csv, summary.json, rows.npz

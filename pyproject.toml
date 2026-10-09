@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bd-correlated-noise"
+version = "1.0.0"
+description = "Ballistic deposition with long-range temporally correlated noise: FFGN generator bias, generator-robust exponents, and a finite-size test for the KPZ crossover."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Yong Huang", email = "" },
+]
+keywords = [
+  "kinetic roughening",
+  "ballistic deposition",
+  "long-range temporal correlations",
+  "Kardar-Parisi-Zhang",
+  "finite-size scaling",
+  "fractional Gaussian noise",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.9",
+  "numba>=0.57",
+  "scikit-learn>=1.2",
+  "matplotlib>=3.6",
+]
+
+[project.optional-dependencies]
+pdf = ["pymupdf>=1.23"]
+test = ["pytest>=7.0"]
+
+[project.urls]
+# TODO: fill these in after the first push / archive deposit.
+# Homepage = "https://github.com/<user>/<repo>"
+# Repository = "https://github.com/<user>/<repo>"
+"Bug Tracker" = ""
+
+# ---------------------------------------------------------------------------
+# The simulation package is the flat directory code/. It is deliberately NOT
+# declared as an installed package: every entry point resolves paths from
+# __file__ and inserts code/ into sys.path itself, and drivers are run as
+# `python code/<script>.py`. Only test/lint tooling is configured here.
+# ---------------------------------------------------------------------------
+
+[tool.setuptools]
+packages = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-q"
+# tests import the simulation modules from code/, matching how the drivers do it
+pythonpath = ["code"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["code/_tmp_*.py", "manuscript/overleaf"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = [
+  "E501",   # long lines occur in the physics docstrings and table code
+  "E741",   # short names like l, I are idiomatic in the linear algebra here
+]

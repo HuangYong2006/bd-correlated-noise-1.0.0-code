@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the archived release and the manuscript below."
+title: "Noise-generator bias in temporally correlated ballistic deposition"
+abstract: >-
+  Simulation and analysis code for a numerical study of (1+1)-dimensional ballistic
+  deposition driven by noise with long-range temporal correlations. The work shows that
+  Mandelbrot's fast fractional Gaussian noise, the generator used throughout the published
+  literature on this problem, is discontinuous at zero correlation exponent, so the family
+  never samples the short-range Kardar-Parisi-Zhang regime; and that the standard
+  fixed-significance onset construction cannot locate the crossover when the detection floor
+  depends on system size. No measured theta_c is reported.
+type: software
+authors:
+  - family-names: Huang
+    given-names: Yong
+    affiliation: "College of Physics, Chengdu University of Technology, Chengdu, China"
+    orcid: ""          # TODO: add your ORCID iD, e.g. https://orcid.org/0000-0000-0000-0000
+repository-code: ""    # TODO: add the GitHub/GitLab URL after the first push
+url: ""                # TODO: same as repository-code, or the archived DOI URL
+license: MIT
+version: "1.0.0"
+date-released: "2026-10-09"
+keywords:
+  - kinetic roughening
+  - ballistic deposition
+  - long-range temporal correlations
+  - Kardar-Parisi-Zhang
+  - finite-size scaling
+  - fractional Gaussian noise
+  - reproducibility
+preferred-citation:
+  type: article
+  title: "Noise-generator bias in temporally correlated ballistic-deposition simulations"
+  authors:
+    - family-names: Huang
+      given-names: Yong
+      affiliation: "College of Physics, Chengdu University of Technology, Chengdu, China"
+  journal: "Physical Review E"
+  year: 2026
+  notes: "Submitted. Update the volume, page and DOI once assigned."

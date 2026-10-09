@@ -1,0 +1,441 @@
+{
+  "tag": "explore",
+  "rule": "bd",
+  "Ls": [
+    256,
+    1024
+  ],
+  "features": [
+    "alpha_loc_r2",
+    "alpha_loc_r4",
+    "alpha_loc_r8",
+    "alpha_loc_r16",
+    "alpha_loc_r32",
+    "alpha_loc_r64",
+    "alpha_loc_r128",
+    "alpha_loc_r256",
+    "logCnorm_r2",
+    "logCnorm_r4",
+    "logCnorm_r8",
+    "logCnorm_r16",
+    "logCnorm_r32",
+    "logCnorm_r64",
+    "logCnorm_r128",
+    "logCnorm_r256",
+    "alpha_s",
+    "skew_d",
+    "kurt_d",
+    "frac_flat",
+    "frac_step2",
+    "frac_step3",
+    "slope_entropy",
+    "log_mean_flat_run",
+    "skew_h",
+    "kurt_h"
+  ],
+  "onsets": {
+    "Hellinger_slope": {
+      "thr3.0": {
+        "theta_star": [
+          null,
+          0.018137339248970923
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 1
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 1
+        }
+      },
+      "thr5.0": {
+        "theta_star": [
+          null,
+          0.03075470624742591
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 1
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 1
+        }
+      },
+      "thr10.0": {
+        "theta_star": [
+          null,
+          null
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        }
+      }
+    },
+    "Hellinger_height": {
+      "thr3.0": {
+        "theta_star": [
+          null,
+          null
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        }
+      },
+      "thr5.0": {
+        "theta_star": [
+          null,
+          null
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        }
+      },
+      "thr10.0": {
+        "theta_star": [
+          null,
+          null
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        }
+      }
+    },
+    "iForest_zscore": {
+      "thr3.0": {
+        "theta_star": [
+          null,
+          null
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        }
+      },
+      "thr5.0": {
+        "theta_star": [
+          null,
+          null
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        }
+      },
+      "thr10.0": {
+        "theta_star": [
+          null,
+          null
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 0
+        }
+      }
+    },
+    "iForest_fraction": {
+      "thr0.1": {
+        "theta_star": [
+          0.0051944218103060075,
+          0.004799764094770389
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 2
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 2
+        }
+      },
+      "thr0.25": {
+        "theta_star": [
+          0.013436093158599461,
+          0.012557416837735763
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 2
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 2
+        }
+      },
+      "thr0.5": {
+        "theta_star": [
+          0.027172212072421886,
+          0.025486838076011386
+        ],
+        "free": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 2
+        },
+        "forced_zero": {
+          "theta_c": null,
+          "theta_c_err": null,
+          "nu": null,
+          "A": null,
+          "chi2": null,
+          "dof": 0,
+          "pvalue": null,
+          "n_points": 2
+        }
+      }
+    }
+  },
+  "exponents": {
+    "+0.0000": {
+      "alpha": NaN,
+      "alpha_err": NaN,
+      "beta": 0.27724611788357045,
+      "beta_early": 0.3019881744811903,
+      "W_by_L": {
+        "1024": 7.120691368632809
+      }
+    },
+    "+0.0500": {
+      "alpha": NaN,
+      "alpha_err": NaN,
+      "beta": 0.31733767206991725,
+      "beta_early": 0.3478624403481091,
+      "W_by_L": {
+        "1024": 13.751965122247466
+      }
+    },
+    "+0.1000": {
+      "alpha": NaN,
+      "alpha_err": NaN,
+      "beta": 0.30671545936936717,
+      "beta_early": 0.35846796696780325,
+      "W_by_L": {
+        "1024": 15.502372273033425
+      }
+    },
+    "+0.1500": {
+      "alpha": NaN,
+      "alpha_err": NaN,
+      "beta": 0.3699423432954601,
+      "beta_early": 0.39963577456396904,
+      "W_by_L": {
+        "1024": 16.237029528342187
+      }
+    },
+    "+0.1667": {
+      "alpha": NaN,
+      "alpha_err": NaN,
+      "beta": 0.3907927393814927,
+      "beta_early": 0.40360399952027537,
+      "W_by_L": {
+        "1024": 19.04757032410884
+      }
+    },
+    "+0.2000": {
+      "alpha": NaN,
+      "alpha_err": NaN,
+      "beta": 0.3803182069413652,
+      "beta_early": 0.41798358414773285,
+      "W_by_L": {
+        "1024": 21.513817937755984
+      }
+    },
+    "+0.2500": {
+      "alpha": NaN,
+      "alpha_err": NaN,
+      "beta": 0.4114553496988372,
+      "beta_early": 0.43541061439308026,
+      "W_by_L": {
+        "1024": 26.90800514655066
+      }
+    },
+    "+0.3000": {
+      "alpha": NaN,
+      "alpha_err": NaN,
+      "beta": 0.45362500773739045,
+      "beta_early": 0.4710579023288841,
+      "W_by_L": {
+        "1024": 33.622807200804935
+      }
+    },
+    "+0.4000": {
+      "alpha": NaN,
+      "alpha_err": NaN,
+      "beta": 0.4847296270070113,
+      "beta_early": 0.47170623781672033,
+      "W_by_L": {
+        "1024": 55.85179478428983
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+# ---------------------------------------------------------------------------
+# Byte-compiled / cache
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.nbi
+*.nbc
+.numba_cache/
+
+# ---------------------------------------------------------------------------
+# Virtual environments
+# ---------------------------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# ---------------------------------------------------------------------------
+# Build / packaging artefacts
+#
+# dist/ holds the release archives built by pack_repo.ps1. They are
+# deliverables, not sources: upload them as GitHub Release assets or a Zenodo
+# deposit rather than committing them.
+# ---------------------------------------------------------------------------
+dist/
+build/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---------------------------------------------------------------------------
+# Simulation data.
+#
+# Raw campaign output is ~2.5 GB and fully regenerable from run_campaign.py
+# given the seeds recorded in each cell's `spec`, so NOTHING under data/raw/ is
+# tracked -- neither the .npz archives nor the manifests. The small derived
+# analysis tables in data/analysis/ ARE tracked: they are what the manuscript
+# numbers come from and they are cheap to carry.
+#
+# If you prefer to version the raw data, remove the data/raw/ rule and use Git
+# LFS for the .npz files.
+# ---------------------------------------------------------------------------
+data/raw/
+
+# Standalone generator-calibration / validation arrays at the top level of
+# data/ are regenerable and not needed to reproduce the manuscript numbers.
+/data/*.npz
+
+# ---------------------------------------------------------------------------
+# Third-party literature.
+#
+# .lit/ contains published journal PDFs downloaded for reference and the text
+# extracted from them. It is NOT distributed with this repository: those PDFs
+# remain under the publishers' copyright, so redistributing them in a public
+# repository is not appropriate. Every reference is listed in manuscript/refs.bib
+# with its DOI, so the sources are citable and discoverable without shipping
+# copies. Delete this rule if and only if you intend the deposit to remain
+# private.
+# ---------------------------------------------------------------------------
+.lit/
+
+# 600 dpi TIFF copies of the manuscript figures are submission assets, not
+# sources: the repository carries the PDF and SVG, and pack_repo.ps1 -Full
+# bundles the TIFFs into the release archive.
+figs/**/*.tiff
+
+# ---------------------------------------------------------------------------
+# Local run artefacts
+# ---------------------------------------------------------------------------
+.figpreview/
+.dsh_tmp/
+.dsh_acl_recovery/
+acl-report-*.jsonl
+acl-backup-*.json
+acl-backup-*.ps1
+
+# ---------------------------------------------------------------------------
+# LaTeX intermediate files
+# ---------------------------------------------------------------------------
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+*.spl
+*.nav
+*.snm
+*.vrb
+
+# ---------------------------------------------------------------------------
+# Editor / OS noise
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini

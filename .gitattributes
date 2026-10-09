@@ -1,0 +1,33 @@
+# Normalise line endings to LF in the repository for text sources, so that
+# diffs and patches are stable across Windows and Unix checkouts, while pinned
+# binaries and compressed archives are never touched by conversion.
+* text=auto eol=lf
+
+*.py    text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.tex   text eol=lf
+*.bib   text eol=lf
+*.cff   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.json  text eol=lf
+*.toml  text eol=lf
+*.cfg   text eol=lf
+*.ps1   text eol=crlf
+
+# Binary / compressed formats: never convert, never diff.
+*.npz   binary
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.tif   binary
+*.tiff  binary
+*.zip   binary
+*.gz    binary
+
+# Generated artefacts: exclude from language statistics and from diffs.
+figs/**/*.svg  linguist-generated=true
+figs/**/*.tiff linguist-generated=true
+manuscript/overleaf/** linguist-generated=true
