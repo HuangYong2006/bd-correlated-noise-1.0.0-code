@@ -108,3 +108,13 @@ The Overleaf builder now writes its source ZIP directly. Release packaging selec
 - `manuscript/overleaf/submission_results.tex`: Generated duplicate of canonical manuscript source/figures.
 - `manuscript/overleaf_bd_paper__1_.pdf`: Superseded draft PDF.
 - `spectrum_check.npz`: Superseded readiness report or standalone debug array.
+
+## Additional author-requested cleanup
+
+The author identified three more background working notes for removal. They are not referenced by the current code, tests or manuscript source. This brings the total to 103 removed files across the two cleanup passes.
+
+- `jiang_xia_2026_CTP_extraction.md`: early literature extraction.
+- `kpz_temporal_corr_exponent_table.md`: background exponent compilation.
+- `kpz_temporal_corr_theory_report.md`: early theoretical reading notes.
+
+These notes remain recoverable from commit `194435f7db4357ae873aa74d5c7f6ac35013b176`. The manuscript bibliography and current covariance derivation are retained.

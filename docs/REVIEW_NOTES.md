@@ -7,4 +7,4 @@
 - [Field validation](revision_20261026/noise_validation_notes.md).
 - [Cleanup and recovery](CLEANUP.md).
 
-The root-level theory and literature notes remain background resources. Their historical numerical discussions are not substitutes for the current manuscript data. Obsolete v6/v7/v8 readiness reports and superseded working reviews are available through Git history.
+The remaining root-level `LR_temporal_correlation_numerics_report.md` is a background resource. Their historical numerical discussions are not substitutes for the current manuscript data. Obsolete v6/v7/v8 readiness reports and superseded working reviews are available through Git history.
