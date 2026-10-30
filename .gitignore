@@ -41,8 +41,7 @@ htmlcov/
 # analysis tables in data/analysis/ ARE tracked: they are what the manuscript
 # numbers come from and they are cheap to carry.
 #
-# If you prefer to version the raw data, remove the data/raw/ rule and use Git
-# LFS for the .npz files.
+# Only the three explicitly listed corrected campaigns are versioned below.
 # ---------------------------------------------------------------------------
 data/raw/*
 !data/raw/rev20261026_shared/
@@ -67,8 +66,8 @@ data/raw/*
 .lit/
 
 # 600 dpi TIFF copies of the manuscript figures are submission assets, not
-# sources: the repository carries the PDF and SVG, and pack_repo.ps1 -Full
-# bundles the TIFFs into the release archive.
+# sources: the repository carries PDF, SVG and PNG. Ignored TIFF files must
+# be distributed separately; release packaging selects tracked files only.
 figs/**/*.tiff
 
 # ---------------------------------------------------------------------------

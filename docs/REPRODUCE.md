@@ -64,6 +64,7 @@ written by revision_analysis.py are the authoritative inventory.
 & $py code/revision_analysis.py --bootstrap 500 --hell-bootstrap 200 --splits 120
 & $py code/export_revision_tables.py
 & $py code/revision_figures.py
+& $py code/submission_controls.py
 & $py code/build_overleaf.py
 ```
 

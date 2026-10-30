@@ -95,7 +95,16 @@ def main():
     axes[1].axhline(1,color='#4d4d4d',lw=.7)
     axes[1].set(xlabel='Observation duration / T',ylabel='Late-time width / width at T',title='Fixed length-4T input record',xticks=[2,4])
     axes[1].legend(fontsize=6,loc='best')
-    save(fig,ROOT/'figs/revision_20261026','fig5_controls')
+    outputs=save(fig,ROOT/'figs/revision_20261026','fig5_controls')
+    manifest={'script':'code/submission_controls.py',
+              'summary':(OUT/'summary.json').relative_to(ROOT).as_posix(),
+              'summary_sha256':hashlib.sha256((OUT/'summary.json').read_text(encoding="utf-8").encode("utf-8")).hexdigest(),
+              'paired_sources':(OUT/'paired.json').relative_to(ROOT).as_posix(),
+              'paired_sources_sha256':hashlib.sha256((OUT/'paired.json').read_text(encoding="utf-8").encode("utf-8")).hexdigest(),
+              'outputs':[Path(p).relative_to(ROOT).as_posix() for p in outputs],
+              'uncertainty':'Paired run-bootstrap SD; pointwise percentile intervals are in the source summary.',
+              'text_hash_normalization':'UTF-8 with LF line endings; binary archive hashes remain byte-exact.'}
+    (ROOT/'figs/revision_20261026/fig5_sources.json').write_text(json.dumps(manifest,indent=2))
     lines=[]
     for r in paired:
         label='1/6' if abs(r['theta']-1/6)<1e-6 else f"{r['theta']:.2f}"

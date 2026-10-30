@@ -1,0 +1,14 @@
+{
+  "script": "code/submission_controls.py",
+  "summary": "data/analysis/submission_20261030/summary.json",
+  "summary_sha256": "8bba3f418a6a80aa11af8690dd005f17c9ed081bb19384fbecd18d78d3a68341",
+  "paired_sources": "data/analysis/submission_20261030/paired.json",
+  "paired_sources_sha256": "757914375a176e1cebe0309c270b002390a642f00129ac6c4cc60263acb3129a",
+  "outputs": [
+    "figs/revision_20261026/fig5_controls.pdf",
+    "figs/revision_20261026/fig5_controls.svg",
+    "figs/revision_20261026/fig5_controls.png"
+  ],
+  "uncertainty": "Paired run-bootstrap SD; pointwise percentile intervals are in the source summary.",
+  "text_hash_normalization": "UTF-8 with LF line endings; binary archive hashes remain byte-exact."
+}

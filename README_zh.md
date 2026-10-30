@@ -23,8 +23,9 @@
 - code/validate_production_noise.py：最终生产接口的相关验证。
 - code/revision_analysis.py：按独立 run 分析宽度、有效斜率及局域 pmf。
 - code/export_revision_tables.py：从源表导出论文数值。
-- code/revision_figures.py：四张修订图及源文件记录。
-- manuscript/main.tex、revision_results.tex：当前论文源文件。
+- code/revision_figures.py：四张生产图及源文件记录。
+- code/submission_controls.py：配对分析、时长对照及第五张图。
+- manuscript/main.tex、revision_results.tex、submission_results.tex：当前论文源文件。
 - manuscript/overleaf_bd_paper.zip：重建后的 Overleaf 上传包。
 - docs/revision_20261026/：修复、测试与视觉检查记录。
 

@@ -55,6 +55,7 @@ Use [docs/REPRODUCE.md](docs/REPRODUCE.md) for current commands and
 - `code/revision_analysis.py`: run-level widths, effective slopes and local-pmf distances.
 - `code/export_revision_tables.py`: data-derived LaTeX numbers.
 - `code/revision_figures.py`: the original four revised figures and source manifest.
+- `code/submission_controls.py`: paired filter inference, duration controls and the fifth figure.
 - `manuscript/main.tex`: current manuscript; `revision_results.tex` and `submission_results.tex` are required inputs.
 - `manuscript/overleaf_bd_paper.zip`: rebuilt upload package.
 - `docs/revision_20261026/`: correction, test and figure QA records.
@@ -65,6 +66,7 @@ Use [docs/REPRODUCE.md](docs/REPRODUCE.md) for current commands and
 & 'D:/TOOLS/anaconda3/python.exe' code/revision_analysis.py
 & 'D:/TOOLS/anaconda3/python.exe' code/export_revision_tables.py
 & 'D:/TOOLS/anaconda3/python.exe' code/revision_figures.py
+& 'D:/TOOLS/anaconda3/python.exe' code/submission_controls.py
 & 'D:/TOOLS/anaconda3/python.exe' code/build_overleaf.py
 ```
 

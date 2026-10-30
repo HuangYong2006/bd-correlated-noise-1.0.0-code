@@ -2,12 +2,10 @@
 Benchmark the corrected (spectral) noise generator to see whether a full
 campaign with a theta-continuous generator is affordable.
 
-The FFGN family is discontinuous at theta = 0 (see calibrate_generator.py), so
-the physical theta axis must be sampled with a different generator: exact
-power-law spectral filtering, S(f) = |f|^(-2 theta) with the DC mode removed.
-That family IS continuous: at theta = 0 it is exactly white noise, and its
-correlation amplitude matches the exact fractional-Gaussian-noise amplitude to
-within ~20% over the whole range.
+This benchmarks the specified finite-record power-law filter and growth kernel.
+DC removal, periodic boundaries and the observation duration remain part of the
+protocol. Timing results do not identify a universality class or establish
+agreement with an infinite-record fractional Gaussian noise covariance.
 
 Cost model: one batched FFT of shape (n_chunk, T) per chunk of sites, so the
 generation cost is O(L T log T) with numpy's vectorised pocketfft.

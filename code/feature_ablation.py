@@ -49,7 +49,7 @@ HOW IT MATCHES code/analyze.py
       detector construction (60% train / 20% threshold calibration / remaining
       independent null runs, requested alpha = 0.02, per-resplit seeds
       seed + 1000*b) is identical. Actual FPR is measured on the null runs;
-    * the fixed-theta ln L slopes follow code/fixed_theta_scaling.py, but are
+    * the auxiliary fixed-theta ln L slopes are descriptive fits,
       applied to zPhi (and to zH) and carry a least-squares and a Monte-Carlo
       standard error.
 

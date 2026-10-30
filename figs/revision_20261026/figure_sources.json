@@ -1,8 +1,8 @@
 {
-  "summary": "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\data\\analysis\\revision_20261026\\summary.json",
-  "summary_sha256": "57ba7392911c2677fb50d3a9db82da3b1d9b593a711ddc10bd60598622ba6091",
-  "noise_validation": "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\data\\analysis\\revision_20261026\\noise_validation.json",
-  "noise_sha256": "69abe021091762baf559b92b21a0c9a211fa94003b672e30be803ac22bc3b8fe",
+  "summary": "data/analysis/revision_20261026/summary.json",
+  "summary_sha256": "51856aaf7d884461685fa8d6963a194f5704c1d0fe7c06a46ccb8ffba5ca11dc",
+  "noise_validation": "data/analysis/revision_20261026/noise_validation.json",
+  "noise_sha256": "35d9de909fa5f4f14a24b5ad49d692c6ee1070e937b09f4b569656db691c30da",
   "protocol": {
     "tags": {
       "shared": "rev20261026_shared",
@@ -59,18 +59,19 @@
     }
   ],
   "outputs": [
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig1_generator.pdf",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig1_generator.svg",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig1_generator.png",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig2_exponents.pdf",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig2_exponents.svg",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig2_exponents.png",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig3_fixed_theta.pdf",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig3_fixed_theta.svg",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig3_fixed_theta.png",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig4_morphology.pdf",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig4_morphology.svg",
-    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig4_morphology.png"
+    "figs/revision_20261026/fig1_generator.pdf",
+    "figs/revision_20261026/fig1_generator.svg",
+    "figs/revision_20261026/fig1_generator.png",
+    "figs/revision_20261026/fig2_exponents.pdf",
+    "figs/revision_20261026/fig2_exponents.svg",
+    "figs/revision_20261026/fig2_exponents.png",
+    "figs/revision_20261026/fig3_fixed_theta.pdf",
+    "figs/revision_20261026/fig3_fixed_theta.svg",
+    "figs/revision_20261026/fig3_fixed_theta.png",
+    "figs/revision_20261026/fig4_morphology.pdf",
+    "figs/revision_20261026/fig4_morphology.svg",
+    "figs/revision_20261026/fig4_morphology.png"
   ],
-  "uncertainty": "Supplied run errors; S(k) uses all-run mean and SE."
+  "uncertainty": "Supplied run errors; S(k) uses all-run mean and SE.",
+  "text_hash_normalization": "UTF-8 with LF line endings; binary archive hashes remain byte-exact."
 }

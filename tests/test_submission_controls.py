@@ -1,5 +1,6 @@
 """Checks for the new duration and paired-analysis evidence."""
 import json
+import hashlib
 from pathlib import Path
 import sys
 import unittest
@@ -12,6 +13,23 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class SubmissionControls(unittest.TestCase):
+    def test_figure_source_manifests_cover_all_five_figures(self):
+        outputs=set()
+        for name,inputs in [
+                ('figure_sources.json',[('summary','summary_sha256'),('noise_validation','noise_sha256')]),
+                ('fig5_sources.json',[('summary','summary_sha256'),('paired_sources','paired_sources_sha256')])]:
+            record=json.loads((ROOT/'figs/revision_20261026'/name).read_text())
+            for source,key in inputs:
+                self.assertFalse(Path(record[source]).is_absolute())
+                self.assertEqual(hashlib.sha256((ROOT/record[source]).read_text(encoding='utf-8').encode('utf-8')).hexdigest(),record[key])
+            for output in record['outputs']:
+                self.assertFalse(Path(output).is_absolute())
+                self.assertTrue((ROOT/output).is_file())
+                outputs.add(output)
+        expected={p.relative_to(ROOT).as_posix() for p in (ROOT/'figs/revision_20261026').iterdir()
+                  if p.suffix in ['.pdf','.svg','.png']}
+        self.assertEqual(outputs,expected)
+
     def test_nested_prefix_matches_direct_parallel_update(self):
         eta = np.random.default_rng(43).integers(0,2,size=(2,24,8),dtype=np.uint8)
         for T in [6,12,24]:

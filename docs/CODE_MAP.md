@@ -16,6 +16,6 @@ All scripts use `code/` as a flat module directory. Run them from the repository
 
 `features.py`, `diagnostics.py`, `analyze.py` and `feature_ablation.py` provide reusable run-level diagnostics and support regression tests. Their optional novelty/onset outputs are not physical critical-point evidence.
 
-Other retained scripts provide calibration studies, integrity checks, benchmarks, model validation, TeX checks and optional PDF/library inspection. They are outside the main evidence pipeline. Removed one-shot/broken/historical renderers are listed in [CLEANUP.md](CLEANUP.md).
+Other retained scripts provide integrity checks, benchmarks, model validation, TeX checks and optional PDF inspection. They are outside the main evidence pipeline. Removed one-shot/broken/historical renderers are listed in [CLEANUP.md](CLEANUP.md).
 
 [The current reproduction guide](submission_20261030/REPRODUCE.md) gives the execution order. The source package contains `main.tex`, both numerical macro files, `refs.bib`, a reading abstract, five PDF/SVG figures and a short README. It does not require a second local `overleaf/` tree.

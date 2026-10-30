@@ -245,13 +245,14 @@ def main(argv=None):
     outputs = fig1(noise, outdir) + fig2(summary, outdir) + fig3(summary, outdir)
     morphology, selected = fig4(summary, outdir)
     outputs += morphology
-    sources = {"summary": str(summary_path),
-               "summary_sha256": hashlib.sha256(summary_path.read_bytes()).hexdigest(),
-               "noise_validation": str(noise_path),
-               "noise_sha256": hashlib.sha256(noise_path.read_bytes()).hexdigest(),
+    sources = {"summary": summary_path.relative_to(ROOT).as_posix() if summary_path.is_relative_to(ROOT) else str(summary_path),
+               "summary_sha256": hashlib.sha256(summary_path.read_text(encoding="utf-8").encode("utf-8")).hexdigest(),
+               "noise_validation": noise_path.relative_to(ROOT).as_posix() if noise_path.is_relative_to(ROOT) else str(noise_path),
+               "noise_sha256": hashlib.sha256(noise_path.read_text(encoding="utf-8").encode("utf-8")).hexdigest(),
                "protocol": summary["protocol"], "morphology_sources": selected,
-               "outputs": outputs,
-               "uncertainty": "Supplied run errors; S(k) uses all-run mean and SE."}
+               "outputs": [Path(p).relative_to(ROOT).as_posix() if Path(p).is_relative_to(ROOT) else p for p in outputs],
+               "uncertainty": "Supplied run errors; S(k) uses all-run mean and SE.",
+               "text_hash_normalization": "UTF-8 with LF line endings; binary archive hashes remain byte-exact."}
     (outdir/"figure_sources.json").write_text(json.dumps(sources, indent=2), encoding="utf-8")
     print(f"Exported {len(outputs)} files at 178 mm width to {outdir}")
 

@@ -1,14 +1,14 @@
 """
-Validation of the literature-standard model (parallel update, binarised
-long-range temporally correlated noise).
+Exploratory validation of this repository's parallel-update growth model.
 
-A. Noise validation: does the FFGN recipe give <eta'(t)eta'(t+tau)> ~ tau^(2th-1)?
-   How does it compare with exact power-law spectral filtering at the same
-   nominal theta?  (This is the generator-dependence question that could
-   explain the spread of published theta_c values.)
-B. theta = 0 dynamics: KPZ exponents beta = 1/3, alpha = 1/2, and a measurement
-   of the saturation time t_x(L) needed to plan the production campaign.
-C. Timing.
+A. Compare empirical binary correlations of the specified shared AR and
+   finite-record power-law spectral input.
+B. Check white-reference growth and width trends and observation durations.
+C. Report timing.
+
+These are exploratory diagnostics. They do not establish historical generator
+implementations, asymptotic exponents or the origin of published thresholds.
+The manuscript's production field checks use validate_production_noise.py.
 
 Run:  python code/validate_model.py
 """

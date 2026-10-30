@@ -49,7 +49,10 @@ def main():
     zip_path = SRC / 'overleaf_bd_paper.zip'
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as archive:
         for name, source in sorted(files.items()):
-            archive.write(source, arcname=name)
+            if source.suffix in ['.tex', '.bib', '.md', '.svg']:
+                archive.writestr(name, source.read_text(encoding='utf-8'))
+            else:
+                archive.write(source, arcname=name)
         archive.writestr('README_OVERLEAF.txt', README)
     print(f'Rebuilt {zip_path} ({zip_path.stat().st_size / 1024:.0f} KB)')
     print(f'Included {len(files)+1} explicitly verified source files')

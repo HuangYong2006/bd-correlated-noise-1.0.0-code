@@ -53,7 +53,7 @@ Shared-versus-independent-innovation growth simulations were not added.
 
 ## Verification
 
-All 50 tests passed with a project-local temporary directory. The new checks
+All 51 tests passed after the repository completeness audit, using a project-local temporary directory. The new checks
 compare nested-prefix simulations to a direct parallel-update reference and
 verify supplemental central slopes against the original production fits.
 An independent read-only audit reproduced the paired bootstrap and all archived
@@ -62,3 +62,7 @@ duration ratio summaries. It did not regenerate every input noise field.
 The supplemental simulation environment used Python 3.12.14, NumPy 2.5.4,
 SciPy 1.18.1, Numba 0.68.1, llvmlite 0.50.0 and Matplotlib 3.11.2.
 Full regression tests were run with the existing project Python installation.
+
+Figure provenance is recorded with repository-relative paths in `figs/revision_20261026/figure_sources.json` (four production figures) and `fig5_sources.json` (the supplemental figure). Both include input hashes and enumerate PDF/SVG/PNG outputs.
+
+Figure-manifest text hashes use UTF-8/LF normalization for portability across checkouts. NPZ hashes remain byte-exact. Source ZIP text is also written with LF line endings.

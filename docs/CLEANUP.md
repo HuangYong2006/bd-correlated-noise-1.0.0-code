@@ -118,3 +118,19 @@ The author identified three more background working notes for removal. They are 
 - `kpz_temporal_corr_theory_report.md`: early theoretical reading notes.
 
 These notes remain recoverable from commit `194435f7db4357ae873aa74d5c7f6ac35013b176`. The manuscript bibliography and current covariance derivation are retained.
+
+## Completeness audit follow-up
+
+Removed 11 further historical, superseded or project-external tools. No retained code or test imports them. Versions are recoverable from commit `0c3e68c502c21f7f33a8cfe19ac3af06b3dc64c8`.
+
+- `LR_temporal_correlation_numerics_report.md`.
+- `code/alpha_drift.py`.
+- `code/calibrate_generator.py`.
+- `code/calibrate_binarised.py`.
+- `code/calibrate_spectral.py`.
+- `code/fixed_theta_scaling.py`.
+- `code/compare_observables.py`.
+- `code/quick_hellinger_scan.py`.
+- `code/zotero_probe.py`.
+- `code/check_generator_limit.py`.
+- `code/validate_fgn_spectrum.py`.
