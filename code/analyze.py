@@ -2,8 +2,8 @@
 Analysis driver.
 
 Produces, for each system size L:
-  * dH(theta,L)  -- bias-corrected Hellinger distance between the standardised
-                    height-INCREMENT densities of the theta ensemble and the
+  * dH(theta,L)  -- bias-corrected Hellinger distance between exact
+                    height-INCREMENT pmfs of the theta ensemble and the
                     theta = 0 (KPZ) reference ensemble   [diagnostic 1, primary]
   * dH_h         -- the same for the height density itself [control; expected
                     to be blind, which is itself a reported result]
@@ -12,10 +12,9 @@ Produces, for each system size L:
                     theta = 0 reference                        [diagnostic 2]
   * Phi          -- the calibrated anomalous FRACTION (secondary iForest output)
   * alpha_s, alpha_loc(r), slope/facet descriptors, W_sat, beta
-It then extracts the scale-dependent onsets theta*(L) for each diagnostic and
-fits theta*(L) = theta_c + A L^(-1/nu), both with theta_c free and with
-theta_c = 0 forced, so that the threshold and no-threshold scenarios can be
-compared directly on the same data.
+Legacy threshold crossings and fits are retained as descriptive summaries.
+Their pointwise uncertainty approximation ignores shared-reference covariance
+and must not be interpreted as physical transition estimates.
 
 Usage:  python code/analyze.py --tag main --rule bd --checkpoints 4
 """
@@ -78,7 +77,10 @@ def main():
     ap.add_argument("--checkpoints", type=int, default=4)
     ap.add_argument("--bins", type=int, default=64)
     ap.add_argument("--splits", type=int, default=120)
-    ap.add_argument("--if-boot", type=int, default=16)
+    ap.add_argument("--hell-boot", type=int, default=200,
+                    help="outer independent-run bootstraps of the complete exact-pmf excess")
+    ap.add_argument("--if-boot", type=int, default=16,
+                    help="random disjoint reference-run resplits (not bootstrap standard errors)")
     ap.add_argument("--if-trees", type=int, default=400)
     ap.add_argument("--if-runs", type=int, default=0,
                     help="subsample every cell to this many runs before the "
@@ -133,13 +135,12 @@ def main():
 
         ref_last = _sub(ref["profiles"][:, -1, :])
         names, F_ref, extra_ref = snapshot_features(ref["profiles"][:, k0:, :])
-        X_ref = F_ref.reshape(-1, F_ref.shape[-1])
         r_probe = max(2, int(args.r_frac * L))
         # --- primary distributional observable: exact, binning-free pmfs ---
         ref_inc = increment_pmf(ref_last)
         ref_terr = terrace_length_pmf(ref_last)
-        n_i = discrete_hellinger_excess(ref_inc, ref_inc, args.splits, args.seed)
-        n_t = discrete_hellinger_excess(ref_terr, ref_terr, args.splits, args.seed + 1)
+        n_i = discrete_hellinger_excess(ref_inc, ref_inc, args.splits, args.seed, n_boot=0)
+        n_t = discrete_hellinger_excess(ref_terr, ref_terr, args.splits, args.seed + 1, n_boot=0)
         # --- controls: histogrammed variants (documented as unsuitable) ---
         hn_d, hn_dsd = hellinger_null_curve(ref_last, args.bins, args.splits,
                                             args.seed, "diff", r_probe)
@@ -155,44 +156,51 @@ def main():
                 continue
             r = cells[(theta, L)]
             th_last = _sub(r["profiles"][:, -1, :])
-            hd = discrete_hellinger_excess(ref_inc, increment_pmf(th_last),
-                                           args.splits, args.seed)
-            ht = discrete_hellinger_excess(ref_terr, terrace_length_pmf(th_last),
-                                           args.splits, args.seed + 1)
+            hd = discrete_hellinger_excess(ref_inc, ref_inc if theta == 0 else increment_pmf(th_last),
+                                           args.splits, args.seed, n_boot=args.hell_boot)
+            ht = discrete_hellinger_excess(ref_terr, ref_terr if theta == 0 else terrace_length_pmf(th_last),
+                                           args.splits, args.seed + 1, n_boot=args.hell_boot)
+            # Histogram controls get conditional null floors only; no inferential
+            # error is claimed for these documented unsuitable observables.
             hx = hellinger_excess(ref_last, th_last, args.bins, args.splits,
-                                  args.seed, None, "diff", r_probe)
+                                  args.seed, None, "diff", r_probe, n_boot=0)
             hh = hellinger_excess(ref_last, th_last, args.bins, args.splits,
-                                  args.seed, None, "height", 1)
+                                  args.seed, None, "height", 1, n_boot=0)
             _, F_th, extra_th = snapshot_features(r["profiles"][:, k0:, :])
-            n_ck = F_th.shape[1]
-            nf = F_th.shape[-1]
             nr_th = F_th.shape[0]
-            X_th = F_th.reshape(-1, nf)
-            Xr = X_ref
-            if args.if_runs:
-                # matched training-sample count across L and theta
-                m = min(args.if_runs, nr_th)
-                ssel = np.arange(m)          # first m runs; cells are i.i.d. draws
-                X_th = F_th[ssel].reshape(-1, nf)
-                Xr = F_ref[:m].reshape(-1, nf)
+            m = min(args.if_runs or nr_th, nr_th, F_ref.shape[0])
+            # Subsample runs first. iforest_excess averages snapshots within run.
+            Xr = F_ref[:m]
+            X_th = Xr if theta == 0 else F_th[:m]
             ires = iforest_excess(Xr, X_th, args.if_trees,
                                   seed=args.seed + int(round(theta * 1e4)) + 10 ** 6,
                                   n_boot=args.if_boot) if not args.skip_iforest else \
-                dict(z_anom=np.nan, z_anom_err=np.nan, dPhi=np.nan, dPhi_err=np.nan)
+                dict(z_anom=np.nan, z_anom_err=np.nan, dPhi=np.nan, dPhi_err=np.nan,
+                     n_ref_runs=m, n_theta_runs=m, n_train=0, n_calibration=0, n_null=0,
+                     calibration_resolution=np.nan, phi_null=np.nan,
+                     phi_null_ci_low=np.nan, phi_null_ci_high=np.nan)
             W_sat = float(np.sqrt(r["w_series"].astype(np.float64).mean(axis=0))[-1])
 
             rows.append(dict(
                 theta=theta, L=L,
-                dH=hd["dH"], dH_err=hd["dH_err"], zH=hd["z"], zH_err=1.0,
+                dH=hd["dH"], dH_err=hd["dH_err"], zH=hd["z"], zH_err=np.nan,
                 dH_terr=ht["dH"], dH_terr_err=ht["dH_err"], zH_terr=ht["z"],
-                zH_terr_err=1.0,
-                dH_histdiff=hx["dH"], zH_histdiff=hx["z"], zH_histdiff_err=1.0,
-                dH_height=hh["dH"], zH_height=hh["z"], zH_height_err=1.0,
+                zH_terr_err=np.nan,
+                dH_histdiff=hx["dH"], zH_histdiff=hx["z"], zH_histdiff_err=np.nan,
+                dH_height=hh["dH"], zH_height=hh["z"], zH_height_err=np.nan,
+                Hsig_split_std=hd["Hsig_split_std"], dH_split_std=hd["dH_split_std"],
+                hell_n_ref_runs=hd["n_ref_runs"], hell_n_theta_runs=hd["n_theta_runs"],
+                hell_n_bootstrap=hd["n_bootstrap"],
                 Hnull=n_i["Hnull_mean"], Hnull_std=n_i["Hnull_std"],
                 Hnull_terr=n_t["Hnull_mean"], Hnull_histdiff=hn_d,
                 Hnull_height=hn_h, r_probe=r_probe,
                 zPhi=ires["z_anom"], zPhi_err=ires["z_anom_err"],
                 dPhi=ires["dPhi"], dPhi_err=ires["dPhi_err"],
+                if_n_ref_runs=ires["n_ref_runs"], if_n_theta_runs=ires["n_theta_runs"],
+                if_n_train=ires["n_train"], if_n_calibration=ires["n_calibration"],
+                if_n_null=ires["n_null"], if_calibration_resolution=ires["calibration_resolution"],
+                if_phi_null=ires["phi_null"], if_phi_null_ci_low=ires["phi_null_ci_low"],
+                if_phi_null_ci_high=ires["phi_null_ci_high"],
                 W_sat=W_sat,
                 alpha_s=float(np.nanmean(extra_th["alpha_s"])),
                 alpha_loc_r8=alpha_loc_at(extra_th, 8),
@@ -222,9 +230,18 @@ def main():
 
     # ---------------- onset + finite-size scaling ----------------
     print("\n" + "=" * 106)
-    print("SCALE-DEPENDENT ONSETS theta*(L) and finite-size scaling fits")
+    print("DESCRIPTIVE CROSSINGS AND FITS (not physical transition estimates)")
     print("=" * 106)
-    summary = {"tag": args.tag, "rule": args.rule, "Ls": Ls, "features": names}
+    summary = {"tag": args.tag, "rule": args.rule, "Ls": Ls, "features": names,
+               "statistics": dict(version="independent-runs-v1", unit="run",
+                   forest_features="late-snapshot mean within run",
+                   forest_error="reference-run resplit dispersion, not a sampling standard error",
+                   forest_null="independent held-out reference runs",
+                   forest_null_interval="envelope of conditional 95% exact binomial intervals",
+                   hellinger_error="outer independent-run bootstrap of full excess",
+                   histogram_controls="conditional null only; error not estimated",
+                   onset_error="pointwise Gaussian approximation; shared-reference covariance omitted",
+                   onsets_are_physical=False)}
     onset_tab = {}
     criteria = [
         # (label, column, thresholds)
@@ -252,15 +269,11 @@ def main():
                 # available, else the bootstrap spread of the observable
                 sig = np.array([r.get(key + "_err", np.nan) for r in sub],
                                dtype=np.float64)
-                if np.isfinite(sig).any():
-                    sig = np.where(np.isfinite(sig), sig, np.nanmedian(sig))
                 ob = onset_with_error(th, val, sig, zthr, True, 300, 11)
                 th_star.append(ob["theta_star"])
                 th_err.append(ob["theta_star_err"])
             th_err_a = np.array([np.nan if e is None else e for e in th_err],
                                 dtype=np.float64)
-            if not np.isfinite(th_err_a).any():
-                th_err_a = None
             fit = fit_onset_scaling(Ls, th_star, th_err_a, theta_c_free=True)
             fit0 = fit_onset_scaling(Ls, th_star, th_err_a, theta_c_free=False)
             onset_tab[obs][f"thr{zthr}"] = dict(                theta_star=[None if not np.isfinite(t) else float(t) for t in th_star],
@@ -305,6 +318,7 @@ def main():
         b1 = [r["beta_1"] for r in rows if r["theta"] == theta]
         exp_tab[f"{theta:+.4f}"] = dict(
             alpha=alpha, alpha_err=alpha_err,
+            alpha_error_method="log-fit residual error, not run-bootstrap uncertainty",
             beta=float(np.nanmean(b2)), beta_early=float(np.nanmean(b1)),
             W_by_L={str(L): float(r["W_sat"]) for r in rows if r["theta"] == theta})
         print(f"  theta={theta:+.4f}  alpha={alpha:6.4f}+-{alpha_err:.4f}"

@@ -1,0 +1,349 @@
+{
+  "rows": [
+    {
+      "theta": 0.0,
+      "delta_alpha": -9.993716474692787e-05,
+      "se": 0.0011728759999094238,
+      "ci95": [
+        -0.0023956051259972767,
+        0.0021967690137470195
+      ]
+    },
+    {
+      "theta": 0.1,
+      "delta_alpha": 0.0026637954846927218,
+      "se": 0.0033242513795666783,
+      "ci95": [
+        -0.003657324453425527,
+        0.00932482125099799
+      ]
+    },
+    {
+      "theta": 0.16666666666666666,
+      "delta_alpha": 0.0039040678113551187,
+      "se": 0.003418224477051825,
+      "ci95": [
+        -0.0028895374733487007,
+        0.010806351607297971
+      ]
+    },
+    {
+      "theta": 0.2,
+      "delta_alpha": 0.00269102162724235,
+      "se": 0.0038464385155509264,
+      "ci95": [
+        -0.005095010575716602,
+        0.010096823987960088
+      ]
+    },
+    {
+      "theta": 0.25,
+      "delta_alpha": -0.004433156369001221,
+      "se": 0.0033815419004670864,
+      "ci95": [
+        -0.01104296882771736,
+        0.0021949019106897345
+      ]
+    },
+    {
+      "theta": 0.3,
+      "delta_alpha": 0.0046787318265553825,
+      "se": 0.002946502019296265,
+      "ci95": [
+        -0.0009973556726547712,
+        0.010365032379607337
+      ]
+    },
+    {
+      "theta": 0.4,
+      "delta_alpha": -0.0033271935581223443,
+      "se": 0.002734092251561804,
+      "ci95": [
+        -0.008687839775900702,
+        0.0018411509969048841
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d0000_L32.npz",
+      "sha256": "0d53231af524ad10847ea23a912d3d483ab10380ad0e7e76edabe13a2bbcba93"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d0000_L32.npz",
+      "sha256": "4f214dd5f0cdb3002b30f5bbe8cf3ed8cd8f72e9afdf631439054fcaa155f7b0"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d0000_L64.npz",
+      "sha256": "71212e36029da4d2329ba538f81e0ccf163fe77162d4443fd7488196d7c1a8c7"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d0000_L64.npz",
+      "sha256": "a703f68d64059818538b701f7eb2c7d2cb3932f6ab326b9bd7925110c416d150"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d0000_L128.npz",
+      "sha256": "a4295482137175509d988559e55f354790bb8d14b6c443e89fe581da263bee77"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d0000_L128.npz",
+      "sha256": "f1f77bf5eacf8899223c1dbedbbaf5c676e07e71d170abf39b26655133ff86f2"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d0000_L256.npz",
+      "sha256": "41a9b200b1f56315f113b5ca268814ce155eb7e79ce99da7e5d9b9dd7efa01f9"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d0000_L256.npz",
+      "sha256": "7597da9f4fbfb919479ee651474f9362867e4a1123df0785a3a9f4aaedc5f876"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d0000_L512.npz",
+      "sha256": "feea7c769b0b7d24a2507a4928fafeaa80a55976e18851d0e560e644662c8275"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d0000_L512.npz",
+      "sha256": "d5fee670e3ad8683ec7bb7074dea61bb44dc77056658973104b179138e6c0e2f"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1000_L32.npz",
+      "sha256": "bd97e84c4a05fe42bf63c143d8b73a5f919b06119c3e9c22624277af9fbe4e1c"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1000_L32.npz",
+      "sha256": "4c7c2e81655c0986d58f3f266556f1941114fbe15cdb77a36ec40588850580e6"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1000_L64.npz",
+      "sha256": "86e4138face820a4c4172cd6da6e7980daf6c90e7b6ca9b65114345eb932d8aa"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1000_L64.npz",
+      "sha256": "adfc87ab0b85d3066ac138bba4b37cc3e2dfc753b3f3782fbd3f6944b129ed06"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1000_L128.npz",
+      "sha256": "0d2bb00a7fc39e926bea4d210c10f2cf7818c5931b5223a9f28af0c9acb6ff09"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1000_L128.npz",
+      "sha256": "534c308c50df7ff9bf115b13f21d9ca3b8b11aaf2cb69bf8eac5c9b2e1c97046"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1000_L256.npz",
+      "sha256": "5274b414257f6732113442aeb26954125ea1c73771fda685c3e34b58091244d4"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1000_L256.npz",
+      "sha256": "bba768876bb2edbe6d4291f49db9ede218b8c94d9b99de8c53af3ccecd1e7406"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1000_L512.npz",
+      "sha256": "0e02b09580aa552c00e64cec3af5559dceae0f7f97f2e908f7827b4cc5f2e9a0"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1000_L512.npz",
+      "sha256": "b75ae6d9fd94277b587256b280b93cc554bd151d052c4c70b469e9b665db539f"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1667_L32.npz",
+      "sha256": "3e8e94a8783cea218a2167536745ea017cc047f723c06574e18355762714f222"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1667_L32.npz",
+      "sha256": "f4be9c3218734299c43f9f963326f787e5c44abc5c7231a3c930f2a6299cae9b"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1667_L64.npz",
+      "sha256": "ac9a0073159bbc784a7335ce1752fa44c2fb5aeb668217ee80eee1ad046a54b0"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1667_L64.npz",
+      "sha256": "9c281133636bc0ba0fe8b8fccc6090a7f68e1816d1651b421269d37694601b1f"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1667_L128.npz",
+      "sha256": "ac79c5b028518dec74ed89870e2a4a6bac1a0521370eb8fe7ee4942605c045d2"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1667_L128.npz",
+      "sha256": "793623835152ef2d06d61375d1b408178d73a251e3bc7f679a833b646e75e861"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1667_L256.npz",
+      "sha256": "d217e09663a586412979738ddfe9aab5d260493f12755706abc5e4d4189ac30c"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1667_L256.npz",
+      "sha256": "c124d2eeddffc505be99342142ba2ce515c9be0ba71fa548204084783139177d"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d1667_L512.npz",
+      "sha256": "b282218b74c3f5d7e97d59b2dd103412bf049208b2b86066f72a5f70d3362e01"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d1667_L512.npz",
+      "sha256": "b64046fad6f8651e9580fab218db9c5a5c066680781b7d4bc429be8f6ea56376"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2000_L32.npz",
+      "sha256": "813998ae3ef1975577bf152baf7779ac06402b4a66bf41a8a0aa6f79c2b5c3b8"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2000_L32.npz",
+      "sha256": "e50b661f9c56ba63fcd67ad53329f2dacbae51fdc99a882884128032141f84a6"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2000_L64.npz",
+      "sha256": "f160faac139a11ade1322d5f4d3540d2438ab8314326a88af646ab9f66275e44"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2000_L64.npz",
+      "sha256": "f8dfedcd33e927cb04387bfe68fc71368dde02553ef75d82c5c31a3e07516a8f"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2000_L128.npz",
+      "sha256": "7f5b6cfcd231c05e5c4ab1c1e5c22a84a56bafa78f15ca0fbd424f177531682e"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2000_L128.npz",
+      "sha256": "241baf8547aeafce40bc00959cda76705e30589a90ce041f79cf4887a5208c15"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2000_L256.npz",
+      "sha256": "aeec515953b8a98c782eef8d9010ddaeb45f8234cb8eaf3de034a83a687e5e44"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2000_L256.npz",
+      "sha256": "c43250a05cd32d3d52224d18f53b3a75c2a29bbc81eae3a149d2634b2bd37273"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2000_L512.npz",
+      "sha256": "56ff4d3f1a5256632ee5040209ed2c92c9559859927d80159dc84e91c720f2f9"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2000_L512.npz",
+      "sha256": "daa129cd7ed8853ce5c191b778f2433f92d42f830d2f02740ff0d6e49eb599ef"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2500_L32.npz",
+      "sha256": "cc71a045d2152889842da39e143880ac7779a69ca487a6ab544dc299f90059ba"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2500_L32.npz",
+      "sha256": "ff83a2b97dab8817528ef4a0118cf4015616ea0dc34f31d88200036e170e3871"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2500_L64.npz",
+      "sha256": "4522ae60ea4e292f64f8e41ca28f67c2ce45ea1b85acf5b1f91aeeebd01d07b2"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2500_L64.npz",
+      "sha256": "72e527600e2bcaf6d435008d4d55dd5954d8e28ddc286c7251c87637d3e180c1"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2500_L128.npz",
+      "sha256": "6600197030d85e555862161a15c5923e5f4ecb6c595f47874301b24494e1e38f"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2500_L128.npz",
+      "sha256": "4c0b15fbbe25834e659b25e0bc08292c3eece460ed8bad0c11235deff22c4724"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2500_L256.npz",
+      "sha256": "f369ae48363a8de232c8b4c112ac53526690277987a9cf3a61aed8c201ecc844"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2500_L256.npz",
+      "sha256": "d499c5d7d294a884991b961b4d369b01a982e99f472526e44ff26f95e67a5aee"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d2500_L512.npz",
+      "sha256": "ba054c8acca75b8e543bdd9c03cfddbbf0ec30231c015898d9e316c5be50a507"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d2500_L512.npz",
+      "sha256": "510b53a6e1312cc4ca150a0f02dee3b8ac4ef9b4f453a870d005b3e345838634"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d3000_L32.npz",
+      "sha256": "08d4454b6c094e414e95ae1574eb591a05dbdf88566072e26d5fab1113255b06"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d3000_L32.npz",
+      "sha256": "1a3a5415884ac758af9e41371c4bf668722afc25a5a968d8e3d67517d9f50db3"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d3000_L64.npz",
+      "sha256": "a6050a77d76e5e6d03b73646d38d0b846d8852d917b2dd8f708c8da02d97fe6d"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d3000_L64.npz",
+      "sha256": "8ad29d4098ceec2c42208839098fe621f5903a94741be89f1a7e901fcb1ca8d3"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d3000_L128.npz",
+      "sha256": "10b475833f5d7b2e68942aae9f047866ba0cbf23768fd105f700df02ff50482a"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d3000_L128.npz",
+      "sha256": "aa3810a29c17b5e7af4715670dcd5f66ebf76fd6de3bbd6d836050b48ae97b89"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d3000_L256.npz",
+      "sha256": "07098558a558f577d7cf46208ed9fcc4d53ad72ba97ebeeca7d0ac502f64da31"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d3000_L256.npz",
+      "sha256": "5c08de406752c893f2abcbaa81b64cae3f4412d29570fdd2761d88ad47b2d3fe"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d3000_L512.npz",
+      "sha256": "71159030e8492b24c7b978ae29c501c9d8b58468b5003e1a91f893362c1a5e82"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d3000_L512.npz",
+      "sha256": "c29ee90de3cd572c674306b739a59bfc5410f90d9dcdec2af29f6954b7e936f1"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d4000_L32.npz",
+      "sha256": "97980a8799581cf02e0ab083bad945c4e0b26f4c1cd4eb64f6b4fd327f8f6469"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d4000_L32.npz",
+      "sha256": "a175281f75c0e49939f5518518eb0a05424a9b54bb0a390092f1820359dc7c69"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d4000_L64.npz",
+      "sha256": "515b8fd5a076c9293ed9c2fb8b72378f5804b2d2f935ac576dd110ef9a92b785"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d4000_L64.npz",
+      "sha256": "045658f4eddd5067d932c7778ed3c9a966dcce570e7392f9c3cb9f5ee1986551"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d4000_L128.npz",
+      "sha256": "3bf20874c2a064e9f9e937c86511929dfed6f52a816a522ef877ae5b514d57f1"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d4000_L128.npz",
+      "sha256": "f69bfcb1b64c38df40bc9416c3644bd640e5931493e74ce8589d3213c98e6c00"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d4000_L256.npz",
+      "sha256": "76ac9625a6ffd6552e6c2dd44def2a20bc25879b44f7858f785f1d0e2467ee2e"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d4000_L256.npz",
+      "sha256": "28acc0b82f5bd90e757a077fd157421e0b2c5fee26d30cc89d62c26ac8d5a8a4"
+    },
+    {
+      "file": "data/raw/rev20261026_powerlaw/bd_p0d4000_L512.npz",
+      "sha256": "b398969de74d8f7ef68a5a1142e9577aefb9ff402760d8ba10b3945f22324e96"
+    },
+    {
+      "file": "data/raw/rev20261026_fgn/bd_p0d4000_L512.npz",
+      "sha256": "f1c4b230f2a433d7ea425a96af800e91c1c2dd484da1000b4f6197c66a1d54cf"
+    }
+  ]
+}

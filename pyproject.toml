@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bd-correlated-noise"
 version = "1.0.0"
-description = "Ballistic deposition with long-range temporally correlated noise: FFGN generator bias, generator-robust exponents, and a finite-size test for the KPZ crossover."
+description = "Ballistic deposition with temporally correlated noise: space-time field validation, specified noise constructions, and finite-size inference."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }

@@ -35,21 +35,20 @@ HOW IT MATCHES code/analyze.py
     * cells are discovered with the same filename regex and the same sign
       convention (tok p0d1000 -> +0.1000, m0d0500 -> -0.0500);
     * the reference ensemble is the theta = 0 cell at the SAME L;
-    * the snapshot used is the FINAL checkpoint, and the feature matrix pools
-      the last ``--checkpoints`` checkpoints of every run:
+    * the feature matrix retains the last ``--checkpoints`` checkpoints per run:
           k0 = max(0, n_check - checkpoints)
           F  = snapshot_features(profiles[:, k0:, :])   -> (n_runs, n_ck, n_f)
-      with X = F.reshape(-1, n_f)  (all runs, then all checkpoints);
+      iforest_excess uses X = F.mean(axis=1), one vector per independent run;
     * realisation matching: with --if-runs R (analyze.py's "--if-runs"),
-          m = min(R, n_runs_theta);  X_th = F_th[:m].reshape(-1, n_f)
-                                     X_ref = F_ref[:m].reshape(-1, n_f)
+          m = min(R, n_runs_theta, n_runs_ref); both ensembles retain m runs;
     * the per-cell seed is analyze.py's formula
           seed = args.seed + int(round(theta * 1e4)) + 10 ** 6
       and the SAME seed, n_estimators and n_boot are used for all three
       variants, so the comparison is paired and fair;
     * iforest_excess is called unchanged from code/diagnostics.py, so the
-      detector construction (60% train / 20% calibration, alpha = 0.02,
-      per-boot seeds seed + 1000*b) is identical;
+      detector construction (60% train / 20% threshold calibration / remaining
+      independent null runs, requested alpha = 0.02, per-resplit seeds
+      seed + 1000*b) is identical. Actual FPR is measured on the null runs;
     * the fixed-theta ln L slopes follow code/fixed_theta_scaling.py, but are
       applied to zPhi (and to zH) and carry a least-squares and a Monte-Carlo
       standard error.
@@ -238,7 +237,7 @@ def main():
     ap.add_argument("--rule", default="bd")
     ap.add_argument("--checkpoints", type=int, default=4)
     ap.add_argument("--if-boot", type=int, default=16,
-                    help="bootstrap replicas of the Isolation Forest per cell "
+                    help="random reference-run resplits of the Isolation Forest per cell "
                          "and variant (analyze.py default: 16)")
     ap.add_argument("--if-trees", type=int, default=400,
                     help="n_estimators (analyze.py default: 400)")
@@ -299,22 +298,24 @@ def main():
             if names_th != names_ref:
                 raise SystemExit(f"feature names differ for theta={theta} "
                                  f"L={L}")
-            n_f = len(names_ref)
             nr_th = F_th.shape[0]
             seed = args.seed + int(round(theta * 1e4)) + 10 ** 6
 
-            m = min(args.if_runs, nr_th) if args.if_runs else nr_th
+            m = min(args.if_runs or nr_th, nr_th, F_ref.shape[0])
             for var in variants:
                 cols = variant_columns(names_ref, var)
-                Xr = F_ref[:m][:, :, cols].reshape(-1, cols.size)
-                Xt = F_th[:m][:, :, cols].reshape(-1, cols.size)
+                # Keep run identity; the detector averages late snapshots per run.
+                Xr = F_ref[:m][:, :, cols]
+                Xt = Xr if theta == 0 else F_th[:m][:, :, cols]
                 t0 = time.time()
                 r = iforest_excess(Xr, Xt, args.if_trees, seed=seed,
                                    n_boot=args.if_boot)
                 fit[(theta, L, var)] = dict(
                     zPhi=r["z_anom"], zPhi_err=r["z_anom_err"],
                     dPhi=r["dPhi"], dPhi_err=r["dPhi_err"],
-                    n_features=int(cols.size), n_rows=int(Xr.shape[0]))
+                    n_features=int(cols.size), n_rows=int(Xr.shape[0]),
+                    n_train=r["n_train"], n_calibration=r["n_calibration"], n_null=r["n_null"],
+                    calibration_resolution=r["calibration_resolution"])
                 print(f"  th={theta:+.4f} L={L:5d} {var:>10s} "
                       f"n_f={cols.size:2d} rows={Xr.shape[0]:4d} "
                       f"zPhi={r['z_anom']:+8.3f}+-{r['z_anom_err']:.3f} "
@@ -482,6 +483,12 @@ def main():
                     if_trees=args.if_trees, if_runs=args.if_runs,
                     seed=args.seed, alpha=0.02, variants=variants,
                     only_difference="which feature columns are retained"),
+        statistics=dict(version="independent-runs-v1", unit="run",
+                        features="late-snapshot mean within run",
+                        null="reference runs held out of training and threshold calibration",
+                        errors="dispersion across independent-run reference resplits",
+                        standardized_scores_are_significance=False,
+                        scale_patterns_are_physical_crossovers=False),
         feature_families=dict(
             increment=sorted(INCREMENT_FEATURES),
             scaling=["alpha_loc_r*", "logCnorm_r*", "alpha_s"],
@@ -496,7 +503,8 @@ def main():
                     **{f"zPhi_{v}_err": float(zPe[v][i]) for v in variants},
                     **{f"dPhi_{v}": float(fit[(t, L, v)]["dPhi"])
                        for v in variants},
-                    n_rows=fit[(t, L, variants[0])]["n_rows"])
+                    **{k: fit[(t, L, variants[0])][k] for k in
+                       ("n_rows", "n_train", "n_calibration", "n_null", "calibration_resolution")})
                for i, (t, L) in enumerate(keys)],
         correlations_all_cells=corr_all,
         correlations_theta_positive=corr_pos,

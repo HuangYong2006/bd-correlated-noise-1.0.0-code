@@ -1,14 +1,12 @@
 cff-version: 1.2.0
 message: "If you use this code or data, please cite the archived release and the manuscript below."
-title: "Noise-generator bias in temporally correlated ballistic deposition"
+title: "Noise construction and finite-size inference in temporally correlated ballistic deposition"
 abstract: >-
   Simulation and analysis code for a numerical study of (1+1)-dimensional ballistic
-  deposition driven by noise with long-range temporal correlations. The work shows that
-  Mandelbrot's fast fractional Gaussian noise, the generator used throughout the published
-  literature on this problem, is discontinuous at zero correlation exponent, so the family
-  never samples the short-range Kardar-Parisi-Zhang regime; and that the standard
-  fixed-significance onset construction cannot locate the crossover when the detection floor
-  depends on system size. No measured theta_c is reported.
+  deposition with specified shared-innovation AR and Gaussian spectral inputs. The revised
+  study validates the final space-time noise field, retains AR covariance cross terms,
+  and reports finite-size late-time width slopes with independent-run uncertainty.
+  It does not report theta_c or identify historical implementations as erroneous.
 type: software
 authors:
   - family-names: Huang
@@ -30,11 +28,10 @@ keywords:
   - reproducibility
 preferred-citation:
   type: article
-  title: "Noise-generator bias in temporally correlated ballistic-deposition simulations"
+  title: "Noise construction and finite-size inference in temporally correlated ballistic deposition"
   authors:
     - family-names: Huang
       given-names: Yong
       affiliation: "College of Physics, Chengdu University of Technology, Chengdu, China"
-  journal: "Physical Review E"
   year: 2026
-  notes: "Submitted. Update the volume, page and DOI once assigned."
+  notes: "Unpublished revised manuscript prepared in Physical Review E format. No publication or submission status is asserted."

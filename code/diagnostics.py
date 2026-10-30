@@ -1,10 +1,10 @@
 """
-The two independent diagnostics used to locate theta_c.
+Complementary finite-ensemble diagnostics, not universality-class tests.
 
 DIAGNOSTIC 1 -- Hellinger distance (a *distributional* measure).
-  It uses ONLY the marginal probability density of the standardised height
-  field s = (h - <h>)/W at a fixed observation time.  The distance to the
-  theta = 0 (KPZ) reference ensemble is
+  The primary observable is the exact nearest-neighbour increment pmf at a
+  fixed observation time. Histogrammed height/difference densities are controls.
+  The distance to the theta = 0 reference ensemble is
 
         H(P,Q) = sqrt( 1 - sum_k sqrt(p_k q_k) )  in [0,1].
 
@@ -22,21 +22,18 @@ DIAGNOSTIC 1 -- Hellinger distance (a *distributional* measure).
   together with its z-score against the null distribution.
 
 DIAGNOSTIC 2 -- Isolation Forest (a *geometric / multivariate* measure).
-  It uses ONLY the dimensionless scaling-and-morphology feature vector of each
-  snapshot (local roughness exponents, slope-distribution moments, step and
-  facet fractions, entropy), i.e. disjoint information from diagnostic 1,
-  which sees only the 1-D height density.  A forest is trained on the
-  theta = 0 ensemble, the decision threshold is calibrated at a fixed false
-  positive rate alpha on held-out theta = 0 data, and we record
+  Late-time features are averaged within each run before fitting or scoring.
+  Reference runs are split into disjoint training, threshold-calibration and
+  null-test sets. The held-out false-positive fraction is measured rather than
+  assumed to equal the requested alpha, which may be below sample resolution.
 
-        Phi(theta, L) = fraction of theta snapshots flagged as anomalous,
+        Phi(theta, L) = fraction of independent theta runs flagged anomalous.
 
-  again reported as an excess over a calibrated null and as a z-score.
+  The signed fraction excess and a standardized mean-score effect are reported.
 
-Both observables have the form  X(theta_c) ~ noise  and  X(theta_c) > noise,
-so both are used identically: extract the scale-dependent onset theta*(L) and
-extrapolate it.  Agreement between two such different statistical machinery is
-the central evidence of this work.
+Hellinger errors use an outer independent-run bootstrap of the complete excess
+statistic. Conditional split-null scatter is retained as a separate quantity.
+The two diagnostics share information; threshold crossings are descriptive.
 """
 
 from __future__ import annotations
@@ -163,47 +160,65 @@ def terrace_length_pmf(profiles_at_t, max_len=48):
     return out
 
 
-def _pool_pmf(pmf_stack, idx):
-    """Average per-run pmfs over a subset of runs (equal weights)."""
-    m = pmf_stack[idx].mean(axis=0)
-    s = m.sum()
-    return m / s if s > 0 else m
+def _hellinger_run_result(ref, theta, evaluate, n_splits, seed, n_boot):
+    """Bootstrap the full signal-minus-null estimator, keeping runs intact."""
+    n_ref, n_th = len(ref), len(theta)
+    n_half = min(n_ref, n_th) // 2
+    result = dict(dH=np.nan, dH_err=np.nan, Hsig=np.nan, Hnull_mean=np.nan,
+                  Hnull_std=np.nan, Hsig_split_std=np.nan, dH_split_std=np.nan,
+                  z=np.nan, H_full=np.nan, n_ref_runs=n_ref, n_theta_runs=n_th,
+                  n_half=n_half, n_bootstrap=int(n_boot),
+                  error_method="independent_run_bootstrap")
+    if n_half < 4:
+        return result
+    if n_splits < 2 or n_boot < 0:
+        raise ValueError("need at least two splits and nonnegative n_boot")
+    hs, hn, full = evaluate(ref, theta, seed)
+    d = float(hs.mean() - hn.mean())
+    null_std = float(hn.std(ddof=1))
+    rng = np.random.default_rng(seed + 7919)
+    bootstrap = []
+    same_ensemble = ref is theta
+    for _ in range(n_boot):
+        rb = ref[rng.integers(n_ref, size=n_ref)]
+        tb = rb if same_ensemble else theta[rng.integers(n_th, size=n_th)]
+        # Common inner partitions reduce Monte Carlo noise of the outer error.
+        bs, bn, _ = evaluate(rb, tb, seed)
+        bootstrap.append(float(bs.mean() - bn.mean()))
+    result.update(dH=d, dH_err=float(np.std(bootstrap, ddof=1)) if n_boot > 1 else np.nan,
+                  Hsig=float(hs.mean()), Hnull_mean=float(hn.mean()),
+                  Hnull_std=null_std, Hsig_split_std=float(hs.std(ddof=1)),
+                  dH_split_std=float((hs - hn).std(ddof=1)),
+                  z=d / null_std if null_std > 1e-15 else np.nan, H_full=full)
+    return result
 
 
-def discrete_hellinger_excess(ref_pmf, th_pmf, n_splits=120, seed=0):
+def discrete_hellinger_excess(ref_pmf, th_pmf, n_splits=120, seed=0, n_boot=200):
     """Null-calibrated Hellinger distance between two ensembles of exact pmfs.
 
     ref_pmf, th_pmf : (n_runs, K) per-run probability mass functions.
     The null floor is measured by splitting the reference into two disjoint
-    halves of exactly the size used for the signal.
+    halves of exactly the size used for the signal. ``dH_err`` is the standard
+    deviation of an outer independent-run bootstrap of the complete excess;
+    ``Hnull_std`` and ``Hsig_split_std`` are conditional split scatters, not
+    estimator errors. ``z`` is descriptive, not a calibrated significance test.
+    Passing the same array for both inputs preserves their identity in resamples.
+    ``n_boot=0`` skips error estimation and returns an unavailable (NaN) error.
     """
-    rng = np.random.default_rng(seed)
-    n_ref = ref_pmf.shape[0]
-    n_th = th_pmf.shape[0]
-    n_half = min(n_ref, n_th) // 2
-    if n_half < 4:
-        return dict(dH=np.nan, z=np.nan)
-
-    hs, hn = [], []
-    for _ in range(n_splits):
-        perm = rng.permutation(n_ref)
-        pa = _pool_pmf(ref_pmf, perm[:n_half])
-        pb = _pool_pmf(ref_pmf, perm[n_half:2 * n_half])
-        jt = rng.permutation(n_th)[:n_half]
-        pt = _pool_pmf(th_pmf, jt)
-        hn.append(hellinger(pa, pb))
-        hs.append(hellinger(pt, pa))
-    hs = np.asarray(hs)
-    hn = np.asarray(hn)
-    null_mean = float(hn.mean())
-    null_std = float(hn.std(ddof=1)) if hn.size > 1 else 0.0
-    sig = float(hs.mean())
-    d = sig - null_mean
-    return dict(dH=float(d), dH_err=float(hs.std(ddof=1)), Hsig=sig,
-                Hnull_mean=null_mean, Hnull_std=null_std,
-                z=float(d / null_std) if null_std > 0 else np.inf,
-                H_full=hellinger(_pool_pmf(ref_pmf, np.arange(n_ref)),
-                                 _pool_pmf(th_pmf, np.arange(n_th))))
+    def evaluate(ref, theta, partition_seed):
+        rng = np.random.default_rng(partition_seed)
+        n_half = min(len(ref), len(theta)) // 2
+        perm = np.array([rng.permutation(len(ref)) for _ in range(n_splits)])
+        jt = np.array([rng.permutation(len(theta))[:n_half] for _ in range(n_splits)])
+        pa = ref[perm[:, :n_half]].mean(axis=1)
+        pb = ref[perm[:, n_half:2 * n_half]].mean(axis=1)
+        pt = theta[jt].mean(axis=1)
+        def distances(p, q):
+            return np.sqrt(np.maximum(0.0, 1.0 - np.minimum(
+                np.sqrt(np.maximum(p, 0) * np.maximum(q, 0)).sum(axis=1), 1.0)))
+        return (distances(pt, pa), distances(pa, pb),
+                hellinger(ref.mean(axis=0), theta.mean(axis=0)))
+    return _hellinger_run_result(ref_pmf, th_pmf, evaluate, n_splits, seed, n_boot)
 
 
 def _auto_edges(ref, n_bins):
@@ -224,51 +239,34 @@ def _split_runs(n_runs, rng):
 
 
 def hellinger_excess(ref_prof, th_prof, n_bins=64, n_splits=120, seed=0,
-                     edges=None, mode="diff", r=1):
+                      edges=None, mode="diff", r=1, n_boot=200):
     """Bias-corrected Hellinger distance of a standardised marginal density.
 
     ref_prof, th_prof : (n_runs, L) profiles at the same time and same L.
     mode : "diff" (primary), "incr" (weak), or "height" (blind control).
-    Returns dict with dH, z, and the raw quantities.
+    Returns the same outer-run error and conditional-null quantities as the
+    discrete estimator. This histogrammed observable is retained as a control.
     """
-    rng = np.random.default_rng(seed)
-    n_ref = ref_prof.shape[0]
-    n_th = th_prof.shape[0]
-    n_half = min(n_ref, n_th) // 2
-    if n_half < 4:
-        return dict(dH=np.nan, z=np.nan)
-
-    ref_full = pooled_standardized(ref_prof, mode, r)
-    if edges is None:
-        edges = _auto_edges(ref_full, n_bins)
-
-    hs, hn = [], []
-    for _ in range(n_splits):
-        perm = rng.permutation(n_ref)
-        ra = ref_prof[perm[:n_half]]
-        rb = ref_prof[perm[n_half:2 * n_half]]
-        jt = rng.permutation(n_th)[:n_half]
-        ta = th_prof[jt]
-
-        pa = _pdf(pooled_standardized(ra, mode, r), edges)
-        pb = _pdf(pooled_standardized(rb, mode, r), edges)
-        pt = _pdf(pooled_standardized(ta, mode, r), edges)
-        hn.append(hellinger(pa, pb))
-        hs.append(hellinger(pt, pa))
-
-    hs = np.asarray(hs)
-    hn = np.asarray(hn)
-    null_mean = float(hn.mean())
-    null_std = float(hn.std(ddof=1)) if hn.size > 1 else 0.0
-    sig_mean = float(hs.mean())
-    dH = sig_mean - null_mean
-    z = (sig_mean - null_mean) / null_std if null_std > 0 else np.inf
-
-    H_full = hellinger(_pdf(ref_full, edges),
-                       _pdf(pooled_standardized(th_prof, mode, r), edges))
-    return dict(dH=float(dH), dH_err=float(hs.std(ddof=1)),
-                Hsig=sig_mean, Hnull_mean=null_mean, Hnull_std=null_std,
-                z=float(z), H_full=float(H_full), n_bins=n_bins, mode=mode, r=r)
+    def evaluate(ref, theta, partition_seed):
+        rng = np.random.default_rng(partition_seed)
+        n_half = min(len(ref), len(theta)) // 2
+        ref_full = pooled_standardized(ref, mode, r)
+        bins = _auto_edges(ref_full, n_bins) if edges is None else edges
+        hs, hn = [], []
+        for _ in range(n_splits):
+            perm = rng.permutation(len(ref))
+            pa = _pdf(pooled_standardized(ref[perm[:n_half]], mode, r), bins)
+            pb = _pdf(pooled_standardized(ref[perm[n_half:2*n_half]], mode, r), bins)
+            jt = rng.permutation(len(theta))[:n_half]
+            pt = _pdf(pooled_standardized(theta[jt], mode, r), bins)
+            hn.append(hellinger(pa, pb))
+            hs.append(hellinger(pt, pa))
+        full = hellinger(_pdf(ref_full, bins),
+                         _pdf(pooled_standardized(theta, mode, r), bins))
+        return np.asarray(hs), np.asarray(hn), full
+    result = _hellinger_run_result(ref_prof, th_prof, evaluate, n_splits, seed, n_boot)
+    result.update(n_bins=n_bins, mode=mode, r=r)
+    return result
 
 
 def hellinger_null_curve(ref_prof, n_bins=64, n_splits=120, seed=1,
@@ -320,20 +318,24 @@ class IForestDetector:
     def fit(self, X_ref):
         X_ref = np.asarray(X_ref, dtype=np.float64)
         n = X_ref.shape[0]
-
-        # drop degenerate features (essentially zero variance in the reference)
-        sd0 = X_ref.std(axis=0)
-        self.keep = sd0 > 1e-8 * max(sd0.max(), 1e-12)
-        if self.keep.sum() < 3:
-            self.keep = np.ones(X_ref.shape[1], dtype=bool)
-        X_ref = X_ref[:, self.keep]
-
         rng = np.random.default_rng(self.seed)
         perm = rng.permutation(n)
         n_tr = int(self.train_frac * n)
         n_ca = int(self.cal_frac * n)
-        tr = X_ref[perm[:n_tr]]
-        ca = X_ref[perm[n_tr:n_tr + n_ca]]
+        if min(n_tr, n_ca, n - n_tr - n_ca) < 2:
+            raise ValueError("need at least two runs in each reference split")
+        self.reference_indices = dict(train=perm[:n_tr],
+                                      calibration=perm[n_tr:n_tr + n_ca],
+                                      null=perm[n_tr + n_ca:])
+        tr = X_ref[self.reference_indices["train"]]
+        # Feature selection and normalization see training runs only.
+        sd0 = tr.std(axis=0)
+        self.keep = sd0 > 1e-8 * max(sd0.max(), 1e-12)
+        if not self.keep.any():
+            self.keep = np.ones(X_ref.shape[1], dtype=bool)
+        tr = tr[:, self.keep]
+        ca = X_ref[self.reference_indices["calibration"]][:, self.keep]
+        nt = X_ref[self.reference_indices["null"]][:, self.keep]
 
         self.mu = tr.mean(axis=0)
         self.sd = tr.std(axis=0)
@@ -352,17 +354,22 @@ class IForestDetector:
         # lower score_samples == more anomalous; threshold at the alpha quantile
         self.threshold = float(np.quantile(scores_ca, self.alpha))
         self.cal_scores = scores_ca
-        self.cal_mean = float(scores_ca.mean())
-        self.cal_std = float(scores_ca.std(ddof=1))
-        # null distribution of the flagged fraction, by bootstrapping the
-        # calibration set
-        boot = []
-        rng2 = np.random.default_rng(self.seed + 999)
-        for _ in range(400):
-            s = rng2.choice(scores_ca, size=scores_ca.size, replace=True)
-            boot.append(float((s < self.threshold).mean()))
-        self.phi_null_mean = float(np.mean(boot))
-        self.phi_null_std = float(np.std(boot, ddof=1))
+        self.null_scores = self.forest.score_samples(self._prep(nt))
+        self.null_mean = float(self.null_scores.mean())
+        self.null_std = float(self.null_scores.std(ddof=1))
+        # Keep these legacy attribute names, now referencing the independent null.
+        self.cal_mean, self.cal_std = self.null_mean, self.null_std
+        n_null = len(self.null_scores)
+        flagged = int((self.null_scores < self.threshold).sum())
+        self.phi_null_mean = flagged / n_null
+        self.phi_null_std = float(np.sqrt(self.phi_null_mean *
+                                         (1 - self.phi_null_mean) / n_null))
+        # Exact conditional binomial interval remains nonzero at zero events.
+        from scipy.stats import beta
+        self.phi_null_ci = (
+            float(beta.ppf(0.025, flagged, n_null - flagged + 1)) if flagged else 0.0,
+            float(beta.ppf(0.975, flagged + 1, n_null - flagged)) if flagged < n_null else 1.0)
+        self.calibration_resolution = 1.0 / (len(scores_ca) + 1)
         self.n_features_used = int(self.keep.sum())
         return self
 
@@ -370,36 +377,68 @@ class IForestDetector:
         X = np.asarray(X, dtype=np.float64)[:, self.keep]
         s = self.forest.score_samples(self._prep(X))
         phi = float((s < self.threshold).mean())
-        zmean = (float(s.mean()) - self.cal_mean) / max(self.cal_std, 1e-12)
+        zmean = ((float(s.mean()) - self.null_mean) / self.null_std
+                 if self.null_std > 1e-15 else np.nan)
         return dict(phi=phi, mean_score=float(s.mean()), z_mean=float(zmean),
                     scores=s)
 
 
 def iforest_excess(X_ref, X_theta, n_estimators=400, alpha=0.02, seed=0,
                    n_boot=40):
-    """Calibrated anomalous-fraction excess for one (theta, L, t) cell.
+    """Forest sensitivity of independent runs, averaged over reference resplits.
 
-    Returns dPhi = Phi(theta) - <Phi_null> clamped at 0, its z-score, and the
-    mean-score z-score, averaged over n_boot random train/calibration splits.
+    Inputs may be (runs, features) or (runs, snapshots, features); snapshots are
+    averaged within each run, never pooled as independent samples. ``*_err``
+    denotes dispersion across random disjoint reference splits, not a complete
+    run-bootstrap standard error. ``z_anom`` is a standardized score effect,
+    not a significance z. The signed dPhi compares with independent null runs.
+    Null confidence bounds are the envelope of conditional 95% binomial
+    intervals over splits, not an interval for the averaged forest estimator.
     """
-    phis, zs, zms = [], [], []
+    same_ensemble = X_ref is X_theta
+    X_ref, X_theta = [np.asarray(X, dtype=np.float64) for X in (X_ref, X_theta)]
+    X_ref, X_theta = [X.mean(axis=1) if X.ndim == 3 else X for X in (X_ref, X_theta)]
+    n_ref, n_theta = len(X_ref), len(X_theta)
+    result = dict(**{k: np.nan for k in (
+        "dPhi", "dPhi_raw", "dPhi_err", "z", "z_err", "z_anom", "z_anom_err",
+        "z_mean_score", "z_mean_score_err", "phi_null", "phi_null_ci_low",
+        "phi_null_ci_high", "calibration_resolution")},
+        n_ref_runs=n_ref, n_theta_runs=n_theta, n_train=int(0.6 * n_ref),
+        n_calibration=int(0.2 * n_ref), n_null=n_ref-int(0.6*n_ref)-int(0.2*n_ref),
+        error_method="reference_run_resplit_dispersion", score_is_significance=False,
+        n_resplits=int(n_boot), status="ok")
+    if min(result["n_train"], result["n_calibration"], result["n_null"]) < 2 or n_theta < 2:
+        result["status"] = "insufficient_reference_runs" if n_theta >= 2 else "insufficient_theta_runs"
+        return result
+    if n_boot < 1:
+        raise ValueError("need at least one reference split")
+    phis, zs, zms, nulls, intervals = [], [], [], [], []
     for b in range(n_boot):
         det = IForestDetector(n_estimators=n_estimators, alpha=alpha,
                               seed=seed + 1000 * b).fit(X_ref)
-        r = det.score(X_theta)
+        r = det.score(X_ref[det.reference_indices["null"]] if same_ensemble else X_theta)
         phis.append(r["phi"] - det.phi_null_mean)
-        zs.append((r["phi"] - det.phi_null_mean) / max(det.phi_null_std, 1e-12))
+        zs.append((r["phi"] - det.phi_null_mean) / det.phi_null_std
+                  if det.phi_null_std > 1e-15 else np.nan)
         zms.append(r["z_mean"])
-    phis = np.asarray(phis)
-    zs = np.asarray(zs)
-    zms = np.asarray(zms)
-    # sklearn's score_samples is oriented so that HIGHER == more normal; the
-    # anomaly signal is therefore the negated standardised mean score.
-    return dict(dPhi=float(max(0.0, phis.mean())), dPhi_raw=float(phis.mean()),
-                dPhi_err=float(phis.std(ddof=1)),
-                z=float(zs.mean()), z_err=float(zs.std(ddof=1)),
-                z_anom=float(-zms.mean()), z_anom_err=float(zms.std(ddof=1)),
-                z_mean_score=float(zms.mean()), z_mean_score_err=float(zms.std(ddof=1)))
+        nulls.append(det.phi_null_mean)
+        intervals.append(det.phi_null_ci)
+    def mean_and_scatter(values):
+        values = np.asarray(values)
+        values = values[np.isfinite(values)]
+        mean = float(values.mean()) if len(values) else np.nan
+        scatter = float(values.std(ddof=1)) if len(values) > 1 else np.nan
+        return mean, scatter if scatter > 1e-15 else np.nan
+    phi, phi_err = mean_and_scatter(phis)
+    z, z_err = mean_and_scatter(zs)
+    zm, zm_err = mean_and_scatter(zms)
+    result.update(dPhi=phi, dPhi_raw=phi, dPhi_err=phi_err, z=z, z_err=z_err,
+                  z_anom=-zm, z_anom_err=zm_err, z_mean_score=zm,
+                  z_mean_score_err=zm_err, phi_null=float(np.mean(nulls)),
+                  phi_null_ci_low=float(np.min(np.asarray(intervals)[:, 0])),
+                  phi_null_ci_high=float(np.max(np.asarray(intervals)[:, 1])),
+                  calibration_resolution=det.calibration_resolution)
+    return result
 
 
 # --------------------------------------------------------------------------
@@ -437,19 +476,24 @@ def onset_theta(thetas, values, threshold, increasing=True):
 
 def onset_with_error(thetas, values, sigma, threshold, increasing=True,
                      n_boot=400, seed=0):
-    """Onset theta* with a bootstrap error bar.
+    """Descriptive crossing with a pointwise Gaussian error approximation.
 
     The observable is perturbed by its own per-point uncertainty and the
     crossing is re-extracted, which propagates the measurement noise of the
     onset curve into sigma(theta*).  Points that never cross are counted as
-    failures and reported through ``frac_failed``.
+    failures and reported through ``frac_failed``. This is not a run bootstrap
+    and ignores cross-theta covariance from the shared reference. Missing
+    per-point errors leave the crossing uncertainty unavailable, never zero.
     """
     rng = np.random.default_rng(seed)
     th = np.asarray(thetas, dtype=np.float64)
     v = np.asarray(values, dtype=np.float64)
     s = np.asarray(sigma, dtype=np.float64)
-    s = np.where(np.isfinite(s) & (s > 0), s, np.nan)
+    s = np.where(np.isfinite(s) & (s >= 0), s, np.nan)
     central = onset_theta(th, v, threshold, increasing)
+    if not np.isfinite(s).all():
+        return dict(theta_star=central, theta_star_err=np.nan,
+                    theta_star_lo=np.nan, theta_star_hi=np.nan, frac_failed=np.nan)
     vals = []
     for _ in range(n_boot):
         pert = v + rng.standard_normal(v.shape) * np.where(np.isfinite(s), s, 0.0)

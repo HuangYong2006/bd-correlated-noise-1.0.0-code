@@ -637,6 +637,5 @@ def fig4():
 
 
 if __name__ == "__main__":
-    print(f"export width {W_FULL:.3f} in = {W_FULL*25.4:.0f} mm, base font {BASE_FS} pt")
-    fig1(); fig2(); fig3(); fig4()
-    print("done")
+    from revision_figures import main
+    main()

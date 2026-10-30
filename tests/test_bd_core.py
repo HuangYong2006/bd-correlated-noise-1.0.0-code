@@ -40,11 +40,10 @@ def test_ffgn_component_count_grows_with_T():
 
 
 def test_ffgn_amplitude_does_not_vanish_at_zero_theta():
-    """The central defect: A_FFGN stays O(1) as theta -> 0.
+    """The implemented weight norm remains finite as theta -> 0.
 
-    The exact fGn amplitude is 2*theta*(theta + 1/2), which vanishes at
-    theta = 0. FFGN's does not, which is why the family never reaches the
-    short-range KPZ regime.
+    This structural check does not measure a covariance-tail amplitude or
+    establish a universality class. Shared AR innovations add cross terms.
     """
     W0, _ = ffgn_weights(0.0, 32)
     W1, _ = ffgn_weights(0.1, 32)
@@ -58,10 +57,9 @@ def test_ffgn_amplitude_does_not_vanish_at_zero_theta():
 def test_exact_fgn_amplitude_is_white_at_zero_theta():
     """The exact fGn spectral density must be flat at theta = 0.
 
-    At theta = 0 the density reduces to the (1 - cos 2 pi f) factor, i.e. flat
-    white noise up to the Nyquist roll-off. We therefore compare amplitudes
-    *inside* the band (excluding the few modes nearest DC, where the 1 - cos
-    factor genuinely vanishes) rather than across the whole spectrum.
+    The full infinite alias sum is flat at theta=0; the implemented finite sum
+    approximates it on nonzero modes. This is only a loose in-band check, not a
+    claim that a finite record with DC removed is independent white noise.
     """
     T = 256
     amp = fgn_spectral_amp(0.0, T)

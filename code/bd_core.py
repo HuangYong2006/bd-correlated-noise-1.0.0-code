@@ -1,37 +1,24 @@
 """
 Ballistic deposition (and RSOS) with long-range temporally correlated noise.
 
-This module implements the *literature-standard* discrete model, so that the
-results are directly comparable with the published numbers for theta_c.  The
-model is (Ales & Lopez 2019; Song & Xia 2021; Wang & Xia 2025; Jiang & Xia 2026)
+The discrete update rules implemented here are
 
     h(x, t+1) = max[ h(x,t) + eta'_theta(x,t),  h(x-1,t),  h(x+1,t) ]      (BD)
     h(x, t+1) = h(x,t) + eta'_theta(x,t)   if |h(x,t)-h(x+-1,t)| <= 1      (RSOS)
                                            else  h(x,t)                    (rejected)
 
-with a PARALLEL update, flat initial condition and periodic boundaries.  The
-noise is a BINARISED, temporally long-range correlated sequence,
+with a PARALLEL update, flat initial condition and periodic boundaries. The
+noise is a binarised, temporally correlated sequence, independent between sites:
 
-    eta_theta(x,t)   Gaussian-like,  <eta(x,t) eta(x,t+tau)> ~ tau^(2*theta-1),
-                     statistically independent between different sites x;
     eta'_theta(x,t)  =  1  if eta_theta(x,t) > 0  else  0        (P = 1/2),
 
-which is the discrete realisation of the continuum correlator
-D(omega,k) = D0 + D_theta * omega^(-2 theta) (spatially delta-correlated,
-temporally power-law correlated).  theta = 0 is ordinary uncorrelated BD.
-
-TWO INDEPENDENT NOISE GENERATORS are provided, because the effective
-correlation exponent at a given nominal theta depends on the generator:
-
-  1. ``ffgn_weights``  -- Mandelbrot's Fast Fractional Gaussian Noise
-     (the generator used by Ales & Lopez, Song & Xia, Jiang & Xia, Wang & Xia).
-     Streaming, O(N) state per site, so arbitrarily long runs are cheap in
-     memory.  This is the DEFAULT and the literature-comparable choice.
-  2. ``fft_noise_field`` -- exact power-law spectral filtering plus Gaussian
-     thresholding, included as a generator-robustness cross-check.
-
-References for the model definition are collected in
-``LR_temporal_correlation_numerics_report.md`` in the workspace root.
+``simulate`` retains the streaming FFGN variant with shared uniform innovations
+across AR components. Its theta=0 branch explicitly uses independent white
+noise. This implementation is not assumed identical to every cited algorithm.
+``simulate_spectral`` filters independent Gaussian records per site, with a
+power-law or fGn target spectrum. Finite records are periodic with DC removed;
+their covariance approximates the infinite-record target. A finite-lag shape
+fit does not identify a continuum correlation exponent or universality class.
 """
 
 from __future__ import annotations
@@ -47,7 +34,7 @@ from numba import njit, prange
 RULE_BD = 0
 RULE_RSOS = 1
 
-# Mandelbrot FFGN constants (as used throughout the literature)
+# Parameters of the implemented FFGN variant.
 B_FFGN = 2.0
 A_FFGN = 6.0
 
@@ -226,13 +213,8 @@ class SimSpec:
     check_frac_min: float = 2.0e-4
     N_ffgn: int = 0          # 0 -> automatic
     spectrum: str = "powerlaw"
-    # "powerlaw": |f|^{-theta}, the family used for the campaign reported in the
-    #             paper (bare power law, cut off at Nyquist; theta axis accurate
-    #             to ~10%).
-    # "fgn":      the exact fractional-Gaussian-noise spectral density, which is
-    #             validated in code/validate_fgn_spectrum.py to give a theta axis
-    #             accurate to ~1% and to be exactly white at theta = 0.  Both
-    #             reduce to white noise at theta = 0.
+    # "powerlaw": |f|^{-theta}, with a Nyquist cutoff and DC removed.
+    # "fgn": fGn target spectrum with a finite alias sum and DC removed.
 
     def check_times(self):
         t0 = int(max(16, round(self.T * self.check_frac_min)))
@@ -283,12 +265,12 @@ def simulate(spec: SimSpec, verbose=False):
 # --------------------------------------------------------------------------
 
 def fft_noise_field(theta, L, T, seed):
-    """Binarised noise field eta'(x,t) in {0,1} from exact spectral filtering.
+    """Binarised noise field eta'(x,t) in {0,1} from power-law filtering.
 
     Gaussian white noise -> rFFT -> amplitude |f|^(-theta) -> irFFT gives a
-    stationary Gaussian field with S(f) ~ |f|^(-2 theta), hence
-    C(tau) ~ tau^(2 theta - 1); thresholding at zero binarises it while
-    preserving the power-law long-range dependence.
+    periodic Gaussian record with the nonzero-mode target S(f)=|f|^(-2 theta).
+    DC removal and finite length modify its covariance relative to an infinite
+    record. Thresholding at zero gives a binary field independent between sites.
     Returns (T, L) uint8.  Cost O(L*T log T), so use for modest L*T only.
     """
     freqs = np.fft.rfftfreq(T)
@@ -381,15 +363,18 @@ def save_result(path, res):
         profiles=res["profiles"],
         stats=res["stats"],
         wall_time=np.float64(res["wall_time"]),
+        noise_layout=res.get("noise_layout", "unversioned"),
     )
 
 
 def load_result(path):
     z = np.load(path, allow_pickle=False)
-    out = {k: z[k] for k in z.files if k not in ("spec", "N_ffgn", "wall_time")}
+    out = {k: z[k] for k in z.files
+           if k not in ("spec", "N_ffgn", "wall_time", "noise_layout")}
     out["spec"] = json.loads(str(z["spec"]))
     out["N_ffgn"] = int(z["N_ffgn"])
     out["wall_time"] = float(z["wall_time"])
+    out["noise_layout"] = str(z["noise_layout"]) if "noise_layout" in z.files else "unversioned"
     return out
 
 
@@ -407,17 +392,11 @@ def empirical_correlation(seq, max_lag):
 # theta-continuous generator: exact power-law spectral filtering
 # --------------------------------------------------------------------------
 #
-# The FFGN family used throughout the published literature is NOT continuous at
-# theta = 0: its normalised correlation amplitude stays O(1) for every theta
-# (see code/calibrate_generator.py), so FFGN(theta=0) is not white noise and no
-# member of the family reaches the short-range KPZ regime.  The spectral family
-#
-#     S(f) = |f|^(-2 theta)   (DC mode removed)
-#
-# IS continuous: at theta = 0 it is exactly white noise, and its correlation
-# amplitude tracks the exact fractional-Gaussian-noise amplitude to within
-# ~20% over the whole range.  It is therefore the correct generator for a
-# theta-scan that is meant to be compared with theta_th = 1/6.
+# These filters vary continuously in theta at fixed record length. At theta=0
+# the power-law filter is flat on nonzero modes; removing DC conditions the
+# record mean and gives a small finite-record anticorrelation. The fGn filter
+# also approximates its infinite alias sum. Neither finite-lag calibration nor
+# agreement with an fGn shape alone establishes a universality class.
 #
 # Cost is O(L T log T), so it is used for moderate L; scipy.fft threads and
 # 5-smooth FFT lengths keep it affordable.
@@ -450,17 +429,14 @@ def _amp(theta, T):
 
 
 def fgn_spectral_amp(theta, T, n_terms=40):
-    """Amplitude of the EXACT fractional-Gaussian-noise spectral density.
+    """Amplitude of the fGn target spectrum, using a truncated alias sum.
 
     S(f) = (1 - cos 2 pi f) * sum_k |2 pi (f + k)|^{-(2H+1)},   H = theta + 1/2,
 
-    evaluated on the rFFT frequency grid (DC removed).  Near f -> 0 this behaves
-    as |f|^{1-2H} = |f|^{-2 theta}, so it realises the required long-range
-    exponent, but it also carries the correct high-frequency behaviour and the
-    exact correlation AMPLITUDE.  A bare power law |f|^{-2 theta} is cut off at
-    the Nyquist frequency and consequently under-correlates at large theta
-    (A/A_fGn = 0.61 at theta = 0.4).  This family reduces to white noise at
-    theta = 0 because S(f) -> 2(1-cos 2 pi f) * const is flat.
+    evaluated on the rFFT grid with k=-n_terms,...,n_terms and DC removed.
+    The infinite sum behaves as |f|^{-2 theta} near zero and is flat at theta=0.
+    Finite alias truncation and record length introduce approximation errors;
+    the omitted overall normalisation does not affect zero-thresholded noise.
     """
     H = theta + 0.5
     f = np.fft.rfftfreq(T)[1:]                    # drop DC
@@ -487,6 +463,8 @@ def generate_spectral_eta(theta, L, T, n_runs, seed, rows_per_chunk=8,
 
     One independent field per run; site rows are processed in small chunks so
     that memory stays bounded and numpy/scipy FFT calls stay cache friendly.
+    Each filtered row is one site's temporal record. The returned layout is
+    (run, time, site), with samples invariant to row and run chunk sizes.
     ``spectrum`` selects the filtering amplitude: "powerlaw" for |f|^{-theta}
     or "fgn" for the exact fractional-Gaussian-noise spectral density.
     """
@@ -498,17 +476,18 @@ def generate_spectral_eta(theta, L, T, n_runs, seed, rows_per_chunk=8,
     for r0 in range(0, n_runs, nb):
         n = min(nb, n_runs - r0)
         eta = np.empty((n, T, L), dtype=np.uint8)
-        flat = eta.reshape(n * L, T)
         for c0 in range(0, n * L, rows_per_chunk):
             c1 = min(c0 + rows_per_chunk, n * L)
             u = rng.standard_normal((c1 - c0, T))
             U = sfft.rfft(u, axis=1, workers=-1)
             U *= amp
             s = sfft.irfft(U, n=T, axis=1, workers=-1)
-            flat[c0:c1] = (s > 0.0)
+            # Each filtered row is one site's full time sequence.
+            rows = np.arange(c0, c1)
+            eta[rows // L, :, rows % L] = (s > 0.0)
             del u, U, s
         yield r0, eta
-        del eta, flat
+        del eta
 
 
 def simulate_spectral(spec: SimSpec, verbose=False):
@@ -536,6 +515,7 @@ def simulate_spectral(spec: SimSpec, verbose=False):
         "spec": asdict(spec),
         "N_ffgn": 0,
         "generator": f"spectral-{getattr(spec, 'spectrum', 'fgn')}",
+        "noise_layout": "spectral-run-time-site-v2",
         "check_times": ts,
         "w_series": wseries,
         "w_times": np.arange(1, n_w + 1, dtype=np.int64) * stride,

@@ -36,15 +36,18 @@ htmlcov/
 # Simulation data.
 #
 # Raw campaign output is ~2.5 GB and fully regenerable from run_campaign.py
-# given the seeds recorded in each cell's `spec`, so NOTHING under data/raw/ is
-# tracked -- neither the .npz archives nor the manifests. The small derived
+# given the seeds recorded in each cell's `spec`, so legacy campaigns remain ignored. The three corrected
+# rev20261026 campaigns are explicitly versioned with this manuscript. The small derived
 # analysis tables in data/analysis/ ARE tracked: they are what the manuscript
 # numbers come from and they are cheap to carry.
 #
 # If you prefer to version the raw data, remove the data/raw/ rule and use Git
 # LFS for the .npz files.
 # ---------------------------------------------------------------------------
-data/raw/
+data/raw/*
+!data/raw/rev20261026_shared/
+!data/raw/rev20261026_powerlaw/
+!data/raw/rev20261026_fgn/
 
 # Standalone generator-calibration / validation arrays at the top level of
 # data/ are regenerable and not needed to reproduce the manuscript numbers.
@@ -73,6 +76,8 @@ figs/**/*.tiff
 # ---------------------------------------------------------------------------
 .figpreview/
 .dsh_tmp/
+.planning/
+manuscript/tmp/
 .dsh_acl_recovery/
 acl-report-*.jsonl
 acl-backup-*.json

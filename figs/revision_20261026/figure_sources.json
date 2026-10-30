@@ -1,0 +1,76 @@
+{
+  "summary": "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\data\\analysis\\revision_20261026\\summary.json",
+  "summary_sha256": "57ba7392911c2677fb50d3a9db82da3b1d9b593a711ddc10bd60598622ba6091",
+  "noise_validation": "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\data\\analysis\\revision_20261026\\noise_validation.json",
+  "noise_sha256": "69abe021091762baf559b92b21a0c9a211fa94003b672e30be803ac22bc3b8fe",
+  "protocol": {
+    "tags": {
+      "shared": "rev20261026_shared",
+      "powerlaw": "rev20261026_powerlaw",
+      "fgn": "rev20261026_fgn"
+    },
+    "n_runs": 64,
+    "Ls": [
+      32,
+      64,
+      128,
+      256,
+      512
+    ],
+    "thetas": [
+      0.0,
+      0.1,
+      0.16666666666666666,
+      0.2,
+      0.25,
+      0.3,
+      0.4
+    ],
+    "width_window": "last 20 percent of stored width times",
+    "previous_window": "preceding 20 percent",
+    "bootstrap": 500,
+    "hell_bootstrap": 200,
+    "splits": 120,
+    "zero_theta_dH": "zero by reference definition",
+    "interpretation": "finite-size late-time slopes; no theta_c inference",
+    "forest": "not used for the manuscript's physical conclusions"
+  },
+  "morphology_sources": [
+    {
+      "generator": "shared",
+      "raw_file": "data/raw/rev20261026_shared/bd_p0d4000_L256.npz",
+      "representative_run_index": 23,
+      "selection": "final width nearest the all-run median",
+      "quantitative_n_runs": 64
+    },
+    {
+      "generator": "powerlaw",
+      "raw_file": "data/raw/rev20261026_powerlaw/bd_p0d4000_L256.npz",
+      "representative_run_index": 5,
+      "selection": "final width nearest the all-run median",
+      "quantitative_n_runs": 64
+    },
+    {
+      "generator": "fgn",
+      "raw_file": "data/raw/rev20261026_fgn/bd_p0d4000_L256.npz",
+      "representative_run_index": 1,
+      "selection": "final width nearest the all-run median",
+      "quantitative_n_runs": 64
+    }
+  ],
+  "outputs": [
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig1_generator.pdf",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig1_generator.svg",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig1_generator.png",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig2_exponents.pdf",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig2_exponents.svg",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig2_exponents.png",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig3_fixed_theta.pdf",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig3_fixed_theta.svg",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig3_fixed_theta.png",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig4_morphology.pdf",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig4_morphology.svg",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\revision_20261026\\fig4_morphology.png"
+  ],
+  "uncertainty": "Supplied run errors; S(k) uses all-run mean and SE."
+}
