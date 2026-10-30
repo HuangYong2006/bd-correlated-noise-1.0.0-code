@@ -24,7 +24,4 @@ matplotlib>=3.6
 #   The test suite needs pytest:
 #       pip install pytest
 #
-#   Re-enabling the rendered panel-alignment / collision audit gate inside
-#   code/figures_ctp.py needs the external "nature-figure" skill helpers on
-#   sys.path; point the DSH_FIGURE_SKILL environment variable at them.
 # ---------------------------------------------------------------------------

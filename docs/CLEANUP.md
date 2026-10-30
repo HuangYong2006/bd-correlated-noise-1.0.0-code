@@ -1,0 +1,110 @@
+# Repository cleanup, 30 October 2026
+
+Removed 100 tracked files (4,703,430 bytes). The 105 corrected production cells, four duration-control archives, current manuscript, five figures, regression tests and reusable analysis tools were retained. Imports from retained Python modules were checked before deletion.
+
+Historical versions remain available at commit `5312322f2187bf0200e04b430f202817a94187dd`. Untracked working notes and local historical raw campaigns were not deleted.
+
+The Overleaf builder now writes its source ZIP directly. Release packaging selects tracked existing files and excludes local caches, temporary dependencies and third-party working materials.
+
+## Removed files
+
+- `PRE_final_formatting_checklist_v7.md`: Superseded readiness report or standalone debug array.
+- `PRE_review_current_status_v6.md`: Superseded readiness report or standalone debug array.
+- `PRE_review_edit_plan.md`: Superseded readiness report or standalone debug array.
+- `PRE_submission_readiness_v8.md`: Superseded readiness report or standalone debug array.
+- `code/_tmp_v7.py`: One-shot, broken or superseded figure script.
+- `code/_tmp_which_sample_count.py`: One-shot, broken or superseded figure script.
+- `code/add_citations.py`: One-shot, broken or superseded figure script.
+- `code/add_fgn_results.py`: One-shot, broken or superseded figure script.
+- `code/check_spectrum.py`: One-shot, broken or superseded figure script.
+- `code/debug_bd.py`: One-shot, broken or superseded figure script.
+- `code/fig_drift.py`: One-shot, broken or superseded figure script.
+- `code/fig_exponents_calibrated.py`: One-shot, broken or superseded figure script.
+- `code/fig_generator.py`: One-shot, broken or superseded figure script.
+- `code/fig_morphology.py`: One-shot, broken or superseded figure script.
+- `code/fig_onsets.py`: One-shot, broken or superseded figure script.
+- `code/figures.py`: One-shot, broken or superseded figure script.
+- `code/figures_ctp.py`: One-shot, broken or superseded figure script.
+- `code/finalize_fgn.py`: One-shot, broken or superseded figure script.
+- `code/fix_author.py`: One-shot, broken or superseded figure script.
+- `code/fix_inline_tables.py`: One-shot, broken or superseded figure script.
+- `code/fix_layout.py`: One-shot, broken or superseded figure script.
+- `code/fix_layout2.py`: One-shot, broken or superseded figure script.
+- `code/fix_tables.py`: One-shot, broken or superseded figure script.
+- `code/shorten_header.py`: One-shot, broken or superseded figure script.
+- `code/stage1_checks.py`: One-shot, broken or superseded figure script.
+- `code/transpose_tables.py`: One-shot, broken or superseded figure script.
+- `data/alpha_drift_all.txt`: Old analysis console log.
+- `data/analysis/ablation_fgnspec.csv`: Historical analysis, excluded from current manuscript.
+- `data/analysis/ablation_fgnspec.json`: Historical analysis, excluded from current manuscript.
+- `data/analysis/explore_bd/diagnostics.csv`: Historical analysis, excluded from current manuscript.
+- `data/analysis/explore_bd/rows.npz`: Historical analysis, excluded from current manuscript.
+- `data/analysis/explore_bd/summary.json`: Historical analysis, excluded from current manuscript.
+- `data/analysis/fgnspec_bd/diagnostics.csv`: Historical analysis, excluded from current manuscript.
+- `data/analysis/fgnspec_bd/rows.npz`: Historical analysis, excluded from current manuscript.
+- `data/analysis/fgnspec_bd/summary.json`: Historical analysis, excluded from current manuscript.
+- `data/analysis/main_bd/diagnostics.csv`: Historical analysis, excluded from current manuscript.
+- `data/analysis/main_bd/rows.npz`: Historical analysis, excluded from current manuscript.
+- `data/analysis/main_bd/summary.json`: Historical analysis, excluded from current manuscript.
+- `data/analysis/spec_bd/diagnostics.csv`: Historical analysis, excluded from current manuscript.
+- `data/analysis/spec_bd/rows.npz`: Historical analysis, excluded from current manuscript.
+- `data/analysis/spec_bd/summary.json`: Historical analysis, excluded from current manuscript.
+- `data/analysis_fgnspec.txt`: Old analysis console log.
+- `data/analysis_main_final.txt`: Old analysis console log.
+- `data/analysis_main_log.txt`: Old analysis console log.
+- `data/analysis_spec_final.txt`: Old analysis console log.
+- `data/analysis_spec_full.txt`: Old analysis console log.
+- `data/analysis_spec_matched.txt`: Old analysis console log.
+- `data/analysis_spec_prelim.txt`: Old analysis console log.
+- `data/fixed_theta_fgnspec.txt`: Old analysis console log.
+- `docs/revision_20261026/final_code_review.md`: Superseded working review/plan.
+- `docs/revision_20261026/final_manuscript_review.md`: Superseded working review/plan.
+- `docs/revision_20261026/implementation_plan.md`: Superseded working review/plan.
+- `figs/ctp/fig1_generator.alignment.json`: Superseded figure output.
+- `figs/ctp/fig1_generator.alignment.svg`: Superseded figure output.
+- `figs/ctp/fig1_generator.collision.json`: Superseded figure output.
+- `figs/ctp/fig1_generator.pdf`: Superseded figure output.
+- `figs/ctp/fig1_generator.svg`: Superseded figure output.
+- `figs/ctp/fig2_exponents.alignment.json`: Superseded figure output.
+- `figs/ctp/fig2_exponents.alignment.svg`: Superseded figure output.
+- `figs/ctp/fig2_exponents.collision.json`: Superseded figure output.
+- `figs/ctp/fig2_exponents.pdf`: Superseded figure output.
+- `figs/ctp/fig2_exponents.svg`: Superseded figure output.
+- `figs/ctp/fig3_fixed_theta.alignment.json`: Superseded figure output.
+- `figs/ctp/fig3_fixed_theta.alignment.svg`: Superseded figure output.
+- `figs/ctp/fig3_fixed_theta.collision.json`: Superseded figure output.
+- `figs/ctp/fig3_fixed_theta.pdf`: Superseded figure output.
+- `figs/ctp/fig3_fixed_theta.svg`: Superseded figure output.
+- `figs/ctp/fig4_morphology.alignment.json`: Superseded figure output.
+- `figs/ctp/fig4_morphology.alignment.svg`: Superseded figure output.
+- `figs/ctp/fig4_morphology.collision.json`: Superseded figure output.
+- `figs/ctp/fig4_morphology.pdf`: Superseded figure output.
+- `figs/ctp/fig4_morphology.svg`: Superseded figure output.
+- `figs/generator/fig_generator.pdf`: Superseded figure output.
+- `figs/generator/fig_generator.png`: Superseded figure output.
+- `figs/physics/fig_drift.pdf`: Superseded figure output.
+- `figs/physics/fig_drift.png`: Superseded figure output.
+- `figs/physics/fig_exponents_calibrated.pdf`: Superseded figure output.
+- `figs/physics/fig_exponents_calibrated.png`: Superseded figure output.
+- `figs/physics/fig_morphology.pdf`: Superseded figure output.
+- `figs/physics/fig_morphology.png`: Superseded figure output.
+- `figs/physics/fig_onsets.pdf`: Superseded figure output.
+- `figs/physics/fig_onsets.png`: Superseded figure output.
+- `manuscript/overleaf/README_OVERLEAF.txt`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/abstract_zh.md`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig1_generator.pdf`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig1_generator.svg`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig2_exponents.pdf`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig2_exponents.svg`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig3_fixed_theta.pdf`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig3_fixed_theta.svg`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig4_morphology.pdf`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig4_morphology.svg`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig5_controls.pdf`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/figs/fig5_controls.svg`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/main.tex`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/refs.bib`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/revision_results.tex`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf/submission_results.tex`: Generated duplicate of canonical manuscript source/figures.
+- `manuscript/overleaf_bd_paper__1_.pdf`: Superseded draft PDF.
+- `spectrum_check.npz`: Superseded readiness report or standalone debug array.

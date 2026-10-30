@@ -6,6 +6,12 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Repository cleanup (2026-10-30)
+
+- Removed 100 obsolete scratch, plotting, analysis and duplicate-source files; see docs/CLEANUP.md.
+- Retained corrected production/control data, current figures, manuscript, tests and reusable tools.
+- Build the Overleaf ZIP directly and package tracked files only, avoiding local caches and working notes.
+
 ### Added
 
 - Repository packaging for public release: `README.md` rewritten as a full research-repository

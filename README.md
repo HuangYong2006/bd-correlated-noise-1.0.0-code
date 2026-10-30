@@ -27,7 +27,7 @@ The corresponding-author email is intentionally left for the author to fill.
 
 A time/site array-layout error was found in the former production spectral path.
 It is fixed and covered by end-to-end temporal/spatial correlation tests. The old
-`spec` and `fgnspec` tracks remain archived for traceability and are **not valid
+`spec` and `fgnspec` results are available only in Git history and are **not valid
 corrected-noise evidence**. Earlier readiness notes and generator-bias conclusions
 are superseded by the revision described here.
 
@@ -68,8 +68,9 @@ Use [docs/REPRODUCE.md](docs/REPRODUCE.md) for current commands and
 & 'D:/TOOLS/anaconda3/python.exe' code/build_overleaf.py
 ```
 
-The pre-revision source zip is preserved in `manuscript/archive/`. The separate
-`overleaf_bd_paper__1_.pdf` is an old draft; recompile the current source.
+Obsolete scripts, old analysis outputs and duplicate source folders were removed
+from the current tree. See [cleanup notes](docs/CLEANUP.md); historical versions
+remain recoverable from Git history.
 The project remains MIT-licensed. It does not include third-party full texts in
 release packages. Publication metadata and data-repository identifiers must be
 updated only when an actual submission or deposit exists.

@@ -4,7 +4,7 @@
 
 The revised manuscript uses only the three `rev20261026_*` production tracks,
 the revision analysis directory and the production-noise validation JSON. Earlier
-tracks are preserved as historical records, not silently relabelled as corrected.
+analysis outputs are retained in Git history, not distributed as current evidence.
 
 ## Locations and naming
 

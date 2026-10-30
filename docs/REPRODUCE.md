@@ -4,7 +4,7 @@
 
 This workflow reproduces the scientific revision dated 2026-10-26. It supersedes
 older commands and readiness notes. The archived `main`, `spec` and `fgnspec`
-tracks are not inputs to the revised manuscript. In particular, the old spectral
+tracks are not inputs to the revised manuscript and are retained only in Git history. In particular, the old spectral
 tracks contain the documented time/site layout error.
 
 ## Environment and regression checks
@@ -80,12 +80,12 @@ DeltaH at theta=0 is zero by reference definition. No theta_c fit is inferred.
 LaTeX numbers are generated into manuscript/revision_results.tex. Figures go to
 `figs/revision_20261026/` as PDF, SVG and 600 dpi PNG. Their source manifest records
 input hashes, all-run quantitative sources and the illustrative-profile selection.
-The historical figures_ctp.py CLI forwards to the new renderer.
+Use revision_figures.py directly; superseded plotting entry points were removed.
 
 Build produces manuscript/overleaf_bd_paper.zip from an explicit whitelist.
 Upload that zip to Overleaf, choose main.tex, and use pdfLaTeX/BibTeX. The old
-standalone overleaf_bd_paper__1_.pdf is not the revised output. The original zip
-is preserved as manuscript/archive/overleaf_bd_paper_pre_revision_20261026.zip.
+draft files are no longer distributed in the current tree. The builder writes
+the ZIP directly without retaining a duplicate source directory.
 
 ## Statistical tools retained outside the main inference
 
