@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib as mpl
 mpl.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize, LightSource
 from matplotlib.ticker import ScalarFormatter
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -85,8 +86,34 @@ def positive(values, label):
 
 def fig1(noise, outdir):
     """Production covariance, same-sample layout control and exact raw AR sums."""
-    fig, axes = canvas(3, 80)
-    fig.subplots_adjust(left=0.08, wspace=0.43)
+    fig, axes = canvas(3, 122)
+    for i, ax in enumerate(axes):
+        ax.set_position([0.08 + i * 0.315, 0.12, 0.245, 0.285])
+        ax.texts[0].set_text(f"({chr(99+i)})")
+    matched = rows(noise["series"], "fgn", 0.25, 32)[0]
+    for i, (key, ylabel) in enumerate((
+            ("time", "Temporal correlation C(Δt = 1)"),
+            ("space", "Spatial correlation C(Δx = 1)"))):
+        ax = fig.add_axes([0.08 + 0.49*i, 0.625, 0.405, 0.30])
+        means = [r[f"C_{key}"][0] for r in (matched, noise["legacy"])]
+        errors = [r[f"C_{key}_err"][0] for r in (matched, noise["legacy"])]
+        bars = ax.bar([0, 1], means, yerr=errors, width=0.52,
+                      color=[STYLE["fgn"][1], STYLE["shared"][1]],
+                      edgecolor="white", linewidth=0.5, capsize=3,
+                      error_kw={"elinewidth": 0.8, "ecolor": NEUTRAL})
+        bars[1].set_hatch("///")
+        ax.axhline(0, color=NEUTRAL, lw=0.6)
+        if key == "time":
+            ax.axhline(matched["target_time"][0], color=NEUTRAL, ls="--", lw=0.7)
+        for x, mean, se in zip((0, 1), means, errors):
+            ax.text(x, mean+se+0.012, f"{mean:.4f} ± {se:.4f}",
+                    ha="center", va="bottom", fontsize=7)
+        ax.set(ylabel=ylabel, ylim=(-0.015, 0.335), xlim=(-0.6, 1.6),
+               xticks=[0, 1], xticklabels=["Correct layout", "Axis-permuted"],
+               yticks=[0, 0.1, 0.2, 0.3])
+        ax.tick_params(axis="x", length=0, pad=6)
+        ax.text(0, 1.04, f"({chr(97+i)})", transform=ax.transAxes,
+                fontweight="bold", fontsize=8, va="bottom")
     current = rows(noise["series"], "fgn", 0.25, 64)[0]
     ax = axes[0]
     positive(current["C_time"], "Temporal correlation")
@@ -97,8 +124,7 @@ def fig1(noise, outdir):
                 color=STYLE["fgn"][1], marker="^", ms=3, capsize=1.5,
                 label="Production")
     ax.plot(noise["lags"], current["target_time"], "--", color=NEUTRAL, label="Target")
-    ax.set(xlabel="Temporal lag (sweeps)", ylabel="Binary correlation",
-           title="fGn spectrum, θ = 0.25, L = 64")
+    ax.set(xlabel="Temporal lag (sweeps)", ylabel="Binary correlation")
     ax.legend(loc="lower left")
     ax = axes[1]
     matched = rows(noise["series"], "fgn", 0.25, 32)[0]
@@ -107,12 +133,11 @@ def fig1(noise, outdir):
         raise ValueError("Layout control requires matched theta and L")
     for row, label, color, marker in (
             (matched, "Current layout", STYLE["fgn"][1], "^"),
-            (legacy, "Legacy layout", STYLE["shared"][1], "o")):
+            (legacy, "Axis-permuted", STYLE["shared"][1], "o")):
         ax.errorbar(noise["spatial_lags"], row["C_space"], yerr=row["C_space_err"],
                     color=color, marker=marker, ms=3, capsize=1.5, label=label)
     ax.axhline(0, color=NEUTRAL, lw=0.7)
-    ax.set(xlabel="Spatial lag (sites)", ylabel="Binary correlation",
-           title="Same samples, θ = 0.25, L = 32")
+    ax.set(xlabel="Spatial lag (sites)", ylabel="Binary correlation")
     ax.set_xticks(noise["spatial_lags"])
     ax.legend(loc="upper right")
     ax = axes[2]
@@ -122,8 +147,7 @@ def fig1(noise, outdir):
             ("C_independent", "Independent innovations", NEUTRAL, "--")):
         positive(ar[key], key)
         ax.loglog(ar["lags"], ar[key], color=color, ls=ls, label=label)
-    ax.set(xlabel="Temporal lag (sweeps)", ylabel="Raw-field correlation",
-           title="Exact AR covariance, θ = 0")
+    ax.set(xlabel="Temporal lag (sweeps)", ylabel="Raw-field correlation")
     ax.legend(loc="lower left")
     return save(fig, outdir, "fig1_generator")
 
@@ -151,7 +175,21 @@ def fig2(summary, outdir):
 
 
 def fig3(summary, outdir):
-    fig, axes = canvas()
+    fig, axes = canvas(3, height=80)
+    fig.subplots_adjust(left=0.07, right=0.985, wspace=0.50)
+    for generator in STYLE:
+        history, _, _ = profile_history(summary, generator)
+        h = history[:, -1]
+        samples = np.abs(np.fft.rfft(h, axis=1))**2/h.shape[1]
+        spectrum = samples[:, 1:].mean(axis=0)
+        se = samples[:, 1:].std(axis=0, ddof=1)/np.sqrt(h.shape[0])
+        positive(spectrum-se, "Spectrum minus one run SE")
+        modes = np.arange(1, len(spectrum)+1)
+        label, color, _ = STYLE[generator]
+        axes[2].loglog(modes, spectrum, color=color, label=label)
+        axes[2].fill_between(modes, spectrum-se, spectrum+se, color=color, alpha=0.16)
+    axes[2].set(xlabel="Mode m (k = 2πm/L)", ylabel="Ensemble S(k)",
+                title="θ = 0.40, L = 256")
     for generator in STYLE:
         data = sorted(rows(summary["cells"], generator, L=256), key=lambda r: r["theta"])
         errorbar(axes[0], [r["theta"] for r in data], [r["p_flat"] for r in data],
@@ -174,8 +212,8 @@ def fig3(summary, outdir):
     return save(fig, outdir, "fig3_fixed_theta")
 
 
-def profiles(summary, generator):
-    cell = rows(summary["cells"], generator, 0.4, 256)[0]
+def profile_history(summary, generator, theta=0.4):
+    cell = rows(summary["cells"], generator, theta, 256)[0]
     path = (ROOT / cell["raw_file"]).resolve()
     expected = (ROOT / "data/raw" / summary["protocol"]["tags"][generator]).resolve()
     if path.parent != expected:
@@ -183,50 +221,87 @@ def profiles(summary, generator):
     with np.load(path, allow_pickle=False) as raw:
         if generator != "shared" and str(raw["noise_layout"]) != "spectral-run-time-site-v2":
             raise ValueError("Morphology requires corrected-layout spectral data")
-        h = raw["profiles"][:, -1, :].astype(float)
-    if h.shape != (summary["protocol"]["n_runs"], 256):
+        h = raw["profiles"].astype(float)
+        times = raw["check_times"].copy()
+        spec = json.loads(str(raw["spec"]))
+    if h.shape != (summary["protocol"]["n_runs"], 32, 256):
         raise ValueError("Morphology must include all declared independent runs")
-    h -= h.mean(axis=1, keepdims=True)
-    return h, cell["raw_file"]
+    assert np.all(np.diff(times) > 0) and times[0] > 0
+    h -= h.mean(axis=2, keepdims=True)
+    widths = np.sqrt(np.mean(h[:, -1]**2, axis=1))
+    index = int(np.argmin(np.abs(widths-np.median(widths))))
+    source = {"generator": generator, "theta": theta, "L": 256,
+              "raw_file": cell["raw_file"],
+              "raw_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+              "representative_run_index": index,
+              "selection": "final width nearest the all-run median; first tie",
+              "quantitative_n_runs": int(h.shape[0]),
+              "displayed_snapshots": len(times), "displayed_sites": h.shape[2],
+              "T": spec["T"], "check_times": times.tolist()}
+    return h, times, source
+
+
+def surface_panel(fig, rect, history, times, source, norm, panel):
+    """Piecewise continuous surface through every stored x/time height sample."""
+    ax = fig.add_axes(rect, projection="3d")
+    x, logt = np.meshgrid(np.arange(256), np.log10(times / source["T"]))
+    height = history[source["representative_run_index"]]
+    colors = LightSource(azdeg=315, altdeg=42).shade(
+        height, cmap=mpl.colormaps["viridis"], norm=norm,
+        vert_exag=0.45, blend_mode="soft")
+    ax.plot_surface(x, logt, height, rcount=len(times), ccount=256,
+                    facecolors=colors, linewidth=0, antialiased=False,
+                    shade=False, rasterized=True)
+    ax.set(xlim=(0, 255), ylim=(logt.min(), 0), zlim=(norm.vmin, norm.vmax),
+           xticks=[0, 128, 255], yticks=[-3, -1, 0], zticks=[-60, 0, 60],
+           xlabel=r"$x$", ylabel=r"$\log_{10}(t/T)$", zlabel=r"$h-\bar h$")
+    ax.view_init(elev=32, azim=-62)
+    ax.set_box_aspect((1.65, 1.35, 0.95), zoom=0.92)
+    ax.tick_params(labelsize=6.5, pad=0, width=0.5)
+    for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
+        axis.label.set_size(8)
+        axis.labelpad = 1
+        axis.line.set_linewidth(0.5)
+        axis.set_pane_color((0.97, 0.98, 0.985, 0.7))
+        axis._axinfo["grid"].update(color=(0.77, 0.82, 0.85, 0.6), linewidth=0.35)
+    ax.text2D(0.0, 0.98, f"({panel})", transform=ax.transAxes,
+              fontsize=8, fontweight="bold", va="top")
 
 
 def fig4(summary, outdir):
-    fig, axes = canvas(height=84)
-    offset = None
+    """Three continuous surfaces with coordinates and panel labels, no titles."""
+    histories = {g: profile_history(summary, g) for g in STYLE}
+    bound = max(np.abs(h[s["representative_run_index"]]).max()
+                for h, _, s in histories.values())
+    bound = 10 * np.ceil(bound/10)
+    norm = Normalize(-bound, bound)
+    fig = plt.figure(figsize=(178/25.4, 75/25.4))
     selected = []
-    for generator in STYLE:
-        label, color, _ = STYLE[generator]
-        h_all, raw_file = profiles(summary, generator)
-        widths = np.sqrt(np.mean(h_all**2, axis=1))
-        index = int(np.argmin(np.abs(widths-np.median(widths))))
-        h = h_all[index]
-        offset = 0.0 if offset is None else bottom - 7.0 - float(h.max())
-        axes[0].plot(np.arange(h.size), h+offset, color=color, lw=0.7, label=label)
-        axes[0].axhline(offset, color="#b3b3b3", ls=":", lw=0.5)
-        bottom = float(h.min()+offset)
-        selected.append({"generator": generator, "raw_file": raw_file,
-                         "representative_run_index": index,
-                         "selection": "final width nearest the all-run median",
-                         "quantitative_n_runs": int(h_all.shape[0])})
-        spectra = np.abs(np.fft.rfft(h_all, axis=1))**2/h_all.shape[1]
-        spectrum = spectra[:, 1:].mean(axis=0)
-        error = spectra[:, 1:].std(axis=0, ddof=1)/np.sqrt(h_all.shape[0])
-        positive(spectrum-error, "Spectrum minus one run SE")
-        m = np.arange(1, spectrum.size+1)
-        axes[1].loglog(m, spectrum, color=color, lw=1.0, label=label)
-        axes[1].fill_between(m, spectrum-error, spectrum+error, color=color, alpha=0.16)
-    axes[0].set(xlabel="x (lattice sites)", ylabel="Mean-centred height (offset)",
-                title="θ = 0.40, L = 256", xlim=(0, 255))
-    axes[0].set_yticks([])
-    top = max(np.max(line.get_ydata()) for line in axes[0].lines)
-    axes[0].plot([242, 242], [top+5, top+15], color=NEUTRAL, lw=0.8)
-    axes[0].text(236, top+10, "10", ha="right", va="center", fontsize=6.2)
-    axes[0].set_ylim(bottom-5, top+20)
-    axes[1].set(xlabel="Mode m (k = 2πm/L)", ylabel="Ensemble S(k)",
-                title="All-run mean ± one SE")
-    handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, ncol=3, loc="upper center", bbox_to_anchor=(0.53, 1.0))
+    for column, generator in enumerate(STYLE):
+        history, times, source = histories[generator]
+        surface_panel(fig, [0.005+column*0.326, 0.17, 0.275, 0.73],
+                      history, times, source, norm, chr(97+column))
+        selected.append(source)
     return save(fig, outdir, "fig4_morphology"), selected
+
+
+def fig6(summary, outdir):
+    """Nine labelled surfaces, ordered by theta (rows) and input (columns)."""
+    histories = {(g, theta): profile_history(summary, g, theta)
+                 for theta in (0.1, 0.25, 0.4) for g in STYLE}
+    bound = max(np.abs(h[s["representative_run_index"]]).max()
+                for h, _, s in histories.values())
+    bound = 10 * np.ceil(bound/10)
+    norm = Normalize(-bound, bound)
+    fig = plt.figure(figsize=(178/25.4, 165/25.4))
+    selected = []
+    for row, theta in enumerate((0.1, 0.25, 0.4)):
+        for col, generator in enumerate(STYLE):
+            history, times, source = histories[generator, theta]
+            surface_panel(fig, [0.025+col*0.326, 0.715-row*0.318, 0.275, 0.25],
+                          history, times, source, norm, chr(97+row*3+col))
+            selected.append(source)
+    return save(fig, outdir, "fig6_morphology_atlas"), selected
 
 
 def main(argv=None):
@@ -245,11 +320,25 @@ def main(argv=None):
     outputs = fig1(noise, outdir) + fig2(summary, outdir) + fig3(summary, outdir)
     morphology, selected = fig4(summary, outdir)
     outputs += morphology
+    atlas, atlas_selected = fig6(summary, outdir)
+    outputs += atlas
     sources = {"summary": summary_path.relative_to(ROOT).as_posix() if summary_path.is_relative_to(ROOT) else str(summary_path),
                "summary_sha256": hashlib.sha256(summary_path.read_text(encoding="utf-8").encode("utf-8")).hexdigest(),
                "noise_validation": noise_path.relative_to(ROOT).as_posix() if noise_path.is_relative_to(ROOT) else str(noise_path),
                "noise_sha256": hashlib.sha256(noise_path.read_text(encoding="utf-8").encode("utf-8")).hexdigest(),
                "protocol": summary["protocol"], "morphology_sources": selected,
+               "atlas_sources": atlas_selected,
+               "morphology_rendering": {
+                   "type": "continuous shaded surfaces",
+                   "coordinates": ["x", "log10(t/T)", "h - mean(h)"],
+                   "height_limits": [-60, 60], "colormap": "viridis",
+                   "vertices": "all 32 stored times and all 256 sites; linear faces",
+                   "annotations": "coordinates, ticks and panel letters; no titles",
+                   "quantitative_spectrum": "panel c of fig3_fixed_theta"},
+               "noise_comparison": {"series": "fgn theta=0.25 L=32",
+                                    "n_runs": 8, "lag": 1,
+                                    "panels": "temporal and spatial mean +/- one run SE",
+                                    "negative_control": "axis-permuted same samples"},
                "outputs": [Path(p).relative_to(ROOT).as_posix() if Path(p).is_relative_to(ROOT) else p for p in outputs],
                "uncertainty": "Supplied run errors; S(k) uses all-run mean and SE.",
                "text_hash_normalization": "UTF-8 with LF line endings; binary archive hashes remain byte-exact."}

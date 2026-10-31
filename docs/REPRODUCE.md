@@ -1,4 +1,4 @@
-> Current 2026-10-30 supplement and repository data instructions: [submission reproduction guide](submission_20261030/REPRODUCE.md). The production commands below remain applicable.
+> Current 2026-10-31 innovation-control data and supplement instructions: [innovation reproduction guide](innovation_20261031/REPRODUCE.md). The [2026-10-30 paired/duration-control guide](submission_20261030/REPRODUCE.md) and production commands below remain applicable.
 
 # Reproducing the revised results
 

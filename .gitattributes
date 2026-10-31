@@ -31,3 +31,8 @@
 figs/**/*.svg  linguist-generated=true
 figs/**/*.tiff linguist-generated=true
 manuscript/overleaf/** linguist-generated=true
+
+# Frozen numerical evidence uses byte-exact hashes; retain archived line endings.
+docs/innovation_20261031/source_snapshot/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/innovation_20261031/results_refined/summary.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+manuscript/README.TXT -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

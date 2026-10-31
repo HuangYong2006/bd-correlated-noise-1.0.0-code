@@ -19,7 +19,7 @@
 %  layout with a 178 mm text block, Times body text and Helvetica headings, to
 %  match Communications in Theoretical Physics.  That version has been dropped:
 %  the submission target is PRE and the publisher class is the correct layout
-%  there.  The figures are unchanged and are still exported at 178 mm, which is
+%  there.  The figures are exported at 178 mm, which is
 %  within 1% of the full REVTeX two-column text width (508 pt), so they are
 %  placed at natural size as full-width \begin{figure*} floats.
 % =====================================================================
@@ -68,7 +68,7 @@
   pdfkeywords={kinetic roughening, ballistic deposition, long-range temporal correlations, Kardar-Parisi-Zhang}
 }
 
-\graphicspath{{figs/}{../figs/revision_20261026/}}
+\graphicspath{{figs/}{../figs/revision_20261026/}{../figs/innovation_20261031/}}
 
 % red marker, available for the author's own use; currently unused
 \newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
@@ -92,27 +92,34 @@ ballistic deposition}
 % Add the corresponding author's actual email before submission.
 \input{revision_results}
 \input{submission_results}
+\input{innovation_numbers}
 
 \begin{abstract}
-Temporal memory changes interface roughening, but comparing numerical results
-requires specifying both the driving process and the observation protocol.
-We examine a shared-innovation autoregressive (AR) sum and two Gaussian
-spectral filters in parallel-update ballistic deposition. Validation of the
-final binary space--time field detects an axis-assignment fault that retains
-correct one-dimensional sequences. Exact AR covariances retain cross terms
-between modes driven by common innovations. Matched campaigns with 64
-independent runs per cell and $L=32$--$512$ show increasing finite-size
-late-time width slopes for all three inputs. At $\theta=0.25$, the slopes are
-$\AlphaSharedQuarter$ for shared AR and $\AlphaFgnQuarter$ for the
-fGn-spectrum filter. A paired bootstrap does not resolve a slope difference
-between the Gaussian filters at any of the seven tested parameters.
-Additional controls compare nested observation windows under one fixed
-spectral record, separating duration sensitivity from changes in its cutoff.
-The nearest-neighbour increment distribution reduces exactly to the flat-pair
-fraction, so its Hellinger distance describes local probability changes rather
-than independent spatial information. These results provide a controlled
-finite-window comparison and specify the input and inference checks needed
-before drawing asymptotic scaling conclusions.
+Shared and independent noise innovations can change interface roughening
+through different driving statistics, even at the same nominal temporal-memory
+parameter. We isolate these effects in parallel-update ballistic deposition
+using stationary autoregressive controls and constructive covariance
+compensation. For Gaussian innovations, reweighted independent modes reproduce
+the shared process law, including after thresholding. For uniform innovations,
+matching the latent covariance leaves binary-correlation residuals of
+$\InnovationRawResidualMin$--$\InnovationRawResidualMax$, requiring a separate
+match to the actual deposition field.
+Independent binary-covariance validation meets the retained 0.005 tolerance
+in \InnovationBinaryPass{} of \InnovationCells{} cells across
+$L=\InnovationSizeRange$ and $\theta=0.10,0.25,0.40$.
+At $\theta=0.25$, $L=256$, a validated Gaussian surrogate still differs
+from the uniform-driven reference in its consecutive-four-sign moment:
+the difference is $\InnovationQuarterMomentContrast$.
+Its effective width-slope contrast across the tested sizes is
+$\InnovationQuarterSlopeContrast$; brackets denote pointwise 95\%
+run-bootstrap intervals.
+Thus a resolved high-order temporal input difference need not coincide with
+a resolved finite-window roughness-slope difference.
+The original three-input production grid and fixed-record duration controls
+place these contrasts in their numerical context. Our results separate
+innovation coupling, thresholded covariance and high-order statistics without
+identifying finite-size slopes with asymptotic exponents or a new universality
+class.
 \end{abstract}
 \keywords{kinetic roughening, ballistic deposition, temporally correlated noise,
 Kardar--Parisi--Zhang, finite-size scaling, stochastic simulation}
@@ -167,7 +174,10 @@ the shared-innovation AR covariance, and compare three inputs on a matched
 finite-size grid. A paired analysis of the Gaussian filters uses their common
 random streams rather than treating their agreement as independent replication.
 Additional duration controls keep the spectral record fixed while extending
-the observation window. Together these checks separate implementation validity,
+the observation window. A separate stationary innovation campaign adds exact
+raw-covariance compensation and independently validated binary-covariance
+surrogates (Sec.~\ref{sec:innovation}).
+Together these checks separate implementation validity,
 differences between specified processes, and sensitivity to observation time.
 
 Hellinger distance and novelty detection have already been used in this
@@ -237,8 +247,9 @@ covariance is
 \end{equation}
 Shared innovations have $Q_{nm}=1/12$ for all pairs; independent innovations
 have $Q_{nm}=\delta_{nm}/12$, reducing Eq.~\eqref{eq:arcov} to a diagonal sum.
-These define different processes. Both are compared analytically, while the
-production AR campaign uses the shared case only. Appendix~\ref{app:cov}
+These define different processes. The original production AR campaign uses
+the shared case only; Sec.~\ref{sec:innovation} adds stationary shared,
+independent and covariance-compensated controls. Appendix~\ref{app:cov}
 addresses cold starts and the interpretation of a power-law approximation.
 
 \subsection{Gaussian spectral filters}
@@ -302,13 +313,22 @@ to the wrong coordinates. No production result below uses this control.
 
 \begin{figure*}[t]
  \includegraphics[width=\textwidth]{fig1_generator}
- \caption{\label{fig:noise} Input validation. (a) Production binary temporal
+ \caption{\label{fig:noise} Input validation from the assembled field to
+ covariance checks. (a,b) Lag-one temporal and spatial binary correlations,
+ respectively, under correct assignment (blue) and the axis-permuted
+ negative control (hatched red) at $\theta=0.25$, $L=32$, $T=65536$.
+ Each pair uses the same eight runs; bar heights are run means and error bars
+ are one run standard error. Numerical labels report mean $\pm$ standard
+ error. The dashed line in (a) is the finite-period temporal target.
+ The comparison shows temporal correlation weakening and spurious spatial
+ correlation appearing under axis permutation.
+ (c) Production binary temporal
  correlations for the fGn-spectrum filter at $\theta=0.25$, $L=64$, $T=65536$
  against its finite-period target. Points are eight-run means with one standard
- error. (b) Spatial correlations of the same samples at $L=32$ under correct
+ error. (d) Spatial correlations of the same samples at $L=32$ under correct
  assignment and the axis-permuted negative control. This is the present
  implementation's fault control, not an attribution to historical codes.
- (c) Exact stationary normalised raw covariances of shared- and independently
+ (e) Exact stationary normalised raw covariances of shared- and independently
  driven AR sums at $\theta=0$, $N=48$. No Gaussian binary conversion is applied;
  these are not the simulator's i.i.d. zero-parameter branch.}
 \end{figure*}
@@ -412,7 +432,7 @@ lag-one temporal correlation $\NoiseTimeMeasured$ against finite-period target
 $\NoiseTimeTarget$, with spatial lag-one correlation consistent with zero.
 The same samples under axis permutation instead give temporal correlation
 $\NoiseLegacyTime$ and spatial correlation $\NoiseLegacySpace$.
-Figure~\ref{fig:noise}(a,b) illustrates why testing the assembled field is
+Figure~\ref{fig:noise}(a--d) illustrates why testing the assembled field is
 necessary even after validating the one-dimensional filter.
 
 Innovation covariance also matters. At nominal $\theta=0$, the stationary
@@ -538,8 +558,13 @@ changes from $\PflatSharedZero$ to $\PflatSharedStrong$. There is no
 opposite-sign response between the correctly assembled inputs on this grid.
 At $\theta=0.40$, $L=256$, the shared-AR and fGn-spectrum late-time widths are
 $\WidthSharedStrong$ and $\WidthFgnStrong$, a ratio of $\WidthStrongRatio$.
-Figure~\ref{fig:morphology} compares their final profiles and ensemble spatial
-spectra. A single size and spectrum are not used to identify a faceting or
+Figure~\ref{fig:morphology} shows their interface evolution as continuous
+surfaces; Fig.~\ref{fig:local}(c) retains the ensemble spatial spectra.
+Figure~\ref{fig:atlas} complements this comparison with surface views at weak,
+intermediate and strong temporal correlation.
+These surfaces visualise the arrangement and persistence of height fluctuations;
+they are illustrative single runs, not estimates of ensemble differences.
+A single size and spectrum are not used to identify a faceting or
 anomalous-scaling boundary.
 
 \begin{figure*}[t]
@@ -551,19 +576,48 @@ anomalous-scaling boundary.
  $\theta$ values, with outer independent-run bootstrap standard deviations
  from 200 resamples. Conditional partition scatter is not substituted for
  these errors. This local statistic is not a necessary or sufficient test
- for a universality crossover.}
+ for a universality crossover. (c) Mean $S(k)=L^{-1}|\hat h(k)|^2$ at
+ $\theta=0.40$, $L=256$ over all 64 final profiles, with one run standard
+ error shaded. Colours identify the same inputs as in (a). All positive
+ Fourier modes are shown without smoothing or an artificial floor;
+ no asymptotic spectral exponent is fitted.}
 \end{figure*}
 
 \begin{figure*}[t]
  \includegraphics[width=\textwidth]{fig4_morphology}
- \caption{\label{fig:morphology} Final interfaces and spectra at
- $\theta=0.40$, $L=256$. (a) One illustrative profile per input, selected by
- final width nearest the 64-run median. Profiles are mean-centred and vertically
- translated without amplitude rescaling. Dotted lines show baselines; the bar
- denotes ten height units. (b) Mean $S(k)=L^{-1}|\hat h(k)|^2$ over all 64 final
- profiles, with one run standard error shaded. Every positive Fourier mode is
- shown without smoothing or an artificial floor. No asymptotic spectral
- exponent is fitted from this panel.}
+ \caption{\label{fig:morphology} Continuous surface views of interface
+ evolution at $\theta=0.40$, $L=256$. Panels (a--c), from left to right: shared AR,
+ power law and the fGn-spectrum input. Each surface spans position
+ $x=0,\ldots,255$ horizontally, time $\log_{10}(t/T)$ in depth (earlier
+ profiles in front, later profiles at the back), and height
+ $h(x,t)-\bar h(t)$ vertically. These are one-dimensional interfaces evolving
+ in time. Each representative run has final width nearest the 64-run median.
+ All 32 archived times and 256 sites are retained as surface vertices;
+ faces connect neighbouring samples linearly and do not supply additional
+ simulated times. Height and colour limits are common to all panels,
+ $[-60,60]$ lattice units. Purple/blue denote lower heights and green/yellow
+ higher heights; lighting accentuates surface orientation. No amplitude
+ rescaling is applied.}
+\end{figure*}
+
+\begin{figure*}[t]
+ \includegraphics[width=\textwidth]{fig6_morphology_atlas}
+ \caption{\label{fig:atlas} Continuous surface morphology at $L=256$.
+ Panels (a--i) are ordered row-wise. Columns, from left to right,
+ distinguish shared AR, power law and the
+ fGn-spectrum input; rows, from top to bottom, show
+ $\theta=0.10$, $0.25$ and $0.40$. Each cell displays all 256 sites and all
+ 32 stored profiles of the run with final width nearest its own 64-run median.
+ At each time the spatial mean height is subtracted. Position, logarithmic
+ time and centred height have the same orientation as in
+ Fig.~\ref{fig:morphology}. A common height range and colour scale of
+ $[-60,60]$ lattice units is used across all nine panels without amplitude
+ rescaling. Purple/blue denote lower heights and green/yellow higher
+ heights. Time is normalised by each cell's archived duration $T$.
+ Surface faces connect neighbouring stored samples linearly;
+ no additional dynamical data or spatial smoothing is introduced.
+ These representative runs illustrate morphology, not an ensemble-averaged
+ effect or a scaling boundary.}
 \end{figure*}
 
 The Hellinger excess detects local changes under correlated driving
@@ -581,6 +635,8 @@ decision rule, it does not establish that a reported threshold has the same
 origin. A detectable local difference likewise does not demonstrate a change
 of scaling universality.
 
+\input{innovation_controls_results}
+
 \section{Discussion}
 The central result is a finite-window comparison in which input validation
 and statistical comparison are treated separately. Both Gaussian spectral
@@ -597,8 +653,11 @@ An axis-assignment fault can preserve filtered sequences while altering the
 coordinates in which their correlations act. Second, an AR specification must
 include the covariance of its innovations across modes. Identical mode weights
 with shared and independent innovations describe different input processes.
-Our analytic comparison establishes this distinction; isolating its effect on
-growth would require a separate matched innovation-control campaign.
+The stationary campaign in Sec.~\ref{sec:innovation} separates this change
+of process from a covariance-compensated representation. For Gaussian inputs,
+complete covariance compensation restores the full process law. Uniform
+innovations require the additional check of the thresholded covariance;
+matching the latent field alone leaves measurable binary-input differences.
 
 The fixed-record controls address observation duration without changing the
 lowest available input frequency within each cell. Their interpretation is
@@ -606,7 +665,11 @@ correspondingly restricted to that input record and to the tested sizes and
 parameters. They do not control the difference between periodic spectral
 inputs and cold-started AR streams. Residual differences can also involve
 short-time correlations and non-Gaussian marginals. Matching nominal $\theta$
-is insufficient to isolate any of these mechanisms.
+is insufficient to isolate any of these mechanisms. The additional stationary
+controls remove this initialization mismatch within their own grid, while
+retaining explicit finite-lag validation limits. Their four-time input
+statistics illustrate why a measurable high-order difference is not itself
+evidence for a changed roughness exponent.
 
 Local distances answer a different question from spatial scaling.
 Equation~\eqref{eq:localH} and its expansion show that the increment-pmf
@@ -629,17 +692,28 @@ The different threshold definitions in the literature therefore remain
 separate physical questions, and no historical threshold is invalidated here.
 
 \section{Conclusion}
-Specifying the complete noise process and observation protocol makes the
-finite-window comparison interpretable. Correctly assembled Gaussian spectral
-inputs and the shared AR variant all show increasing width slopes and
-decreasing flat-pair fractions as temporal correlations strengthen. Paired
-run-bootstrap inference resolves the uncertainty in the Gaussian-filter
-comparison, and fixed-record controls test duration sensitivity separately
-from a changing spectral cutoff. Exact innovation covariances and the local-pmf
-reduction explain why generator labels and local distance thresholds cannot
-substitute for these checks. The resulting benchmark supports finite-window
-comparisons without identifying them with asymptotic exponents or a measured
-critical temporal parameter.
+Innovation coupling and high-order noise statistics affect different levels
+of the driving process. We construct independent AR weights that compensate
+the complete shared-input covariance; for Gaussian innovations this fixes
+the entire process law and hence the distribution of BD observables.
+Uniform innovations show why latent covariance compensation is insufficient
+after binary thresholding. The additional binary-target controls validate
+\InnovationBinaryPass{} of \InnovationCells{} cells at the unchanged
+0.005 tolerance, with the original failures and their independent
+recalibration retained for audit.
+At $\theta=0.25$, $L=256$, a four-time input difference remains resolved
+under this validation, while the corresponding effective-slope contrast
+across $L=\InnovationSizeRange$ is not resolved.
+This distinguishes measurable high-order temporal structure from evidence
+for changed roughness scaling; an unresolved contrast is not proof of
+physical equivalence.
+
+The original three-input comparison, assembled-field checks, paired filter
+inference and fixed-record duration controls support this interpretation.
+The conclusions remain conditional on the fitted surrogate spectrum,
+the sampled covariance lags and finite observation windows. They do not
+establish asymptotic exponents, a universality-class change or a critical
+temporal-memory parameter.
 
 \section*{Data availability}
 The code, production data and additional control results are maintained in
@@ -647,6 +721,13 @@ The code, production data and additional control results are maintained in
 The reproducibility materials contain all 105 production cells, validation
 outputs, analysis and plotting scripts, seeds, layout identifiers and source
 hashes. The reproduction guide maps figures and tables to their inputs.
+The stationary controls added in Sec.~\ref{sec:innovation} form a separate
+revision data set, packaged as \texttt{innovation\_controls\_data\_20261031.zip};
+they are not included in the earlier production release.
+This numerical supplement accompanies the manuscript and contains the
+run-level archives, original failed controls, refined controls, calibration
+metadata, seeds, analysis code, a standalone numerical verifier and a
+file-level SHA256 manifest~\cite{SupplementalData}.
 
 \appendix
 \section{Single-step constraint}

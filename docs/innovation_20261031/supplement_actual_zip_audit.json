@@ -1,0 +1,148 @@
+{
+  "payload_hashes_verified": 73,
+  "original_failures": [
+    {
+      "theta": 0.4,
+      "L": 32,
+      "original_upper95": 0.010739237467447923,
+      "file": "data/raw/innovation_binary_20261031_v3/theta0.40_L32.npz"
+    },
+    {
+      "theta": 0.4,
+      "L": 64,
+      "original_upper95": 0.0058502070109049216,
+      "file": "data/raw/innovation_binary_20261031_v3/theta0.40_L64.npz"
+    },
+    {
+      "theta": 0.4,
+      "L": 512,
+      "original_upper95": 0.005309560712091339,
+      "file": "data/raw/innovation_binary_20261031_v3/theta0.40_L512.npz"
+    }
+  ],
+  "final_validation": [
+    {
+      "theta": 0.1,
+      "L": 32,
+      "current_upper95": 0.0034873453776041725,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.25,
+      "L": 32,
+      "current_upper95": 0.0044677734375,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.4,
+      "L": 32,
+      "current_upper95": 0.0037062666151259087,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.1,
+      "L": 64,
+      "current_upper95": 0.0023758316040039165,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.25,
+      "L": 64,
+      "current_upper95": 0.0025444030761718845,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.4,
+      "L": 64,
+      "current_upper95": 0.002552623748779321,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.1,
+      "L": 128,
+      "current_upper95": 0.0015769899191243695,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.25,
+      "L": 128,
+      "current_upper95": 0.0021284150663008644,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.4,
+      "L": 128,
+      "current_upper95": 0.004291525562985736,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.1,
+      "L": 256,
+      "current_upper95": 0.0010226090749104722,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.25,
+      "L": 256,
+      "current_upper95": 0.0015839608510335667,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.4,
+      "L": 256,
+      "current_upper95": 0.0046661043167114105,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.1,
+      "L": 512,
+      "current_upper95": 0.0005558441259787963,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.25,
+      "L": 512,
+      "current_upper95": 0.0008564563641332123,
+      "passed": true,
+      "independent_covariance_only": false
+    },
+    {
+      "theta": 0.4,
+      "L": 512,
+      "current_upper95": 0.002503268953104469,
+      "passed": true,
+      "independent_covariance_only": true
+    }
+  ],
+  "all_final_checks_pass": true,
+  "calibration_checks": [
+    {
+      "L": 32,
+      "first_training_seed": 3868594458,
+      "regenerated_training_max_error": 0.0,
+      "fitted_spectrum_reconstructed": true
+    },
+    {
+      "L": 64,
+      "first_training_seed": 3140175199,
+      "regenerated_training_max_error": 0.0,
+      "fitted_spectrum_reconstructed": true
+    }
+  ],
+  "slope_and_bootstrap_intervals": "independently reproduced by least-squares regression",
+  "four_sign_moments": "all independently reproduced",
+  "imports_project_analysis_code": false
+}

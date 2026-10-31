@@ -1,0 +1,11 @@
+# 最终论文与投稿材料更新
+
+全部五尺寸网格L=32,64,128,256,512已完成；最终15/15组通过同一0.005协方差精度要求。原两组小尺寸的同时上界分别由0.010739和0.005850降为0.003706和0.002553。新增L512强记忆单元在保持拟合谱和全部界面数据不变的独立纯噪声追加验证中，由0.005310降为0.002503。所有初始失败记录、校准及追加验证方案、种子和代码均保留；失败的原验证记录不用于机制性归因。
+
+Abstract与Conclusion已以前述创新变量对照、协方差补偿、阈值后二值相关和高阶时间统计为主线。最新全文PDF为12页，正文明确区别可检测的四点统计差异与未分辨出的有限窗口斜率差异，不把后者表述为物理等效、相同渐近指数或普适类结论。
+
+最新PDF：manuscript/BD_noise_controls_updated.pdf；main.pdf和BD_figures_revised.pdf同步。最终材料总包：manuscript/PRE_submission_materials_20261031.zip，包含PDF、Overleaf源码包、innovation_controls_data_20261031.zip及README.TXT。数据ZIP包含73个有SHA256的负载文件与MANIFEST.json，其中有全部选用数据、原失败归档、精确生产代码快照、可运行数值/图7重现代码、依赖说明和独立校验器。正文补充材料参考文献已补齐；尚未实际向期刊上传。
+
+验证：70项测试通过；独立复核无剩余可操作问题。已在独立解压目录从补充包重算全部15组验证上界、斜率/置信区间和四点统计；完整summary全部字段一致。无docs目录的全新解压环境成功重新生成两组小尺寸修正结果，上界精确重现。图7可从解压包独立重绘而不依赖TeX。PDF无未解析引用、超宽框或越出页面的文字，全部页面已渲染检查。最终文件SHA256及验证结果见final_delivery_manifest.json。
+
+追加核查：Table III表注中过时的dagger说明已删除。实际ZIP重新解压后，73个负载哈希通过；45份NPZ及原始失败、重新校准、追加验证记录均已核对。新增DATA_INDEX.json、SEEDS.json及不导入项目生成/分析函数的independent_supplement_audit.py。独立最小二乘及bootstrap复算一致；两条校准记录由显式种子再生，归档协方差差为0。完整随包重分析全部summary字段一致。详见Supplemental_Material_核验报告.md及supplement_actual_zip_audit.json。

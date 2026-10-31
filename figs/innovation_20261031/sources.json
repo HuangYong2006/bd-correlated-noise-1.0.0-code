@@ -1,0 +1,16 @@
+{
+  "summary": "docs/innovation_20261031/results_refined/summary.json",
+  "summary_sha256": "751ef74991daed30611693d6605d502c57d8a31c0c871fc514f01f07b378092e",
+  "sizes": [
+    32,
+    64,
+    128,
+    256,
+    512
+  ],
+  "outputs": [
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\innovation_20261031\\fig7_innovation_controls.pdf",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\innovation_20261031\\fig7_innovation_controls.svg",
+    "E:\\\u5e94\u7528\u7269\u7406\u5b66\\\u79d1\u7814\\BD\u6a21\u578b\\figs\\innovation_20261031\\fig7_innovation_controls.png"
+  ]
+}

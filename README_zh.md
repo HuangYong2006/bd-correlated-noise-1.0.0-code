@@ -1,11 +1,25 @@
-> 2026-10-30 更新：当前论文为 `manuscript/main.tex`，PDF 为 `manuscript/main.pdf`。
-> 本轮增加配对 bootstrap、四组固定输入记录时长对照以及第五张图。
-> 三组修正版生产数据共105个单元已纳入仓库，其余历史原始数据仍排除。
-> 最新复现步骤见 `docs/submission_20261030/REPRODUCE.md`。
+> 2026-10-31 更新：论文、PDF、七张图及完整创新变量对照数据已同步。
+> 新增三个数据目录各15份NPZ，共45份；保留原失败验证、重新校准和追加独立验证记录。
+> 最终15/15组满足原定0.005精度。最新复现入口见
+> [本轮复现说明](docs/innovation_20261031/REPRODUCE.md)。
 
 # 时间关联噪声下的弹道沉积
 
 当前英文稿题目为 **Noise construction and finite-size inference in temporally correlated ballistic deposition**，采用 PRE 格式。中文阅读摘要见 manuscript/abstract_zh.md。
+
+## 最新材料与独立核验
+
+- [最新论文 PDF](manuscript/main.pdf)与[Overleaf 源码包](manuscript/overleaf_bd_paper.zip)。
+- [数值补充 ZIP](manuscript/innovation_controls_data_20261031.zip)：包含45份NPZ、
+  逐运行种子、重新校准记录、原始失败、分析与图7代码及独立核验脚本。
+- [投稿材料总包](manuscript/PRE_submission_materials_20261031.zip)：PDF、源码、数据ZIP与README.TXT。
+- [实际ZIP核验报告](docs/innovation_20261031/Supplemental_Material_核验报告.md)。
+
+将补充ZIP解压到独立空目录后，运行
+`python code/independent_supplement_audit.py` 可在不导入项目生成器或分析函数的情况下，
+复算原失败和最终验证、有效斜率及bootstrap区间，并按显式种子再生校准记录。
+本轮还通过了70项测试。原105组生产数据与新增15组参数单元是不同的实验网格。
+结论仍限于已验证的协方差精度、有限尺寸与观测窗口。
 
 ## 2026-10-26 科学修订
 

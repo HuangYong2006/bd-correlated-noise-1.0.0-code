@@ -1,9 +1,10 @@
-> As of 2026-10-30, the three corrected `rev20261026_*` production campaigns (105 NPZ cells) are versioned in Git. Other raw campaigns remain excluded. New control records are documented in `docs/submission_20261030/REPRODUCE.md`.
+> As of 2026-10-31, the 105 corrected production cells and 45 additional innovation-control archives are versioned. Prototype and legacy campaigns remain excluded. Current commands are in `docs/innovation_20261031/REPRODUCE.md`.
 
 # Data for the scientific revision
 
-The revised manuscript uses only the three `rev20261026_*` production tracks,
-the revision analysis directory and the production-noise validation JSON. Earlier
+The original production comparison uses the three `rev20261026_*` tracks,
+the revision analysis directory and the production-noise validation JSON. The
+additional stationary controls are described below. Earlier
 analysis outputs are retained in Git history, not distributed as current evidence.
 
 ## Locations and naming
@@ -46,6 +47,33 @@ The spectral stats field cannot be used as a measured deposition fraction, and
 noise correlations cannot be recovered from final height profiles. Use the
 separate final-interface noise validation instead.
 
+## Additional stationary innovation controls
+
+| Directory under data/raw | Archives | Role |
+|---|---:|---|
+| innovation_20261031_v3 | 15 | Six shared/independent/raw-covariance-matched Gaussian and uniform inputs |
+| innovation_binary_20261031_v3 | 15 | Original binary-target Gaussian controls, including failed validation records |
+| innovation_binary_refined_20261031 | 15 | Final selected controls, two recalibrations and an independent L=512 covariance-only check |
+
+These use theta=0.10,0.25,0.40 and L=32,64,128,256,512. Each interface ensemble
+has 64 runs; binary-target slope contrasts use 32 held-out uniform-shared source
+runs. The record length is 2T with common DC removal. `late_w2` contains squared
+widths at two observation durations, not raw width samples.
+
+The final summary is `docs/innovation_20261031/results_refined/summary.json`.
+All 15 covariance gates pass the retained 0.005 criterion. The original failed
+archives remain unchanged. Two refined archives additionally store 128-run
+training covariance records; the L=512 archive retains its original fitted
+spectrum/interface arrays and adds separate 128-run covariance-validation arrays.
+
+The self-contained `manuscript/innovation_controls_data_20261031.zip` includes
+the 45 NPZ files and `DATA_INDEX.json`, `SEEDS.json`, sampling/validation reports,
+source snapshots, numerical and figure code, dependencies and a SHA256 manifest.
+`docs/innovation_20261031/Supplemental_Material_核验报告.md` lists the actual
+files and independent recomputation scope. Frozen source snapshots and the
+figure-input summary retain byte-exact line endings so their archived hashes
+survive Git checkouts.
+
 ## Derived current evidence
 
 `data/analysis/revision_20261026/summary.json` contains the declared protocol,
@@ -83,6 +111,6 @@ runs. `manuscript/revision_results.tex` is generated from current source tables.
 - The pre-revision manuscript zip and frozen review packet are preserved.
   Earlier submission-readiness notes concern the superseded draft.
 
-Raw campaigns are intentionally ignored by Git. Derived current tables and
-figure sources can be versioned. Do not invent a public data DOI or publication
+Only the explicitly retained production and innovation campaigns are versioned;
+other raw campaigns remain ignored. Do not invent a public data DOI or publication
 status; provide an actual deposit identifier only when one exists.

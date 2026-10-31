@@ -5,10 +5,39 @@ shared-innovation AR and Gaussian spectral noise inputs. The revised manuscript 
 **Noise construction and finite-size inference in temporally correlated ballistic deposition**,
 prepared in Physical Review E format.
 
+## Current data and manuscript update, 31 October 2026
+
+The updated article is [manuscript/main.pdf](manuscript/main.pdf), with seven
+figures and the innovation-control results in its abstract and conclusion.
+The new controls cover three theta values and five sizes, with 64 interface
+runs per input/cell. All 15 final binary-covariance checks pass the unchanged
+0.005 tolerance. Initial failed validations, two recalibrations and the
+fixed-spectrum L=512 covariance-only validation remain available for audit.
+
+- [Numerical supplement](manuscript/innovation_controls_data_20261031.zip):
+  45 NPZ archives, explicit per-run seeds, calibration records, source snapshots,
+  analysis/figure code and standalone verification scripts.
+- [Manuscript, source and data bundle](manuscript/PRE_submission_materials_20261031.zip).
+- [Actual-ZIP audit report](docs/innovation_20261031/Supplemental_Material_核验报告.md).
+- [Current reproduction instructions](docs/innovation_20261031/REPRODUCE.md).
+
+The three additional raw-data directories are now versioned:
+`innovation_20261031_v3`, `innovation_binary_20261031_v3` and
+`innovation_binary_refined_20261031`. They contain 15 archives each.
+The first two retain the original source and surrogate results; the third
+contains the final controls. They supplement the existing 105 production cells.
+Prototype/performance trials and local extraction/build directories are excluded.
+
+After unpacking the supplement into a separate empty directory, run
+`python code/independent_supplement_audit.py` to verify the data without importing
+the project's generator or analysis functions. Full reanalysis reproduces every
+field of the archived summary. These finite-window results do not establish
+equal asymptotic exponents or a new universality class.
+
 ## PRE revision, 30 October 2026
 
-The current manuscript and compiled PDF are `manuscript/main.tex` and
-`manuscript/main.pdf`. The five figures use Times New Roman throughout.
+That revision used `manuscript/main.tex` and `manuscript/main.pdf`
+with five figures. The current seven-figure revision retains Times New Roman.
 The matching Overleaf source archive is `manuscript/overleaf_bd_paper.zip`.
 
 This revision adds a paired bootstrap for the two common-stream Gaussian
@@ -19,7 +48,7 @@ not evidence of equivalence, saturation, or an asymptotic critical parameter.
 
 All 105 corrected production cells are versioned under the three
 `data/raw/rev20261026_*` directories. Other raw campaigns remain excluded.
-See [the current reproduction guide](docs/submission_20261030/REPRODUCE.md)
+See [that revision's reproduction guide](docs/submission_20261030/REPRODUCE.md)
 and [revision notes](docs/submission_20261030/修改说明.md).
 The corresponding-author email is intentionally left for the author to fill.
 

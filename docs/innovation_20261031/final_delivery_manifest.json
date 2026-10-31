@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "pdf_pages": 12,
+  "validation_passed": 15,
+  "validation_total": 15,
+  "retained_tolerance": 0.005,
+  "data_archive_payload_hashes": 73,
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "70",
+    "time": "3.283",
+    "timestamp": "2026-10-31T20:11:36.294502+08:00",
+    "hostname": "DESKTOP-0TU9N95"
+  },
+  "files": [
+    {
+      "file": "manuscript/BD_noise_controls_updated.pdf",
+      "bytes": 883881,
+      "sha256": "8e9f7ea51d0eb00fe61be2b60350414c8de9acc7c9ecd48ef51c4ea5aa66945d"
+    },
+    {
+      "file": "manuscript/overleaf_bd_paper.zip",
+      "bytes": 1256994,
+      "sha256": "d9690beeab08f7b2587fd4e31eae2d5c5fe43e46566eb6df454094ab21e2c0cd"
+    },
+    {
+      "file": "manuscript/innovation_controls_data_20261031.zip",
+      "bytes": 27377005,
+      "sha256": "25f690993fd5914f7643b511ff3573f148d92da2259cd904c221fbd1333ca2df"
+    },
+    {
+      "file": "manuscript/PRE_submission_materials_20261031.zip",
+      "bytes": 29505411,
+      "sha256": "be45196aa7ff92fa53baf10c4b2172fb80ca661486aaf8b7ef952c2688f9f6da"
+    },
+    {
+      "file": "manuscript/README.TXT",
+      "bytes": 712,
+      "sha256": "20f02e67a2b548457bb7d391732f26589dd9d9a288851d5f626ef07aad1cd2a1"
+    }
+  ],
+  "independent_review": "No remaining actionable issues; additional validation affects covariance gate only.",
+  "standalone_reproduction": "All analysis summary fields identical; clean-root refinement regeneration succeeded; paper Figure7 reproduced without TeX.",
+  "actual_zip_audit": "docs/innovation_20261031/supplement_actual_zip_audit.json",
+  "stale_dagger_caption_removed": true,
+  "repository_publication_check": "70 tests passed with temporary input data outside the repository; updated supplement passed both verifiers and full reanalysis matched every summary field."
+}

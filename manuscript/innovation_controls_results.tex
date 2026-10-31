@@ -1,0 +1,119 @@
+\subsection{Stationary innovation and covariance-matching controls}
+\label{sec:innovation}
+\InnovationStageNotice{}
+At $\theta=0.10,0.25,0.40$, we compare shared and independent AR innovations
+under the same weights and add covariance-compensated independent modes.
+Both centred uniform and Gaussian innovations are used, giving six inputs
+with 64 runs per cell. Every input is a circular length-$2T$ record with its
+DC component removed. Here $T$ is the next 5-smooth integer at or above
+$15L^{3/2}$, and the mode count is determined by $2T$.
+Flat interfaces evolve under one record to $T$
+and $2T$. Late-time squared widths are averaged over the last 20\% of regularly
+stored times before taking the ensemble square root. This campaign controls
+initialization and cutoff within its own comparisons; it does not replace
+the cold-start protocol of the original shared-AR campaign.
+
+For the positive weights in Eq.~\eqref{eq:ar}, define
+\begin{align}
+ A_n&=W_n\sum_m\frac{W_m}{1-r_nr_m},&
+ V_n&=\sqrt{(1-r_n^2)A_n}.
+ \label{eq:innovationmatch}
+\end{align}
+Independent innovations with weights $V_n$ reproduce the shared-input
+stationary covariance at every lag, not just its variance.
+The spectral identity survives sampling on a common frequency grid and
+removing DC. Zero-mean Gaussian processes with the same complete covariance
+have the same finite-dimensional laws; their thresholded fields and resulting
+BD observables therefore also agree in law. The Gaussian comparison is an
+implementation and sampling control, rather than evidence for an additional
+physical effect of a latent mode representation.
+
+Figure~\ref{fig:innovation}(a) and Table~\ref{tab:innovation} quantify how
+innovation coupling and covariance compensation affect the effective width
+slopes. Raw-covariance compensation cannot by itself match the actual
+uniform-driven binary input: the maximum measured sign-correlation residual
+across the control cells is
+$\InnovationRawResidualMin$--$\InnovationRawResidualMax$.
+Thresholding a non-Gaussian process depends on its two-time orthant
+probabilities, which are not fixed by its raw covariance.
+
+We therefore add a Gaussian surrogate fitted to the \emph{binary} covariance.
+Only the first 32 uniform-shared noise records in each cell calibrate a
+nonnegative mixture of circular AR spectra, using the Gaussian relation
+$\rho(\tau)=\sin[\pi C_s(\tau)/2]$. Fresh Gaussian and uniform validation
+records, with 64 runs and 16 sites per run, test every integer lag from 0
+through 64 and the sampled long lags. A simultaneous bootstrap upper bound
+on $\max_\tau|\Delta C_s(\tau)|$ must fall below 0.005, an explicit numerical
+tolerance rather than a universal physical equivalence criterion.
+Two initial cells, $\theta=0.40$ at $L=32,64$, failed this test.
+We performed one documented calibration refinement, retaining the same
+spectral family and tolerance: 128 fresh 64-site records calibrate every
+integer lag from 0 through 64 and the original long lags, followed by
+64 new, independent 64-site validation records per cell.
+The initial failures motivated this refinement. After its calibration scheme
+was fixed, the fresh validation records were not used for fitting, parameter
+selection or further retries; the tolerance was not relaxed.
+The simultaneous upper bounds changed as follows:
+\InnovationRefinementBounds{}.
+\InnovationLargeValidationNotice{}
+With these refined controls, \InnovationBinaryPass{} of \InnovationCells{}
+reported cells pass. The original failed archives remain in the numerical
+supplement. \InnovationFailedInferenceNotice{}
+
+The surrogate interface comparison uses the 32 held-out uniform-shared
+runs. \InnovationSurrogateFinding{}
+An unresolved difference does not prove equal exponents.
+Independent four-time input statistics can nevertheless differ.
+Sign-flip symmetry and stationarity imply
+\begin{equation}
+ \langle s_0s_1s_2s_3\rangle
+ =16P(++++)-1-3C_s(1)-2C_s(2)-C_s(3).
+ \label{eq:foursign}
+\end{equation}
+Figure~\ref{fig:innovation}(b) evaluates this moment with fresh validation
+records at $L=256$, where all three covariance checks pass. The
+$\theta=0.25$ and $0.40$ four-time input differences are resolved.
+These observations distinguish a detectable high-order input change from a
+demonstrated change in interface scaling. The original failed controls
+are excluded from mechanistic inference. Only parameter grids passing
+every retained covariance check are eligible for that comparison.
+Unmeasured lag residuals and uncertainty in the fitted spectrum still
+preclude a stronger attribution. Intervals use 2000 whole-run bootstrap draws,
+preserve the six-input pairing within size, and resample sizes independently.
+Surrogate intervals are conditional on the fitted spectrum; no
+multiple-comparison adjustment is applied to these exploratory contrasts.
+The raw run archives, original failures and reproducible analysis and
+figure code are provided in the Supplemental Material~\cite{SupplementalData}.
+
+\begin{table}[tb]
+ \caption{Innovation-control slope differences at duration $2T$ across
+ $L=\InnovationSizeRange$. G and U denote Gaussian and uniform innovations.
+ Independent inputs are compared with their corresponding shared input;
+ the binary-target Gaussian surrogate is compared with the held-out
+ uniform-shared runs. Intervals are pointwise 95\% run-bootstrap intervals.}
+ \label{tab:innovation}
+ \compacttab
+ \begin{ruledtabular}
+ \begin{tabular}{clcc}
+ $\theta$ & Input contrast & $\Delta\alpha_{\rm eff}$ & 95\% interval \\
+ \InnovationContrastRows
+ \end{tabular}
+ \end{ruledtabular}
+\end{table}
+
+\begin{figure*}[tb]
+ \centering
+ \includegraphics[width=\textwidth]{fig7_innovation_controls}
+ \caption{Stationary innovation controls.
+ (a) Finite-size slope differences at $2T$ relative to the corresponding
+ shared-input family. Each estimate uses \InnovationSizeCount{} sizes
+ ($L=\InnovationSizeRange$) and 64 runs per input and size.
+ (b) Gaussian binary-target minus fresh uniform-shared consecutive-four-sign
+ moment at $L=256$, reconstructed by Eq.~\eqref{eq:foursign}; 64 independent
+ validation runs per input, 16 sites per run. Bars are pointwise 95\%
+ whole-run bootstrap intervals from 2000 draws.
+ High-order input differences and finite-size slope sensitivity are distinct
+ observables; approximate covariance matching does not establish identical
+ full input processes or an asymptotic universality class.}
+ \label{fig:innovation}
+\end{figure*}

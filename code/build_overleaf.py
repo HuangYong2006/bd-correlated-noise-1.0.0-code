@@ -9,25 +9,33 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / 'manuscript'
 FIGS = ROOT / 'figs' / 'revision_20261026'
-FIGURES = ['fig1_generator', 'fig2_exponents', 'fig3_fixed_theta', 'fig4_morphology', 'fig5_controls']
+FIGURES = ['fig1_generator', 'fig2_exponents', 'fig3_fixed_theta', 'fig4_morphology',
+           'fig5_controls', 'fig6_morphology_atlas']
 
-README = '''OVERLEAF SOURCE PACKAGE - PRE REVISION 2026-10-30
+README = '''OVERLEAF SOURCE PACKAGE - PRE REVISION 2026-10-31
 =====================================================
 Upload overleaf_bd_paper.zip as an Overleaf project and compile main.tex using
 pdfLaTeX and BibTeX. REVTeX 4.2 and the packages used are standard TeX Live
 components. revision_results.tex and submission_results.tex supply numerical tables
-and must stay beside main.tex and refs.bib.
+and must stay beside main.tex and refs.bib. innovation_numbers.tex and
+innovation_controls_results.tex supply the additional stationary controls.
 
 This package uses a regenerated 105-cell comparison: three inputs, seven theta
-values, five sizes, 64 independent runs per cell. Five figures use corrected spectral data, including paired-filter
+values, five sizes, 64 independent runs per cell. Seven figures use corrected spectral data, including paired-filter
 inference and fixed-record duration controls. All figure text is Times New Roman. The text distinguishes finite-size late-time slopes from
 asymptotic exponents. It neither reports theta_c nor attributes errors to
 previous authors. The former flat corrected KPZ-branch claim is withdrawn.
 
 Files
   main.tex, refs.bib, revision_results.tex, submission_results.tex
+  innovation_numbers.tex, innovation_controls_results.tex
   abstract_zh.md (reading aid, not part of the compiled manuscript)
-  figs/fig1_generator through fig5_controls, each PDF and SVG
+  figs/fig1_generator through fig7_innovation_controls, each PDF and SVG
+
+The stationary innovation controls have their own completed-size scope, stated
+in the article and innovation_numbers.tex. They must not be confused with the
+original five-size production grid. Their revision-local data are packaged
+separately as innovation_controls_data_20261031.zip.
 
 Old drafts are available in Git history, not in this source package.
 Code/data reproduction is described in docs/REPRODUCE.md in the project.
@@ -39,10 +47,14 @@ scientific readiness or acceptance.
 
 def main():
     files = {name: SRC / name for name in
-             ['main.tex', 'refs.bib', 'revision_results.tex', 'submission_results.tex', 'abstract_zh.md']}
+             ['main.tex', 'refs.bib', 'revision_results.tex', 'submission_results.tex',
+              'innovation_numbers.tex', 'innovation_controls_results.tex', 'abstract_zh.md']}
     for name in FIGURES:
         for extension in ['pdf', 'svg']:
             files[f'figs/{name}.{extension}'] = FIGS / f'{name}.{extension}'
+    for extension in ['pdf', 'svg']:
+        files[f'figs/fig7_innovation_controls.{extension}'] = (
+            ROOT / 'figs/innovation_20261031' / f'fig7_innovation_controls.{extension}')
     for name, source in files.items():
         if not source.is_file():
             raise FileNotFoundError(source)

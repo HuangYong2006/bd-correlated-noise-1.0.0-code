@@ -41,12 +41,15 @@ htmlcov/
 # analysis tables in data/analysis/ ARE tracked: they are what the manuscript
 # numbers come from and they are cheap to carry.
 #
-# Only the three explicitly listed corrected campaigns are versioned below.
+# Only the explicitly listed corrected and innovation campaigns are versioned below.
 # ---------------------------------------------------------------------------
 data/raw/*
 !data/raw/rev20261026_shared/
 !data/raw/rev20261026_powerlaw/
 !data/raw/rev20261026_fgn/
+!data/raw/innovation_20261031_v3/
+!data/raw/innovation_binary_20261031_v3/
+!data/raw/innovation_binary_refined_20261031/
 
 # Standalone generator-calibration / validation arrays at the top level of
 # data/ are regenerable and not needed to reproduce the manuscript numbers.
