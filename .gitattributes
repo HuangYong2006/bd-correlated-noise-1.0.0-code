@@ -36,3 +36,20 @@ manuscript/overleaf/** linguist-generated=true
 docs/innovation_20261031/source_snapshot/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/innovation_20261031/results_refined/summary.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 manuscript/README.TXT -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# November controlled/parity evidence and producer sources have byte-exact hashes.
+data/analysis/controlled_20261117/** -text
+data/analysis/strict_binary_20261117/** -text
+figs/refocus_20261117/** -text
+figs/strict_binary_20261117/** -text
+docs/research_refocus_20261117/** -text
+docs/strict_binary_20261117/** -text
+code/audit_controlled_campaign.py -text
+code/export_controlled_results.py -text
+code/package_refocus.py -text
+code/refocus_figures.py -text
+code/strict_binary.py -text
+code/strict_binary_analysis.py -text
+code/strict_binary_figure.py -text
+code/strict_binary_limits.py -text
+code/verify_refocus_artifacts.py -text

@@ -109,7 +109,8 @@ def main():
     for r in paired:
         label='1/6' if abs(r['theta']-1/6)<1e-6 else f"{r['theta']:.2f}"
         lines.append(f"${label}$ & ${r['delta_alpha']:.5f}$ & $[{r['ci95'][0]:.5f},{r['ci95'][1]:.5f}]$ \\\\")
-    (ROOT/'manuscript/submission_results.tex').write_text('\\newcommand{\\PairedRows}{\n'+'\n'.join(lines)+'\n}\n')
+    target = ROOT/'docs/strict_binary_20261117/supplement_source/tex/tables/submission_results.tex'
+    target.write_text('\\newcommand{\\PairedRows}{\n'+'\n'.join(lines)+'\n}\n')
 
 
 if __name__=='__main__':

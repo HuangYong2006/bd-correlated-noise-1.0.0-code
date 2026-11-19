@@ -1,0 +1,72 @@
+{
+  "source": "data\\analysis\\controlled_20261117\\summary.json",
+  "summary_sha256": "657bfdb72d7770e2fce4d495d7284d78615d9b5ab6c819d9adeb5e995f1174bd",
+  "script_sha256": "aa9bed18a106049dfd503e6a876ac3b3235ecb0b1cdff7e5171e3d3052326ee6",
+  "sources": [
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L1024.npz",
+      "sha256": "04ea40049361e16448e48ec524c92ac142fcdcc3bf14a05c48e710f7b083ba69"
+    },
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L128.npz",
+      "sha256": "7d1bd05b5417c89a4428b6164c12dc719d72ac5d0bc73d9d7bd278877327558b"
+    },
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L256.npz",
+      "sha256": "ff49e85183770f658b308d52ebcf1b5e89dcd69d69e2e0aabddc62fbea171b6d"
+    },
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L512.npz",
+      "sha256": "0cfbc54d811745d511482dd7828dbac2ceebeab9a95ac314d1e6e4f9368ff4bd"
+    },
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L64.npz",
+      "sha256": "e6bbec57cc090c1e7b6254b7d4e862b0147c3fb9a9534423cecd98fba535640c"
+    },
+    {
+      "file": "data/raw/controlled_20261117/modes_plus4/theta0.25_L128.npz",
+      "sha256": "2bddd79e52506a0bd319018a2596cf382bfb28de5303b93f046abf45b267a79b"
+    },
+    {
+      "file": "data/raw/controlled_20261117/modes_plus4/theta0.25_L256.npz",
+      "sha256": "1de602bc0b8bc5117ed7cb8aa72a333805b3010b6fdd5be98363df6ab6bb5afd"
+    },
+    {
+      "file": "data/raw/controlled_20261117/period4/theta0.25_L128.npz",
+      "sha256": "d752c99dca693b38e7daf4e94b4783d69416603245bc0af8934c9a3a38ee6cc5"
+    },
+    {
+      "file": "data/raw/controlled_20261117/period4/theta0.25_L256.npz",
+      "sha256": "2b2eb8547218ee93ad71d6ed7017369d183782d1a556f9ebddf8c97593de8f8a"
+    },
+    {
+      "file": "data/raw/controlled_20261117/period8/theta0.25_L128.npz",
+      "sha256": "d2b3dc538304bf96d153625881c806fa90ebf672fa33f9c920832df13e6d7445"
+    },
+    {
+      "file": "data/raw/controlled_20261117/period8/theta0.25_L256.npz",
+      "sha256": "d02c9757f9a7920c02db6ef87f082e318f7330288288a89ff0ff9e2ae2fe9ae3"
+    },
+    {
+      "file": "data/raw/innovation_20261031_v3/theta0.25_L64.npz",
+      "sha256": "928a1eccb1748aeb59d5fe91d651ae589d7e0656e010291904c538c3983a5470"
+    },
+    {
+      "file": "data/raw/innovation_20261031_v3/theta0.25_L128.npz",
+      "sha256": "fb0de515990b55fea47ac9ae36981ecca51e451a69ced357c2ce9e43524d035f"
+    },
+    {
+      "file": "data/raw/innovation_20261031_v3/theta0.25_L256.npz",
+      "sha256": "df491ac1466afccca7f49b166e826afb7263e85ea45beb0722319c6b9b283111"
+    },
+    {
+      "file": "data/raw/innovation_20261031_v3/theta0.25_L512.npz",
+      "sha256": "85920a64912122c93ea716654c68145f4e6d436c191f8730f56944c07c19e876"
+    },
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L1024.npz",
+      "sha256": "04ea40049361e16448e48ec524c92ac142fcdcc3bf14a05c48e710f7b083ba69"
+    }
+  ],
+  "plotted_time_sampling": "Every tenth archived width sample; all samples retained in the archive and used in late-window estimates."
+}

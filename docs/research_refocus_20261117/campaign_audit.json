@@ -1,0 +1,513 @@
+{
+  "passed": true,
+  "cells": [
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L64.npz",
+      "sha256": "e6bbec57cc090c1e7b6254b7d4e862b0147c3fb9a9534423cecd98fba535640c",
+      "group": "baseline",
+      "L": 64,
+      "runs": 16,
+      "maximum_raw_correlation_error": [
+        0.0023643252300736273,
+        0.0012476635160070279
+      ],
+      "raw_variance_ratio": [
+        0.9988984092486504,
+        1.0001318045019407
+      ],
+      "maximum_binary_G_U_difference": 0.06057332356770834,
+      "deposition_mean": [
+        0.4999277750651041,
+        0.4999708811442057
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          -0.0010986328125,
+          0.0009847005208333335,
+          -0.001085747612847222
+        ],
+        [
+          -0.0014599609374999997,
+          0.0008475167410714283,
+          -0.0006490071614583332
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        0.004300123243610621,
+        -0.5267120422682748
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5273603917430847
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L128.npz",
+      "sha256": "7d1bd05b5417c89a4428b6164c12dc719d72ac5d0bc73d9d7bd278877327558b",
+      "group": "baseline",
+      "L": 128,
+      "runs": 16,
+      "maximum_raw_correlation_error": [
+        0.0012122276161669956,
+        0.002367110621974422
+      ],
+      "raw_variance_ratio": [
+        0.9994527528155281,
+        1.0025369885457485
+      ],
+      "maximum_binary_G_U_difference": 0.0597115054869683,
+      "deposition_mean": [
+        0.49998758644833097,
+        0.49998606824417013
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          0.00023205304069501615,
+          0.0003860065974263504,
+          0.001259335467154397
+        ],
+        [
+          -7.81130925163855e-06,
+          7.879352015154491e-05,
+          0.00033293324188385896
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        0.0008913528163551621,
+        -0.5172593957345415
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5201918929534203
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L256.npz",
+      "sha256": "ff49e85183770f658b308d52ebcf1b5e89dcd69d69e2e0aabddc62fbea171b6d",
+      "group": "baseline",
+      "L": 256,
+      "runs": 16,
+      "maximum_raw_correlation_error": [
+        0.0009825178694370697,
+        0.0017074476221677556
+      ],
+      "raw_variance_ratio": [
+        0.9996811312482519,
+        0.9988864471674517
+      ],
+      "maximum_binary_G_U_difference": 0.06097920735677076,
+      "deposition_mean": [
+        0.49997584025065106,
+        0.49998208085695905
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          -6.734212239583338e-05,
+          -7.280622209821424e-05,
+          0.0003388298882378472
+        ],
+        [
+          -0.0007373046875000001,
+          -0.00046415783110119056,
+          -1.2969970703125076e-05
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        0.00023754886026566835,
+        -0.5179255528237292
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5157923667282418
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L512.npz",
+      "sha256": "0cfbc54d811745d511482dd7828dbac2ceebeab9a95ac314d1e6e4f9368ff4bd",
+      "group": "baseline",
+      "L": 512,
+      "runs": 16,
+      "maximum_raw_correlation_error": [
+        0.0005470681406910521,
+        0.0007601580944498862
+      ],
+      "raw_variance_ratio": [
+        1.000113196749522,
+        1.000513776395473
+      ],
+      "maximum_binary_G_U_difference": 0.06062358896319148,
+      "deposition_mean": [
+        0.4999982219010551,
+        0.4999996092856938
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          0.0005338601204084742,
+          -0.00014477799007119995,
+          0.0008356672001219325
+        ],
+        [
+          0.00014777187166590454,
+          -4.6362637990724426e-05,
+          7.710095640908298e-06
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        -0.0006379493327682839,
+        -0.512515673502653
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5129831046114237
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/baseline/theta0.25_L1024.npz",
+      "sha256": "04ea40049361e16448e48ec524c92ac142fcdcc3bf14a05c48e710f7b083ba69",
+      "group": "baseline",
+      "L": 1024,
+      "runs": 64,
+      "maximum_raw_correlation_error": [
+        0.00016658557282089002,
+        0.00023462117057813578
+      ],
+      "raw_variance_ratio": [
+        0.9999254787373489,
+        1.0000078277899984
+      ],
+      "maximum_binary_G_U_difference": 0.06076969703038532,
+      "deposition_mean": [
+        0.5000012939485411,
+        0.4999995567214986
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          -9.982638888888888e-05,
+          -0.00017479033697219117,
+          -3.1473901536729616e-05
+        ],
+        [
+          -5.77714708116322e-06,
+          0.00012186595371791295,
+          6.384584638807506e-05
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        -0.00020039351371206604,
+        -0.5112172889507863
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5112961708103216
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/period4/theta0.25_L128.npz",
+      "sha256": "d752c99dca693b38e7daf4e94b4783d69416603245bc0af8934c9a3a38ee6cc5",
+      "group": "period4",
+      "L": 128,
+      "runs": 32,
+      "maximum_raw_correlation_error": [
+        0.0007916500420294178,
+        0.0010696852022560738
+      ],
+      "raw_variance_ratio": [
+        1.0001327441207937,
+        0.9993307214068943
+      ],
+      "maximum_binary_G_U_difference": 0.061018857881801614,
+      "deposition_mean": [
+        0.5000085594341207,
+        0.5000300347668754
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          3.381725346745924e-05,
+          -0.000402387892742831,
+          -0.0001108586724584667
+        ],
+        [
+          0.0003255506020423717,
+          -0.00016345572865634597,
+          3.215020576131645e-06
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        -0.0016854931017386415,
+        -0.5171588522798174
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5170640936078775
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/period4/theta0.25_L256.npz",
+      "sha256": "2b2eb8547218ee93ad71d6ed7017369d183782d1a556f9ebddf8c97593de8f8a",
+      "group": "period4",
+      "L": 256,
+      "runs": 32,
+      "maximum_raw_correlation_error": [
+        0.000759328842356792,
+        0.0003916689607135794
+      ],
+      "raw_variance_ratio": [
+        0.9992051877087698,
+        1.0000310512077144
+      ],
+      "maximum_binary_G_U_difference": 0.06050170262654625,
+      "deposition_mean": [
+        0.49999091078837715,
+        0.5000050445397695
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          7.99560546875e-05,
+          1.9618443080356955e-06,
+          0.0003571192423502605
+        ],
+        [
+          -9.57912868923611e-05,
+          0.0003671191987537202,
+          -0.0002667533026801214
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        0.0012050340074597071,
+        -0.5137845921691774
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5138406305731733
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/period8/theta0.25_L128.npz",
+      "sha256": "d2b3dc538304bf96d153625881c806fa90ebf672fa33f9c920832df13e6d7445",
+      "group": "period8",
+      "L": 128,
+      "runs": 32,
+      "maximum_raw_correlation_error": [
+        0.0007258901024414927,
+        0.0006555834807457838
+      ],
+      "raw_variance_ratio": [
+        1.0000987173540663,
+        0.9997601119720926
+      ],
+      "maximum_binary_G_U_difference": 0.060842522933813425,
+      "deposition_mean": [
+        0.500010882788834,
+        0.5000035652680435
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          -2.321959304983996e-05,
+          0.00018483816709125364,
+          -0.0003944651634659351
+        ],
+        [
+          -0.00011555022100289588,
+          -0.0002778441194722059,
+          1.6015565462581973e-05
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        3.8908261542625056e-06,
+        -0.5157373211597523
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5147908098188839
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/period8/theta0.25_L256.npz",
+      "sha256": "d02c9757f9a7920c02db6ef87f082e318f7330288288a89ff0ff9e2ae2fe9ae3",
+      "group": "period8",
+      "L": 256,
+      "runs": 32,
+      "maximum_raw_correlation_error": [
+        0.0004108389473822223,
+        0.00035452848628547
+      ],
+      "raw_variance_ratio": [
+        1.0004145218948115,
+        0.999904483400605
+      ],
+      "maximum_binary_G_U_difference": 0.060902976989746005,
+      "deposition_mean": [
+        0.4999949867526691,
+        0.5000029956301054
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          -8.273654513888922e-06,
+          2.0708356584821413e-05,
+          0.000100760989718967
+        ],
+        [
+          2.9364691840277767e-05,
+          2.411433628627235e-05,
+          -2.4604797363281254e-05
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        -0.00011505075104611961,
+        -0.5126801946042522
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5124339917268173
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/modes_plus4/theta0.25_L128.npz",
+      "sha256": "2bddd79e52506a0bd319018a2596cf382bfb28de5303b93f046abf45b267a79b",
+      "group": "modes_plus4",
+      "L": 128,
+      "runs": 32,
+      "maximum_raw_correlation_error": [
+        0.0006426715263333771,
+        0.0011914382880271676
+      ],
+      "raw_variance_ratio": [
+        0.9996024742635758,
+        1.0000885226771727
+      ],
+      "maximum_binary_G_U_difference": 0.06094107224508449,
+      "deposition_mean": [
+        0.49995999364586907,
+        0.49999633565797175
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          -0.000469059594573998,
+          0.0003954475308641976,
+          -0.0002908998247218411
+        ],
+        [
+          0.00029516270385611956,
+          -0.0005072077699392515,
+          -0.0001716463763145864
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        -0.0007549587203623115,
+        -0.5179076115371447
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.5169348994979734
+      ]
+    },
+    {
+      "file": "data/raw/controlled_20261117/modes_plus4/theta0.25_L256.npz",
+      "sha256": "1de602bc0b8bc5117ed7cb8aa72a333805b3010b6fdd5be98363df6ab6bb5afd",
+      "group": "modes_plus4",
+      "L": 256,
+      "runs": 32,
+      "maximum_raw_correlation_error": [
+        0.0006243417745216675,
+        0.00043195010101947096
+      ],
+      "raw_variance_ratio": [
+        1.0000282887611156,
+        0.9995644285973281
+      ],
+      "maximum_binary_G_U_difference": 0.060682582855224765,
+      "deposition_mean": [
+        0.4999897271394729,
+        0.5000050579508144
+      ],
+      "spatial_sign_offsets": [
+        1,
+        2,
+        4
+      ],
+      "spatial_sign_correlations": [
+        [
+          4.896375868055553e-05,
+          0.00026301429385230653,
+          5.86615668402778e-05
+        ],
+        [
+          -5.9254964192708326e-05,
+          -0.0001703534807477678,
+          0.00016998714870876733
+        ]
+      ],
+      "measured_excess_kurtosis": [
+        0.00016148942522932475,
+        -0.5142857777676108
+      ],
+      "predicted_excess_kurtosis": [
+        0.0,
+        -0.513739145827566
+      ]
+    }
+  ],
+  "independent_interface_trajectories": 640,
+  "calibration": "65 spectra including original; 16 common innovation records, not 1040 independent records.",
+  "checks": [
+    "source/solver/archive hashes",
+    "complete run counts",
+    "unique variant seeds",
+    "finite values",
+    "single-step constraint",
+    "Parseval",
+    "late-window reaggregation",
+    "aggregate equals saved independent runs"
+  ],
+  "noise_diagnostics": "Descriptive deviations; no new post-hoc equivalence threshold imposed."
+}

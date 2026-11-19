@@ -130,7 +130,8 @@ def export(summary, figure_only=False):
             rows.append('$'+f'{theta:.2f}'+marker+'$ & '+label+' & $'+f'{c["delta_alpha"][1]:.4f}'+
                         '$ & $['+f'{ci[0,1]:.4f},{ci[1,1]:.4f}'+r']$ \\')
     lines.append(r'\newcommand{\InnovationContrastRows}{'+'\n'+'\n'.join(rows)+'\n}')
-    (ROOT/'manuscript/innovation_numbers.tex').write_text('\n'.join(lines)+'\n', encoding='utf-8')
+    target = ROOT/'docs/strict_binary_20261117/supplement_source/tex/tables/innovation_numbers.tex'
+    target.write_text('\n'.join(lines)+'\n', encoding='utf-8')
     (figdir/'sources.json').write_text(json.dumps(dict(summary=summary.relative_to(ROOT).as_posix(),
         summary_sha256=hashlib.sha256(summary.read_bytes()).hexdigest(), sizes=sizes, outputs=outputs), indent=2), encoding='utf-8')
     build_data_archive(summary, result, sizes)

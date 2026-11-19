@@ -1,107 +1,35 @@
-# Temporally correlated ballistic deposition
+# Temporally correlated ballistic deposition: data and code
 
-This project studies parallel-update ballistic deposition with explicitly specified
-shared-innovation AR and Gaussian spectral noise inputs. The revised manuscript is
-**Noise construction and finite-size inference in temporally correlated ballistic deposition**,
-prepared in Physical Review E format.
+This repository distributes numerical evidence and reproducibility software. Manuscript drafts, article PDFs, TeX/BibTeX sources and Overleaf bundles are not part of this data release.
 
-## Current data and manuscript update, 31 October 2026
+## Numerical data
 
-The updated article is [manuscript/main.pdf](manuscript/main.pdf), with seven
-figures and the innovation-control results in its abstract and conclusion.
-The new controls cover three theta values and five sizes, with 64 interface
-runs per input/cell. All 15 final binary-covariance checks pass the unchanged
-0.005 tolerance. Initial failed validations, two recalibrations and the
-fixed-spectrum L=512 covariance-only validation remain available for audit.
+Fixed version: [data-20261119](https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/tag/data-20261119).
 
-- [Numerical supplement](manuscript/innovation_controls_data_20261031.zip):
-  45 NPZ archives, explicit per-run seeds, calibration records, source snapshots,
-  analysis/figure code and standalone verification scripts.
-- [Manuscript, source and data bundle](manuscript/PRE_submission_materials_20261031.zip).
-- [Actual-ZIP audit report](docs/innovation_20261031/Supplemental_Material_核验报告.md).
-- [Current reproduction instructions](docs/innovation_20261031/REPRODUCE.md).
+- [Current numerical archive](https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/download/data-20261119/bd_strict_binary_data_20261117.zip): parity controls, covariance perturbations, joint observation-time/record-period/mode controls, seeds, frozen producer sources and analysis inputs.
+- [Historical innovation-control archive](https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/download/data-20261119/innovation_controls_data_20261031.zip): calibration and validation records, including initial failed checks and refinements. It is also nested in the current archive.
+- [SHA-256 checksums](https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/download/data-20261119/SHA256SUMS.txt).
 
-The three additional raw-data directories are now versioned:
-`innovation_20261031_v3`, `innovation_binary_20261031_v3` and
-`innovation_binary_refined_20261031`. They contain 15 archives each.
-The first two retain the original source and surrogate results; the third
-contains the final controls. They supplement the existing 105 production cells.
-Prototype/performance trials and local extraction/build directories are excluded.
+The archives contain run-resolved NPZ arrays, JSON metadata and processed summaries, CSV figure-source data, simulation/analysis code, and reproduction instructions. They contain no article PDFs or TeX/BibTeX files. The numerical archive includes new simulations and historical inputs needed for the displayed comparisons; it does not redistribute every historical production record.
 
-After unpacking the supplement into a separate empty directory, run
-`python code/independent_supplement_audit.py` to verify the data without importing
-the project's generator or analysis functions. Full reanalysis reproduces every
-field of the archived summary. These finite-window results do not establish
-equal asymptotic exponents or a new universality class.
+## Reproduce and inspect
 
-## PRE revision, 30 October 2026
+Extract the current archive into an empty directory and start with [the numerical reproduction instructions](docs/strict_binary_20261117/REPRODUCE.md). Extract only missing inputs from the nested historical archive for the complete legacy audit; retain newer code and manifests.
 
-That revision used `manuscript/main.tex` and `manuscript/main.pdf`
-with five figures. The current seven-figure revision retains Times New Roman.
-The matching Overleaf source archive is `manuscript/overleaf_bd_paper.zip`.
+- [Parity, residual-sensitivity and joint-limit summaries](data/analysis/strict_binary_20261117/summary.json).
+- [Observation/period/mode control summaries](data/analysis/controlled_20261117/summary.json).
+- Source CSVs and data-derived figures: `figs/strict_binary_20261117/` and `figs/refocus_20261117/`.
+- Simulation, analysis and tests: `code/` and `tests/`.
+- Parameters, seeds, resampling units and coverage limits: the reproduction instructions.
 
-This revision adds a paired bootstrap for the two common-stream Gaussian
-filters and four fixed-record duration-control cells (32 independent runs each).
-All seven pointwise slope-difference intervals include zero; all eight duration
-ratio intervals include one. These are non-detections at the available precision,
-not evidence of equivalence, saturation, or an asymptotic critical parameter.
+All 85 existing tests passed in the documented project Anaconda environment. Each numerical archive has an internal SHA-256 manifest; the release checksum file verifies the downloadable ZIP files.
 
-All 105 corrected production cells are versioned under the three
-`data/raw/rev20261026_*` directories. Other raw campaigns remain excluded.
-See [that revision's reproduction guide](docs/submission_20261030/REPRODUCE.md)
-and [revision notes](docs/submission_20261030/修改说明.md).
-The corresponding-author email is intentionally left for the author to fill.
+## Cite the data
 
-## Scientific correction, 26 October 2026
+Yong Huang, *Numerical data and code for temporally correlated ballistic deposition*, version data-20261119, GitHub (2026), https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/tag/data-20261119.
 
-A time/site array-layout error was found in the former production spectral path.
-It is fixed and covered by end-to-end temporal/spatial correlation tests. The old
-`spec` and `fgnspec` results are available only in Git history and are **not valid
-corrected-noise evidence**. Earlier readiness notes and generator-bias conclusions
-are superseded by the revision described here.
+Machine-readable citation metadata are in [CITATION.cff](CITATION.cff). This record has a fixed version URL; no DOI has been assigned. The existing repository license is in [LICENSE](LICENSE).
 
-New tracks `rev20261026_shared`, `rev20261026_powerlaw` and `rev20261026_fgn` each
-contain 35 cells: seven theta values, five sizes (32 through 512), and 64 independent
-runs per cell. Their 105 cells were regenerated rather than relabelled. Spectral
-archives carry `noise_layout=spectral-run-time-site-v2`; new analysis rejects older
-spectral layouts.
+## Interpretation boundary
 
-The new data show increasing finite-size late-time width slopes and decreasing
-flat-pair fractions for all three inputs. At theta=0.25, shared AR gives
-0.717 +/- 0.008 and the fGn-spectrum filter 0.678 +/- 0.007. These are finite-window
-slopes with run-bootstrap uncertainty, not measured asymptotic exponents.
-No theta_c is reported and no historical implementation is identified as erroneous.
-The old claims of a flat corrected KPZ branch, opposite-sign morphology and a
-quantitative explanation of published thresholds have been withdrawn.
-
-## Reproduction and files
-
-Use [docs/REPRODUCE.md](docs/REPRODUCE.md) for current commands and
-[docs/DATA.md](docs/DATA.md) for archive fields and legacy-data boundaries.
-
-- `code/bd_core.py`: simulation and corrected space-time spectral assembly.
-- `code/validate_production_noise.py`: final-interface correlation validation.
-- `code/revision_analysis.py`: run-level widths, effective slopes and local-pmf distances.
-- `code/export_revision_tables.py`: data-derived LaTeX numbers.
-- `code/revision_figures.py`: the original four revised figures and source manifest.
-- `code/submission_controls.py`: paired filter inference, duration controls and the fifth figure.
-- `manuscript/main.tex`: current manuscript; `revision_results.tex` and `submission_results.tex` are required inputs.
-- `manuscript/overleaf_bd_paper.zip`: rebuilt upload package.
-- `docs/revision_20261026/`: correction, test and figure QA records.
-
-```powershell
-& 'D:/TOOLS/anaconda3/python.exe' -m pytest tests -q --basetemp .dsh_tmp/pytest
-& 'D:/TOOLS/anaconda3/python.exe' code/validate_production_noise.py
-& 'D:/TOOLS/anaconda3/python.exe' code/revision_analysis.py
-& 'D:/TOOLS/anaconda3/python.exe' code/export_revision_tables.py
-& 'D:/TOOLS/anaconda3/python.exe' code/revision_figures.py
-& 'D:/TOOLS/anaconda3/python.exe' code/submission_controls.py
-& 'D:/TOOLS/anaconda3/python.exe' code/build_overleaf.py
-```
-
-Obsolete scripts, old analysis outputs and duplicate source folders were removed
-from the current tree. See [cleanup notes](docs/CLEANUP.md); historical versions
-remain recoverable from Git history.
-The project remains MIT-licensed. It does not include third-party full texts in
-release packages. Publication metadata and data-repository identifiers must be
-updated only when an actual submission or deposit exists.
+The parity comparison identifies a finite-scale response under exact binary two-time matching. Long-range covariance residuals and convergence limitations remain. These data do not establish a new universality class.

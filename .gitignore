@@ -112,3 +112,9 @@ acl-backup-*.ps1
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Manuscript drafts stay local; publish numerical data and code only.
+/manuscript/
+/docs/strict_binary_20261117/supplement_source/
+overleaf*.zip
+PRE_submission*.zip

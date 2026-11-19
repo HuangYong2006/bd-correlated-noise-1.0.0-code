@@ -50,5 +50,6 @@ for t in s['protocol']['thetas']:
         r=exponent(g,t);values.append(f"${r['alpha']:.3f}"+r'\pm'+f"{r['alpha_err']:.3f}$")
     rows.append('$'+label+'$ & '+' & '.join(values)+r' \\')
 define('RevisionAlphaRows','\n'+'\n'.join(rows)+'\n')
-(ROOT/'manuscript/revision_results.tex').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+target = ROOT/'docs/strict_binary_20261117/supplement_source/tex/tables/revision_results.tex'
+target.write_text('\n'.join(lines)+'\n',encoding='utf-8')
 print('Exported',len(lines)-1,'data-derived LaTeX commands')

@@ -1,46 +1,29 @@
-> 2026-10-31 更新：论文、PDF、七张图及完整创新变量对照数据已同步。
-> 新增三个数据目录各15份NPZ，共45份；保留原失败验证、重新校准和追加独立验证记录。
-> 最终15/15组满足原定0.005精度。最新复现入口见
-> [本轮复现说明](docs/innovation_20261031/REPRODUCE.md)。
+# 时间关联弹道沉积：数据与代码
 
-# 时间关联噪声下的弹道沉积
+本仓库共享数值数据和复现软件。本次数据发布不含文稿、论文 PDF、TeX/BibTeX 源码或 Overleaf 包。
 
-当前英文稿题目为 **Noise construction and finite-size inference in temporally correlated ballistic deposition**，采用 PRE 格式。中文阅读摘要见 manuscript/abstract_zh.md。
+## 数据下载
 
-## 最新材料与独立核验
+固定版本：[`data-20261119`](https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/tag/data-20261119)。
 
-- [最新论文 PDF](manuscript/main.pdf)与[Overleaf 源码包](manuscript/overleaf_bd_paper.zip)。
-- [数值补充 ZIP](manuscript/innovation_controls_data_20261031.zip)：包含45份NPZ、
-  逐运行种子、重新校准记录、原始失败、分析与图7代码及独立核验脚本。
-- [投稿材料总包](manuscript/PRE_submission_materials_20261031.zip)：PDF、源码、数据ZIP与README.TXT。
-- [实际ZIP核验报告](docs/innovation_20261031/Supplemental_Material_核验报告.md)。
+- [当前数值数据包](https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/download/data-20261119/bd_strict_binary_data_20261117.zip)：奇偶约束、协方差扰动、联合时长/周期/模态控制、运行种子、冻结代码和分析输入。
+- [历史校准数据包](https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/download/data-20261119/innovation_controls_data_20261031.zip)：保留初始失败验证、重新校准及最终验证；也嵌套于当前数据包内。
+- [SHA-256 校验清单](https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/download/data-20261119/SHA256SUMS.txt)。
 
-将补充ZIP解压到独立空目录后，运行
-`python code/independent_supplement_audit.py` 可在不导入项目生成器或分析函数的情况下，
-复算原失败和最终验证、有效斜率及bootstrap区间，并按显式种子再生校准记录。
-本轮还通过了70项测试。原105组生产数据与新增15组参数单元是不同的实验网格。
-结论仍限于已验证的协方差精度、有限尺寸与观测窗口。
+数据采用 NPZ、JSON 和 CSV 格式，并提供代码、参数、种子、数据来源和复现说明。包内没有论文 PDF、TeX 或 BibTeX 文件。包中包含新实验及当前比较所需的历史输入，不宣称重发了全部历史原始记录。
 
-## 2026-10-26 科学修订
+## 复现与引用
 
-旧生产谱滤波路径存在时间轴与空间轴排列错误，现已修复并增加端到端时空相关测试。原 spec、fgnspec 结果仅在 Git 历史中保留追溯，但不得作为“正确发生器”结果使用。之前的投稿准备状态和发生器偏差结论由本次修订取代。
+将数据包解压到空目录，从[数值复现说明](docs/strict_binary_20261117/REPRODUCE.md)开始。复现完整历史核验时，仅补充解压嵌套包中缺失的文件，不覆盖新代码和清单。
 
-三条新数据轨道 rev20261026_shared、rev20261026_powerlaw、rev20261026_fgn 均已重算。每条包括 7 个 θ、5 个尺寸（32–512）和每单元 64 次独立运行，共 105 个单元、6720 次运行。新谱数据记录 noise_layout=spectral-run-time-site-v2，新主分析会拒绝旧布局。
+[严格匹配与敏感性分析汇总](data/analysis/strict_binary_20261117/summary.json)、[时长及谱控制汇总](data/analysis/controlled_20261117/summary.json)随仓库提供。逐图 CSV 位于 `figs/strict_binary_20261117/` 和 `figs/refocus_20261117/`；模拟、分析代码及测试位于 `code/`、`tests/`。参数、种子和重采样单位见复现说明。
 
-新结果显示，三种输入的有限尺寸晚期宽度斜率均随关联增强而上升，平坦对比例均下降。θ=0.25 时，共享 AR 为 0.717±0.008，fGn 谱滤波为 0.678±0.007。误差为独立 run bootstrap 标准差，不包含有限时间和噪声截断系统误差。本研究没有测出 θ_c，也没有证明其他作者的实现错误。旧稿关于恢复平坦 KPZ 分支、形貌变化方向相反、定量解释文献阈值的论断已撤下。
+现有 85 项测试通过；数据包内部清单及下载文件均提供 SHA-256 校验。
 
-## 入口
+数据引用：Yong Huang, *Numerical data and code for temporally correlated ballistic deposition*, version data-20261119, GitHub (2026), https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/tag/data-20261119。
 
-- docs/REPRODUCE.md：当前复现命令。
-- docs/DATA.md：数据字段及旧数据边界。
-- code/bd_core.py：模拟器及已修正的时空场装配。
-- code/validate_production_noise.py：最终生产接口的相关验证。
-- code/revision_analysis.py：按独立 run 分析宽度、有效斜率及局域 pmf。
-- code/export_revision_tables.py：从源表导出论文数值。
-- code/revision_figures.py：四张生产图及源文件记录。
-- code/submission_controls.py：配对分析、时长对照及第五张图。
-- manuscript/main.tex、revision_results.tex、submission_results.tex：当前论文源文件。
-- manuscript/overleaf_bd_paper.zip：重建后的 Overleaf 上传包。
-- docs/revision_20261026/：修复、测试与视觉检查记录。
+机器可读信息见 [CITATION.cff](CITATION.cff)，现有许可见 [LICENSE](LICENSE)。当前提供固定版本链接，尚未获得 DOI。
 
-旧图表、旧分析结果、临时脚本及重复展开目录已从仓库当前版本移除，清理清单见 docs/CLEANUP.md。历史版本可通过 Git 历史找回。正式投稿仍需作者核对新结论和通信邮箱。
+## 结论边界
+
+严格二元两时统计匹配下的结果是有限尺度响应。长程比较仍有协方差残差及收敛限制，不据此宣称普适类改变。

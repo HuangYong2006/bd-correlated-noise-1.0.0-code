@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-19",
+  "tests": {
+    "tests": 85,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "numerical_archive": {
+    "file": "dist/bd_strict_binary_data_20261117.zip",
+    "members": 825,
+    "bytes": 225944889,
+    "sha256": "5a64b6852de14d96fe0365fd5e1b712d205b42f8e667c7b3c0f493cb3705225a"
+  },
+  "scope": "Numerical data and reproducibility code only; no manuscript PDFs, TeX/BibTeX, or Overleaf archives."
+}

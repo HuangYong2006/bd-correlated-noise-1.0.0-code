@@ -1,37 +1,18 @@
 cff-version: 1.2.0
-message: "If you use this code or data, please cite the archived release and the manuscript below."
-title: "Noise construction and finite-size inference in temporally correlated ballistic deposition"
-abstract: >-
-  Simulation and analysis code for a numerical study of (1+1)-dimensional ballistic
-  deposition with specified shared-innovation AR and Gaussian spectral inputs. The revised
-  study validates the final space-time noise field, retains AR covariance cross terms,
-  and reports finite-size late-time width slopes with independent-run uncertainty.
-  It does not report theta_c or identify historical implementations as erroneous.
-type: software
+message: "If you use these data or code, please cite this versioned data release."
+title: "Numerical data and code for temporally correlated ballistic deposition"
+type: dataset
 authors:
   - family-names: Huang
     given-names: Yong
     affiliation: "College of Physics, Chengdu University of Technology, Chengdu, China"
-    orcid: ""          # TODO: add your ORCID iD, e.g. https://orcid.org/0000-0000-0000-0000
 repository-code: "https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code"
-url: "https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code"
+url: "https://github.com/HuangYong2006/bd-correlated-noise-1.0.0-code/releases/tag/data-20261119"
 license: MIT
-version: "1.0.0"
-date-released: "2026-10-09"
+version: "data-20261119"
+date-released: "2026-11-19"
 keywords:
-  - kinetic roughening
   - ballistic deposition
-  - long-range temporal correlations
-  - Kardar-Parisi-Zhang
-  - finite-size scaling
-  - fractional Gaussian noise
+  - temporal correlations
+  - parity controls
   - reproducibility
-preferred-citation:
-  type: article
-  title: "Noise construction and finite-size inference in temporally correlated ballistic deposition"
-  authors:
-    - family-names: Huang
-      given-names: Yong
-      affiliation: "College of Physics, Chengdu University of Technology, Chengdu, China"
-  year: 2026
-  notes: "Unpublished revised manuscript prepared in Physical Review E format. No publication or submission status is asserted."
